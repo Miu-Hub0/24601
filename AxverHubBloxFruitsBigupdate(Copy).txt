@@ -6889,101 +6889,168 @@ task.spawn(function()
 	end;
 end);
 
+-- ============================================
+-- AUTO FARM LEVEL - TWEEN CẢI TIẾN
+-- ============================================
+
 task.spawn(function()
-	while task.wait(0.2) do
+	while task.wait(0.15) do
 		if _G.EclipseLevel and _G.EclipseStartFarm then
 			pcall(function()
-				CheckQuest();
-				local plr = game:GetService("Players").LocalPlayer;
-				local _playerLevel = 0;
-				pcall(function() _playerLevel = plr.Data.Level.Value; end);
-				local _isSubQuest = LevelQuest and NameQuest and string.find(tostring(NameQuest or ""), "Submerged");
-				if _isSubQuest or _playerLevel >= 2600 then
-					local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-					if not hrp then return; end;
+				CheckQuest()
+				local plr = game:GetService("Players").LocalPlayer
+				local playerLevel = plr.Data.Level.Value
+				
+				-- Xử lý Submerged Island (Level 2600+)
+				local isSubQuest = LevelQuest and NameQuest and string.find(tostring(NameQuest or ""), "Submerged")
+				if isSubQuest or playerLevel >= 2600 then
+					local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+					if not hrp then return end
+					
 					if hrp.Position.Y > -200 then
-						if _G._subEntering then return; end;
-						_G._subEntering = true;
-						local SubWorkerCF = CFrame.new(-16417.6, 74.26, 1811.3);
-						TweenPlayer(SubWorkerCF);
-						local t = 0;
+						if _G._subEntering then return end
+						_G._subEntering = true
+						
+						local SubWorkerCF = CFrame.new(-16417.6, 74.26, 1811.3)
+						TweenPlayer(SubWorkerCF)
+						
+						local timeout = 0
 						repeat
-							task.wait(0.2); t = t + 0.2;
-							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-							if not hrp then _G._subEntering = false; return; end;
-						until (hrp.Position - SubWorkerCF.Position).Magnitude < 15 or t > 25;
-						task.wait(0.5);
+							task.wait(0.2)
+							timeout = timeout + 0.2
+							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+							if not hrp then 
+								_G._subEntering = false 
+								return 
+							end
+						until (hrp.Position - SubWorkerCF.Position).Magnitude < 15 or timeout > 25
+						
+						task.wait(0.5)
 						pcall(function()
-							(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("NPC", "Submarine Worker");
-						end);
-						task.wait(0.5);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("NPC", "Submarine Worker")
+						end)
+						
+						task.wait(0.5)
 						pcall(function()
-							game:GetService("ReplicatedStorage").Modules.Net["RF/SubmarineWorkerSpeak"]:InvokeServer("TravelToSubmergedIsland");
-						end);
-						t = 0;
+							game:GetService("ReplicatedStorage").Modules.Net["RF/SubmarineWorkerSpeak"]:InvokeServer("TravelToSubmergedIsland")
+						end)
+						
+						timeout = 0
 						repeat
-							task.wait(0.3); t = t + 0.3;
-							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-						until (hrp and hrp.Position.Y < -200) or t > 20;
-						task.wait(1);
-						_G._subEntering = false;
-						return;
-					end;
-				end;
-				local ok, QuestTitle = pcall(function()
-					return plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text;
-				end);
-				if ok and QuestTitle and not string.find(QuestTitle, NameMon or "") then
-					(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("AbandonQuest");
-				end;
-				if (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-					TweenPlayer(CFrameQuest);
-					task.wait(0.5);
-					(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest);
-				elseif (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-					if (game:GetService("Workspace")).Enemies:FindFirstChild(Mon) then
-						local bestMob = nil;
-						local bestDist = math.huge;
-						local myHRP = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart");
-						for _, v in pairs((game:GetService("Workspace")).Enemies:GetChildren()) do
-							if v.Name == Mon and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-								local d = myHRP and (v.HumanoidRootPart.Position - myHRP.Position).Magnitude or 0;
-								if d < bestDist then bestDist = d; bestMob = v; end;
-							end;
-						end;
-						if bestMob then
-							local v = bestMob;
-							if string.find((game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-								PosMon  = v.HumanoidRootPart.Position;
-								MonFarm = v.Name;
-								BringEnemy();
-								local myH = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart");
-								if myH then
-									local dMob = (v.HumanoidRootPart.Position - myH.Position).Magnitude;
-									if dMob > 8 then
-										TweenPlayer(v.HumanoidRootPart.CFrame * Pos);
-									end;
-								end;
-								repeat
-									task.wait(0.15);
-									EquipWeapon(_G.Settings.Main["Selected Weapon"]);
-									AutoHaki();
-									PosMon  = v.HumanoidRootPart.Position;
-									MonFarm = v.Name;
-									pcall(function() v.Humanoid.WalkSpeed = 0; v.HumanoidRootPart.Size = Vector3.new(1,1,1); v.HumanoidRootPart.CanCollide = false; end);
-									Attack();
-								until not _G.EclipseStartFarm or not _G.EclipseLevel or v.Humanoid.Health <= 0 or (not v.Parent) or (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == false;
-							end;
-						end;
+							task.wait(0.3)
+							timeout = timeout + 0.3
+							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+						until (hrp and hrp.Position.Y < -200) or timeout > 20
+						
+						task.wait(1)
+						_G._subEntering = false
+						return
+					end
+				end
+				
+				-- Kiểm tra và abandon quest nếu sai
+				local questVisible = plr.PlayerGui.Main.Quest.Visible
+				local questTitle = ""
+				pcall(function()
+					questTitle = plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+				end)
+				
+				if questVisible and questTitle ~= "" and not string.find(questTitle, NameMon or "") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+					task.wait(0.3)
+				end
+				
+				-- Lấy quest nếu chưa có
+				if not plr.PlayerGui.Main.Quest.Visible then
+					-- Tween đến NPC quest
+					local questNPC = CFrameQuest
+					local distToNPC = (questNPC.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+					
+					if distToNPC > 10 then
+						TweenPlayer(questNPC)
+						task.wait(0.5)
+					end
+					
+					-- Nhận quest
+					pcall(function()
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
+					end)
+					task.wait(0.5)
+				end
+				
+				-- Farm quái nếu đã có quest
+				if plr.PlayerGui.Main.Quest.Visible then
+					-- Tìm quái theo quest
+					local targetMob = nil
+					local closestDist = math.huge
+					local myHRP = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+					
+					for _, mob in pairs(workspace.Enemies:GetChildren()) do
+						if mob.Name == Mon and mob:FindFirstChild("HumanoidRootPart") then
+							local hum = mob:FindFirstChild("Humanoid")
+							if hum and hum.Health > 0 then
+								local dist = myHRP and (mob.HumanoidRootPart.Position - myHRP.Position).Magnitude or 0
+								if dist < closestDist then
+									closestDist = dist
+									targetMob = mob
+								end
+							end
+						end
+					end
+					
+					if targetMob then
+						-- Tween đến quái
+						local mobPos = targetMob.HumanoidRootPart.CFrame * CFrame.new(0, _G.Settings.Setting["Farm Distance"] or 15, 0)
+						local distToMob = (mobPos.Position - myHRP.Position).Magnitude
+						
+						if distToMob > 8 then
+							TweenPlayer(mobPos)
+						end
+						
+						-- Trang bị vũ khí và bật Haki
+						EquipWeapon(_G.Settings.Main["Selected Weapon"])
+						AutoHaki()
+						
+						-- Setup quái để kéo về
+						PosMon = targetMob.HumanoidRootPart.Position
+						MonFarm = targetMob.Name
+						_B = true
+						BringEnemy()
+						
+						-- Disable quái để tránh chạy lung tung
+						pcall(function()
+							targetMob.Humanoid.WalkSpeed = 0
+							targetMob.HumanoidRootPart.CanCollide = false
+							targetMob.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+						end)
+						
+						-- Tấn công liên tục
+						local startTime = tick()
+						while _G.EclipseLevel and _G.EclipseStartFarm 
+							and targetMob.Parent 
+							and targetMob.Humanoid.Health > 0 
+							and plr.PlayerGui.Main.Quest.Visible do
+							
+							FastAttack()
+							task.wait(0.05)
+							
+							-- Kiểm tra timeout để tránh bug
+							if tick() - startTime > 30 then
+								break
+							end
+						end
 					else
-						TweenPlayer(CFrameMon);
-						UnEquipWeapon(_G.Settings.Main["Selected Weapon"]);
-					end;
-				end;
-			end);
-		end;
-	end;
-end);
+						-- Không tìm thấy quái, tween đến spawn point
+						local spawnPoint = CFrameMon
+						if spawnPoint then
+							TweenPlayer(spawnPoint)
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
 
 
 task.spawn(function()

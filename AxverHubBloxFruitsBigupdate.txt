@@ -3646,146 +3646,94 @@ end)
 
 
 -- ============================================
--- FAST ATTACK MODULE (TỪ FILE ĐẦU)
+-- SUPER FAST ATTACK MODULE (Từ Night Slayer)
 -- ============================================
 
-_G.FastAttackActive = true
-_G.Fast_Delay = 0.01
+-- Tạo module Attack
+local AttackModule = {}
+local players = game:GetService("Players")
+local replicated = game:GetService("ReplicatedStorage")
+local client = players.LocalPlayer
 
--- Bảng tốc độ Fast Attack
+-- Lấy các remote cần thiết
+local modules = replicated:WaitForChild("Modules")
+local net = modules:WaitForChild("Net")
+local RegisterAttack = net:WaitForChild("RE/RegisterAttack")
+local RegisterHit = net:WaitForChild("RE/RegisterHit")
+
+-- Hàm tấn công enemy
+function AttackModule:AttackEnemy(EnemyHead, Table)
+    if EnemyHead then
+        RegisterAttack:FireServer(0)
+        RegisterAttack:FireServer(1)
+        RegisterAttack:FireServer(2)
+        RegisterAttack:FireServer(3)
+        RegisterHit:FireServer(EnemyHead, Table or {})
+    end
+end
+
+-- Hàm tìm enemy gần nhất và tấn công
+function AttackModule:AttackNearest()
+    local enemyFolder = workspace:WaitForChild("Enemies")
+    local playerFolder = game:GetService("Players")
+    
+    local mon = {nil, {}}
+    for _, Enemy in enemyFolder:GetChildren() do
+        if not mon[1] and Enemy:FindFirstChild("HumanoidRootPart", true) then
+            if client:DistanceFromCharacter(Enemy.HumanoidRootPart.Position) < 60 then
+                mon[1] = Enemy:FindFirstChild("HumanoidRootPart")
+            end
+        elseif Enemy:FindFirstChild("HumanoidRootPart", true) then
+            if client:DistanceFromCharacter(Enemy.HumanoidRootPart.Position) < 60 then
+                table.insert(mon[2], {[1] = Enemy, [2] = Enemy:FindFirstChild("HumanoidRootPart")})
+            end
+        end
+    end
+    
+    self:AttackEnemy(unpack(mon))
+    
+    local player = {nil, {}}
+    for _, Player in playerFolder:GetChildren() do
+        if Player.Character then
+            if not player[1] and Player.Character:FindFirstChild("HumanoidRootPart", true) then
+                if client:DistanceFromCharacter(Player.Character.HumanoidRootPart.Position) < 60 then
+                    player[1] = Player.Character:FindFirstChild("HumanoidRootPart")
+                end
+            elseif Player.Character:FindFirstChild("HumanoidRootPart", true) then
+                if client:DistanceFromCharacter(Player.Character.HumanoidRootPart.Position) < 60 then
+                    table.insert(player[2], {[1] = Player, [2] = Player.Character:FindFirstChild("HumanoidRootPart")})
+                end
+            end
+        end
+    end
+    self:AttackEnemy(unpack(player))
+end
+
+function AttackModule:BladeHits()
+    self:AttackNearest()
+end
+
+-- Hàm tấn công chính được gọi trong Farm loop
+function FastAttack()
+    AttackModule:BladeHits()
+end
+
+-- Danh sách tốc độ Fast Attack
 local FastAttackSpeeds = {
     ["Normal Attack"] = 0.25,
     ["Fast Attack"] = 0.15,
     ["Super Fast Attack"] = 0.05,
-    ["siêu nhanh Attack"] = 0.01
+    ["Siêu nhanh Attack"] = 0.01
 }
 
--- Hàm UsesKills - gửi phím kỹ năng
-function UsesKills(weaponType, skillKey)
-    if weaponType == "Melee" then
-        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v.ToolTip == "Melee" then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                break
-            end
-        end
-        if skillKey == "Z" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
-        elseif skillKey == "X" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
-        elseif skillKey == "C" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
-        end
-    elseif weaponType == "Sword" then
-        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v.ToolTip == "Sword" then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                break
-            end
-        end
-        if skillKey == "Z" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
-        elseif skillKey == "X" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
-        end
-    elseif weaponType == "Blox Fruit" then
-        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v.ToolTip == "Blox Fruit" then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                break
-            end
-        end
-        if skillKey == "Z" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
-        elseif skillKey == "X" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
-        elseif skillKey == "C" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
-        elseif skillKey == "V" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "V", false, game)
-        end
-    elseif weaponType == "Gun" then
-        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v.ToolTip == "Gun" then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                break
-            end
-        end
-        if skillKey == "Z" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
-        elseif skillKey == "X" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
-            task.wait(0.05)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
-        end
-    end
-end
+-- Biến để chọn tốc độ
+_G.FastAttackMode = "Super Fast Attack"
+_G.Fast_Delay = FastAttackSpeeds[_G.FastAttackMode]
 
--- Method Kill chính
-G = G or {}
-G.Kill = function(enemy, isActive)
-    if not enemy or not isActive then return end
-    local hrp = enemy:FindFirstChild("HumanoidRootPart")
-    local hum = enemy:FindFirstChild("Humanoid")
-    if not hrp or not hum or hum.Health <= 0 then return end
-    
-    PosMon = hrp.Position
-    BringEnemy()
-    
-    local weapon = _G.Settings.Main["Selected Weapon"] or _G.SelectWeapon or "Melee"
-    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v.ToolTip == weapon or v.Name == weapon then
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-            break
-        end
-    end
-    
-    local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-    if tool then
-        if tool.ToolTip == "Blox Fruit" then
-            TweenPlayer(hrp.CFrame * CFrame.new(0, 10, 0))
-        else
-            TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 0))
-        end
-    end
-    
-    if RandomCFrame then
-        task.wait(0.5)
-        TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 25))
-        task.wait(0.5)
-        TweenPlayer(hrp.CFrame * CFrame.new(25, 30, 0))
-        task.wait(0.5)
-        TweenPlayer(hrp.CFrame * CFrame.new(-25, 30, 0))
-    end
-    
-    local head = enemy:FindFirstChild("Head") or hrp
-    AttackModule:AttackEnemy(head, {})
-end
-
--- Attack Loop chạy liên tục theo Fast_Delay
+-- Attack Loop chạy liên tục
 task.spawn(function()
-    repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character
-    while task.wait(_G.Fast_Delay or 0.01) do
+    repeat task.wait() until game:IsLoaded() and client.Character
+    while task.wait(_G.Fast_Delay) do
         pcall(function()
             local farmActive = _G.Settings.Main["Auto Farm"] 
                 or _G.Settings.Main["Auto Farm Mon"] 
@@ -3800,14 +3748,13 @@ task.spawn(function()
             
             if not farmActive then return end
             
-            local char = game.Players.LocalPlayer.Character
+            local char = client.Character
             local root = char and char:FindFirstChild("HumanoidRootPart")
             if not char or not root then return end
             
             local hum = char:FindFirstChildOfClass("Humanoid")
             if not hum or hum.Health <= 0 then return end
             
-            -- Tìm quái gần nhất
             local closest = nil
             local closestDist = 60
             
@@ -3832,7 +3779,6 @@ task.spawn(function()
         end)
     end
 end)
-
 
 pcall(function()
 	local UIS = game:GetService("UserInputService");
@@ -6889,101 +6835,168 @@ task.spawn(function()
 	end;
 end);
 
+-- ============================================
+-- AUTO FARM LEVEL - TWEEN CẢI TIẾN
+-- ============================================
+
 task.spawn(function()
-	while task.wait(0.2) do
+	while task.wait(0.15) do
 		if _G.EclipseLevel and _G.EclipseStartFarm then
 			pcall(function()
-				CheckQuest();
-				local plr = game:GetService("Players").LocalPlayer;
-				local _playerLevel = 0;
-				pcall(function() _playerLevel = plr.Data.Level.Value; end);
-				local _isSubQuest = LevelQuest and NameQuest and string.find(tostring(NameQuest or ""), "Submerged");
-				if _isSubQuest or _playerLevel >= 2600 then
-					local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-					if not hrp then return; end;
+				CheckQuest()
+				local plr = game:GetService("Players").LocalPlayer
+				local playerLevel = plr.Data.Level.Value
+				
+				-- Xử lý Submerged Island (Level 2600+)
+				local isSubQuest = LevelQuest and NameQuest and string.find(tostring(NameQuest or ""), "Submerged")
+				if isSubQuest or playerLevel >= 2600 then
+					local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+					if not hrp then return end
+					
 					if hrp.Position.Y > -200 then
-						if _G._subEntering then return; end;
-						_G._subEntering = true;
-						local SubWorkerCF = CFrame.new(-16417.6, 74.26, 1811.3);
-						TweenPlayer(SubWorkerCF);
-						local t = 0;
+						if _G._subEntering then return end
+						_G._subEntering = true
+						
+						local SubWorkerCF = CFrame.new(-16417.6, 74.26, 1811.3)
+						TweenPlayer(SubWorkerCF)
+						
+						local timeout = 0
 						repeat
-							task.wait(0.2); t = t + 0.2;
-							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-							if not hrp then _G._subEntering = false; return; end;
-						until (hrp.Position - SubWorkerCF.Position).Magnitude < 15 or t > 25;
-						task.wait(0.5);
+							task.wait(0.2)
+							timeout = timeout + 0.2
+							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+							if not hrp then 
+								_G._subEntering = false 
+								return 
+							end
+						until (hrp.Position - SubWorkerCF.Position).Magnitude < 15 or timeout > 25
+						
+						task.wait(0.5)
 						pcall(function()
-							(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("NPC", "Submarine Worker");
-						end);
-						task.wait(0.5);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("NPC", "Submarine Worker")
+						end)
+						
+						task.wait(0.5)
 						pcall(function()
-							game:GetService("ReplicatedStorage").Modules.Net["RF/SubmarineWorkerSpeak"]:InvokeServer("TravelToSubmergedIsland");
-						end);
-						t = 0;
+							game:GetService("ReplicatedStorage").Modules.Net["RF/SubmarineWorkerSpeak"]:InvokeServer("TravelToSubmergedIsland")
+						end)
+						
+						timeout = 0
 						repeat
-							task.wait(0.3); t = t + 0.3;
-							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart");
-						until (hrp and hrp.Position.Y < -200) or t > 20;
-						task.wait(1);
-						_G._subEntering = false;
-						return;
-					end;
-				end;
-				local ok, QuestTitle = pcall(function()
-					return plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text;
-				end);
-				if ok and QuestTitle and not string.find(QuestTitle, NameMon or "") then
-					(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("AbandonQuest");
-				end;
-				if (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-					TweenPlayer(CFrameQuest);
-					task.wait(0.5);
-					(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest);
-				elseif (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-					if (game:GetService("Workspace")).Enemies:FindFirstChild(Mon) then
-						local bestMob = nil;
-						local bestDist = math.huge;
-						local myHRP = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart");
-						for _, v in pairs((game:GetService("Workspace")).Enemies:GetChildren()) do
-							if v.Name == Mon and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-								local d = myHRP and (v.HumanoidRootPart.Position - myHRP.Position).Magnitude or 0;
-								if d < bestDist then bestDist = d; bestMob = v; end;
-							end;
-						end;
-						if bestMob then
-							local v = bestMob;
-							if string.find((game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-								PosMon  = v.HumanoidRootPart.Position;
-								MonFarm = v.Name;
-								BringEnemy();
-								local myH = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart");
-								if myH then
-									local dMob = (v.HumanoidRootPart.Position - myH.Position).Magnitude;
-									if dMob > 8 then
-										TweenPlayer(v.HumanoidRootPart.CFrame * Pos);
-									end;
-								end;
-								repeat
-									task.wait(0.15);
-									EquipWeapon(_G.Settings.Main["Selected Weapon"]);
-									AutoHaki();
-									PosMon  = v.HumanoidRootPart.Position;
-									MonFarm = v.Name;
-									pcall(function() v.Humanoid.WalkSpeed = 0; v.HumanoidRootPart.Size = Vector3.new(1,1,1); v.HumanoidRootPart.CanCollide = false; end);
-									Attack();
-								until not _G.EclipseStartFarm or not _G.EclipseLevel or v.Humanoid.Health <= 0 or (not v.Parent) or (game:GetService("Players")).LocalPlayer.PlayerGui.Main.Quest.Visible == false;
-							end;
-						end;
+							task.wait(0.3)
+							timeout = timeout + 0.3
+							hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+						until (hrp and hrp.Position.Y < -200) or timeout > 20
+						
+						task.wait(1)
+						_G._subEntering = false
+						return
+					end
+				end
+				
+				-- Kiểm tra và abandon quest nếu sai
+				local questVisible = plr.PlayerGui.Main.Quest.Visible
+				local questTitle = ""
+				pcall(function()
+					questTitle = plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+				end)
+				
+				if questVisible and questTitle ~= "" and not string.find(questTitle, NameMon or "") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+					task.wait(0.3)
+				end
+				
+				-- Lấy quest nếu chưa có
+				if not plr.PlayerGui.Main.Quest.Visible then
+					-- Tween đến NPC quest
+					local questNPC = CFrameQuest
+					local distToNPC = (questNPC.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+					
+					if distToNPC > 10 then
+						TweenPlayer(questNPC)
+						task.wait(0.5)
+					end
+					
+					-- Nhận quest
+					pcall(function()
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
+					end)
+					task.wait(0.5)
+				end
+				
+				-- Farm quái nếu đã có quest
+				if plr.PlayerGui.Main.Quest.Visible then
+					-- Tìm quái theo quest
+					local targetMob = nil
+					local closestDist = math.huge
+					local myHRP = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+					
+					for _, mob in pairs(workspace.Enemies:GetChildren()) do
+						if mob.Name == Mon and mob:FindFirstChild("HumanoidRootPart") then
+							local hum = mob:FindFirstChild("Humanoid")
+							if hum and hum.Health > 0 then
+								local dist = myHRP and (mob.HumanoidRootPart.Position - myHRP.Position).Magnitude or 0
+								if dist < closestDist then
+									closestDist = dist
+									targetMob = mob
+								end
+							end
+						end
+					end
+					
+					if targetMob then
+						-- Tween đến quái
+						local mobPos = targetMob.HumanoidRootPart.CFrame * CFrame.new(0, _G.Settings.Setting["Farm Distance"] or 15, 0)
+						local distToMob = (mobPos.Position - myHRP.Position).Magnitude
+						
+						if distToMob > 8 then
+							TweenPlayer(mobPos)
+						end
+						
+						-- Trang bị vũ khí và bật Haki
+						EquipWeapon(_G.Settings.Main["Selected Weapon"])
+						AutoHaki()
+						
+						-- Setup quái để kéo về
+						PosMon = targetMob.HumanoidRootPart.Position
+						MonFarm = targetMob.Name
+						_B = true
+						BringEnemy()
+						
+						-- Disable quái để tránh chạy lung tung
+						pcall(function()
+							targetMob.Humanoid.WalkSpeed = 0
+							targetMob.HumanoidRootPart.CanCollide = false
+							targetMob.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+						end)
+						
+						-- Tấn công liên tục
+						local startTime = tick()
+						while _G.EclipseLevel and _G.EclipseStartFarm 
+							and targetMob.Parent 
+							and targetMob.Humanoid.Health > 0 
+							and plr.PlayerGui.Main.Quest.Visible do
+							
+							FastAttack()
+							task.wait(0.05)
+							
+							-- Kiểm tra timeout để tránh bug
+							if tick() - startTime > 30 then
+								break
+							end
+						end
 					else
-						TweenPlayer(CFrameMon);
-						UnEquipWeapon(_G.Settings.Main["Selected Weapon"]);
-					end;
-				end;
-			end);
-		end;
-	end;
-end);
+						-- Không tìm thấy quái, tween đến spawn point
+						local spawnPoint = CFrameMon
+						if spawnPoint then
+							TweenPlayer(spawnPoint)
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
 
 
 task.spawn(function()

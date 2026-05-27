@@ -6779,7 +6779,7 @@ end;
 
 MainTab:AddDropdown({
 	Title = "Select Farm Mode",
-	Desc = "Level = por quest/level | Bone = Haunted Castle | Cake Prince | Tyrant Of The Skies | Nearest = ataca NPCs proximos",
+	Desc = "Level = theo nhiệm vụ/cấp độ | Bone = Lâu Đài Ma | Cake Prince = Hoàng Tử Bánh | Tyrant Of The Skies = Bạo Chúa Bầu Trời | Nearest = tấn công quái gần nhất",
 	Values = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies", "Nearest"},
 	Value = "Level",
 	Callback = function(v)
@@ -6803,7 +6803,7 @@ end);
 
 MainTab:AddToggle({
 	Title = "Accept Quests",
-	Desc = "Aceita quest automaticamente antes de farmar",
+	Desc = "Tự động nhận nhiệm vụ trước khi farm",
 	Value = false,
 	Callback = function(v)
 		_G.EclipseAcceptQuest = v;
@@ -6812,7 +6812,7 @@ MainTab:AddToggle({
 
 AutoLevelFarmToggle = MainTab:AddToggle({
 	Title = "Start Farm",
-	Desc = "Inicia o modo de farm selecionado",
+	Desc = "Bắt đầu chế độ farm đã chọn",
 	Value = _G.Settings.Main["Auto Farm"],
 	Callback = function(v)
 		_G.EclipseStartFarm = v;
@@ -8553,7 +8553,7 @@ FactoryRaidSection = OthersTab:AddSection("Factory Raid");
 _G.Settings.Farm["Auto Factory Raid"] = _G.Settings.Farm["Auto Factory Raid"] or false;
 AutoFactoryRaidToggle = OthersTab:AddToggle({
 	Title = "Auto Factory Raid",
-	Desc = "Entra na factory pelo portal do Dom Flamingo (Sea 2), vai ao topo e farma os inimigos.",
+	Desc = "Vào nhà máy qua cổng Dom Flamingo (Biển 2), lên đỉnh và farm quái.",
 	Value = _G.Settings.Farm["Auto Factory Raid"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Factory Raid"] = state;
@@ -9839,7 +9839,7 @@ MultiFarmTab:AddSection("PRE HISTORIC KAITUN");
 
 MultiFarmTab:AddDropdown({
 	Title   = "Boat Selection",
-	Desc    = "Barco para navegar ate a Prehistoric Island",
+	Desc    = "Thuyền để di chuyển đến Đảo Tiền Sử",
 	Options = {"Guardian","Patrol Boat","Speedboat","Upgraded Boat","Cannon Raft"},
 	CurrentOption = {_G.VolcanicSelectedBoat or "Guardian"},
 	Callback = function(sel)
@@ -9873,7 +9873,7 @@ MultiFarmTab:AddToggle({
 
 MultiFarmTab:AddToggle({
 	Title = "Auto Reset After Complete",
-	Desc  = "Espera 10s e reseta apos a raid.",
+	Desc  = "Chờ 10 giây và reset sau khi raid xong.",
 	Value = _G.Settings.Multi and _G.Settings.Multi["Auto Reset After Complete"] or false,
 	Callback = function(state)
 		_G.VolcanicAutoReset = state;
@@ -9885,7 +9885,7 @@ MultiFarmTab:AddToggle({
 
 MultiFarmTab:AddToggle({
 	Title = "Auto Collect Egg",
-	Desc  = "Coleta Dragon Egg apos raid.",
+	Desc  = "Thu thập Trứng Rồng sau khi raid.",
 	Value = _G.Settings.Multi and _G.Settings.Multi["Auto Collect Egg"] or false,
 	Callback = function(state)
 		_G.VolcanicCollectEgg = state;
@@ -9897,7 +9897,7 @@ MultiFarmTab:AddToggle({
 
 MultiFarmTab:AddToggle({
 	Title = "Auto Collect Bone",
-	Desc  = "Coleta DinoBones apos raid.",
+	Desc  = "Thu thập Xương Khủng Long sau khi raid.",
 	Value = _G.Settings.Multi and _G.Settings.Multi["Auto Collect Bone"] or false,
 	Callback = function(state)
 		_G.VolcanicCollectBone = state;
@@ -9909,7 +9909,7 @@ MultiFarmTab:AddToggle({
 
 MultiFarmTab:AddButton({
 	Title = "Remove Lava (Manual)",
-	Desc  = "Remove toda a lava da Prehistoric Island agora.",
+	Desc  = "Xóa toàn bộ dung nham trên Đảo Tiền Sử.",
 	Callback = function()
 		pcall(function()
 			for _, v in pairs(workspace:GetDescendants()) do
@@ -9995,7 +9995,7 @@ _G.Settings.Main["Auto Fully Dungeon"] = _G.Settings.Main["Auto Fully Dungeon"] 
 
 MultiFarmTab:AddParagraph({
 	Title = "Auto Fully Dungeon",
-	Desc = "Entra na Dungeon, derrota todos os NPCs de cada Floor (incluindo Kitsune F10 e Gas F15), faz Skip Hub e repete. Funciona apenas na Dungeon World (Place ID: 73902483975735)."
+	Desc = "Vào Dungeon, đánh bại toàn bộ quái mỗi tầng (gồm Kitsune F10 và Gas F15), tự Skip Hub và lặp lại. Chỉ hoạt động ở Dungeon World (ID: 73902483975735)."
 });
 
 local _AutoFullyDungeonToggle = MultiFarmTab:AddToggle({
@@ -10172,7 +10172,7 @@ end;
 
 AutoFarmChestTweenToggle = OthersTab:AddToggle({
 	Title = "Auto Farm Chest Tween",
-	Desc = "Tween preciso para cada bau. Confirma coleta via Beli antes de ir pro proximo.",
+	Desc = "Tween chính xác đến từng rương. Xác nhận đã nhặt qua Beli trước khi chuyển rương.",
 	Value = _G.Settings.Farm["Auto Farm Chest Tween"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Farm Chest Tween"] = state;
@@ -10253,7 +10253,7 @@ end);
 local _chestBypassActive = false;
 AutoFarmChestInstantToggle = OthersTab:AddToggle({
 	Title = "Auto Farm Chest Bypass",
-	Desc = "Teleporte instantaneo e preciso em cada bau. Aguarda confirmacao de coleta antes do proximo.",
+	Desc = "Teleport tức thời và chính xác đến từng rương. Chờ xác nhận đã nhặt trước khi chuyển.",
 	Value = _G.Settings.Farm["Auto Farm Chest Instant"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Farm Chest Instant"] = state;
@@ -10333,7 +10333,7 @@ task.spawn(function()
 end);
 OthersTab:AddToggle({
 	Title = "Chest Hop",
-	Desc = "Troca de servidor apos pegar X baus (define quantidade abaixo)",
+	Desc = "Chuyển máy chủ sau khi lấy X rương (đặt số lượng bên dưới)",
 	Value = false,
 	Callback = function(state)
 		_G.ChestHopActive = state;
@@ -10343,7 +10343,7 @@ OthersTab:AddToggle({
 local _chestHopLimitOptions = {20,25,30,35,40,45,50};
 OthersTab:AddDropdown({
 	Title = "Chest Hop Limit",
-	Desc = "Quantos baus pegar antes de trocar de servidor",
+	Desc = "Số rương cần lấy trước khi chuyển máy chủ",
 	Values = {"20","25","30","35","40","45","50"},
 	Value = "20",
 	Callback = function(v)
@@ -10351,7 +10351,7 @@ OthersTab:AddDropdown({
 	end
 });
 OthersTab:AddParagraph({
-	Title = "Baus Coletados",
+	Title = "Rương đã thu thập",
 	Desc = "0"
 });
 task.spawn(function()
@@ -10368,7 +10368,7 @@ task.spawn(function()
 end);
 AutoStopItemsToggle = OthersTab:AddToggle({
 	Title = "Auto Stop Items",
-	Desc = "Stop When Get God's Chalice or FoD",
+	Desc = "Dừng lại khi nhận được Chén Thánh hoặc đuốc Râu Đen",
 	Value = _G.Settings.Farm["Auto Stop Items"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Stop Items"] = state;
@@ -10882,7 +10882,7 @@ SettingsTab:AddSection("Anti Cheat Bypass");
 _G.BypassAntiCheat = true;
 SettingsTab:AddToggle({
 	Title = "Bypass Anti Cheat",
-	Desc = "Ativo por padrao. Usa tecnicas de ofuscacao de movimento, randomizacao de intervalo e simulacao de acao humana para reduzir deteccao do AC do Blox Fruits.",
+	Desc = "Bật theo mặc định. Dùng kỹ thuật làm mờ chuyển động, ngẫu nhiên thời gian và mô phỏng hành động người để tránh phát hiện từ Anti Cheat.",
 	Value = true,
 	Callback = function(state)
 		_G.BypassAntiCheat = state;
@@ -10953,7 +10953,7 @@ ResetSettingsButton = SettingsTab:AddButton({
 SettingsTab:AddSection(" Speed & Jump Control");
 SettingsTab:AddToggle({
 	Title = "Custom Walk Speed",
-	Desc = "Ativa controle manual de velocidade do player",
+	Desc = "Bật điều khiển tốc độ di chuyển thủ công",
 	Value = _G.Settings.Setting["Custom Speed Enabled"] or false,
 	Callback = function(state)
 		_G.Settings.Setting["Custom Speed Enabled"] = state;
@@ -10968,7 +10968,7 @@ SettingsTab:AddToggle({
 });
 SettingsTab:AddSlider({
 	Title = "Walk Speed",
-	Desc = "Velocidade direta do player. Normal = 16. Maximo = 300",
+	Desc = "Tốc độ di chuyển trực tiếp. Mặc định = 16. Tối đa = 300",
 	Min = 16,
 	Max = 300,
 	Default = _G.Settings.Setting["Custom Speed Val"] or 16,
@@ -10985,7 +10985,7 @@ SettingsTab:AddSlider({
 });
 SettingsTab:AddToggle({
 	Title = "Custom Jump Power",
-	Desc = "Ativa controle manual de altura de pulo do player",
+	Desc = "Bật điều khiển độ cao nhảy tùy chỉnh",
 	Value = _G.Settings.Setting["Custom Jump Enabled"] or false,
 	Callback = function(state)
 		_G.Settings.Setting["Custom Jump Enabled"] = state;
@@ -11000,7 +11000,7 @@ SettingsTab:AddToggle({
 });
 SettingsTab:AddSlider({
 	Title = "Jump Power %",
-	Desc = "100% = pulo normal (50). 500% = 250. Maximo: 1000%",
+	Desc = "100% = nhảy thường (50). 500% = 250. Tối đa: 1000%",
 	Min = 100,
 	Max = 1000,
 	Default = _G.Settings.Setting["Custom Jump Pct"] or 100,
@@ -11130,7 +11130,7 @@ AttackAuraToggle = SettingsTab:AddToggle({
 _G.Settings.Setting["Fast M1 Fruit"] = _G.Settings.Setting["Fast M1 Fruit"] or false;
 SettingsTab:AddToggle({
 	Title = "Fast M1 Fruit",
-	Desc = "Spamma click da fruta muito rapido quando Weapon = Fruit e estiver farmando qualquer coisa. No Sea Beast com frutas especiais (Pain, T-Rex, Kitsune, Control, Dragon) usa apenas M1 sem skills.",
+	Desc = "Spam click trái cây rất nhanh khi chọn Vũ Khí = Fruit và đang farm. Với Sea Beast và trái đặc biệt (Pain, T-Rex, Kitsune, Control, Dragon) chỉ dùng M1 không skill.",
 	Value = _G.Settings.Setting["Fast M1 Fruit"] or false,
 	Callback = function(state)
 		_G.Settings.Setting["Fast M1 Fruit"] = state;
@@ -11279,7 +11279,7 @@ end);
 SettingsTab:AddSection("Performance");
 SettingsTab:AddToggle({
 	Title = "Fix Lag",
-	Desc = "Reduz lag e stutters sem remover texturas do jogo",
+	Desc = "Giảm lag và giật hình nhưng không xóa kết cấu game",
 	Value = false,
 	Callback = function(state)
 		getgenv().FixLagEnabled = state
@@ -11306,7 +11306,7 @@ SettingsTab:AddToggle({
 
 SettingsTab:AddToggle({
 	Title = "FPS Boost",
-	Desc = "Remove texturas e efeitos visuais para melhorar FPS e tentar reduzir ping",
+	Desc = "Xóa hiệu ứng hình ảnh để tăng FPS và giảm ping",
 	Value = false,
 	Callback = function(state)
 		_G.FpsBoostEnabled = state
@@ -13302,7 +13302,7 @@ end;
 
 local RaidStatusParagraph = RaidTab:AddParagraph({
 	Title = "Raid Status",
-	Desc = "Desligado"
+	Desc = "Đã tắt"
 });
 
 task.spawn(function()
@@ -13311,16 +13311,16 @@ task.spawn(function()
 			local raidActive = game.Players.LocalPlayer.PlayerGui.Main.TopHUDList.RaidTimer.Visible;
 			if _G.Settings.Raid["Auto Raid"] then
 				if raidActive then
-					RaidStatusParagraph:SetDesc(" Raid em progresso! Matando inimigos...");
+					RaidStatusParagraph:SetDesc(" Đang trong raid! Tiêu diệt kẻ địch...");
 				else
 					if RaidGetBP("Special Microchip") then
-						RaidStatusParagraph:SetDesc(" Microchip pronto. Iniciando raid...");
+						RaidStatusParagraph:SetDesc(" Microchip sẵn sàng. Bắt đầu raid...");
 					else
-						RaidStatusParagraph:SetDesc(" Comprando Microchip...");
+						RaidStatusParagraph:SetDesc(" Đang mua Microchip...");
 					end;
 				end;
 			else
-				RaidStatusParagraph:SetDesc(" Desligado");
+				RaidStatusParagraph:SetDesc(" Đã tắt");
 			end;
 		end);
 	end;
@@ -13427,7 +13427,7 @@ end);
 _G.AutoBuyChip = false;
 AutoBuyChipToggle = RaidTab:AddToggle({
 	Title = " Auto Buy Chip",
-	Desc = "Swaps a fruit already in the bag for the Microchip. Does not unstore fruits fo estoque. Compra apenas 1 chip por vez.",
+	Desc = "Đổi một trái cây có sẵn trong túi đồ để lấy Microchip. Không lấy trái từ kho. Chỉ mua 1 chip mỗi lần.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoBuyChip = state;
@@ -13486,7 +13486,7 @@ PriceDevilFruitToUnstoreSlider = RaidTab:AddSlider({
 });
 AutoUnstoreDevilFruitToggle = RaidTab:AddToggle({
 	Title = "Auto Unstore Fruit (< 1M)",
-	Desc = "Tira do estoque frutas abaixo do preco definido (padrao: menos de 1.000.000). Use junto com Auto Buy Chip.",
+	Desc = "Lấy trái cây dưới giá đã đặt ra khỏi kho (mặc định: dưới 1.000.000). Dùng cùng với Auto Buy Chip.",
 	Value = _G.Settings.Raid["Unstore Devil Fruit"],
 	Callback = function(state)
 		_G.Settings.Raid["Unstore Devil Fruit"] = state;
@@ -14268,7 +14268,7 @@ local PvPPlayerDropdown = CombatTab:AddDropdown({
 
 CombatTab:AddButton({
 	Title = " Refresh Player List",
-	Desc = "Atualiza a lista de jogadores no servidor",
+	Desc = "Làm mới danh sách người chơi trong máy chủ",
 	Callback = function()
 		RefreshPvPTargets();
 		pcall(function()
@@ -14341,7 +14341,7 @@ CombatTab:AddToggle({
 local _PvPAutoKill = false;
 CombatTab:AddToggle({
 	Title = "Auto Kill Selected Player",
-	Desc = "Mata automaticamente o jogador selecionado",
+	Desc = "Tự động tiêu diệt người chơi được chọn.",
 	Value = false,
 	Callback = function(v)
 		_PvPAutoKill = v;
@@ -14451,7 +14451,7 @@ end;
 
 CombatTab:AddToggle({
 	Title = "AimLock Skill",
-	Desc = "Keeps the camera locked on the selected target when using skills. Does not move the player.",
+	Desc = "Khóa camera vào mục tiêu đã chọn khi sử dụng kỹ năng. Không di chuyển người chơi.",
 	Value = false,
 	Callback = function(v)
 		_G.AimLockSkill = v;
@@ -14460,7 +14460,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "AimLock NPC",
-	Desc = "Trava camera no NPC mais proximo automaticamente",
+	Desc = "Tự động khóa camera vào NPC gần nhất",
 	Value = false,
 	Callback = function(v)
 		_G.AimLockNPC = v;
@@ -14501,7 +14501,7 @@ end);
 
 CombatTab:AddToggle({
 	Title = "Silent Aim Skill",
-	Desc = "Redireciona os projecteis/hits da skill para o alvo sem precisar olhar pra ele",
+	Desc = "Chuyển hướng đạn/đòn đánh của kỹ năng vào mục tiêu mà không cần nhìn vào nó",
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimSkill = v;
@@ -14510,7 +14510,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "Silent Aim NPC",
-	Desc = "Redireciona hits para o NPC mais proximo sem olhar para ele",
+	Desc = "Chuyển hướng đòn đánh vào NPC gần nhất mà không cần nhìn",
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimNPC = v;
@@ -15446,7 +15446,7 @@ DragonDojoTab:AddSection(" Dojo Quest - Belt Trainer");
 
 DragonDojoTab:AddParagraph({
 	Title = "Auto Dojo Trainer",
-	Desc = "Completa as quests de faixa automaticamente (White -> Black)"
+	Desc = "Tự động hoàn thành nhiệm vụ đai (Trắng -> Đen)"
 });
 
 local _G_Dojoo = false;
@@ -15460,7 +15460,7 @@ end;
 
 DragonDojoTab:AddToggle({
 	Title = "Auto Dojo Trainer",
-	Desc = "Pega e completa quests de faixa: White, Yellow, Green, Purple, Red, Black",
+	Desc = "Nhận và hoàn thành nhiệm vụ đai: Trắng, Vàng, Xanh Lá, Tím, Đỏ, Đen",
 	Value = false,
 	Callback = function(I)
 		_G_Dojoo = I;
@@ -16216,7 +16216,7 @@ PrehistoricTab:AddSection("Fully Volcano")
 
 PrehistoricFarm:AddToggle({
 	Title = "Ignore Craft Volcanic Magnet [Fully]",
-	Desc = "Skip crafting step in Fully Volcanic loop",
+	Desc = "Bỏ qua bước chế tạo trong vòng lặp Fully Volcanic.",
 	Value = false,
 	Callback = function(state)
 		_G.CraftVM = state
@@ -16266,7 +16266,7 @@ ChooseBoatDropdown = SeaEventTab:AddDropdown({
 
 ChooseZoneDropdown = SeaEventTab:AddDropdown({
 	Title = "Choose Zone (Sea 3)",
-	Desc = "Nivel de perigo para navegar (Sea 3 apenas)",
+	Desc = "Cấp độ nguy hiểm để đi thuyền (Chỉ Biển 3)",
 	Values = {"Lv 1","Lv 2","Lv 3","Lv 4","Lv 5","Lv 6","Lv Infinite"},
 	Value = "Lv 1",
 	Callback = function(option)
@@ -16276,7 +16276,7 @@ ChooseZoneDropdown = SeaEventTab:AddDropdown({
 
 local BoatSpeedSlider = SeaEventTab:AddSlider({
 	Title = "Boat Speed",
-	Desc = "Velocidade do barco (padrao: 300)",
+	Desc = "Tốc độ thuyền (mặc định: 300)",
 	Min = 10,
 	Max = 350,
 	Default = 300,
@@ -16288,7 +16288,7 @@ local BoatSpeedSlider = SeaEventTab:AddSlider({
 
 SeaEventTab:AddToggle({
 	Title = "Activate Boat Speed",
-	Desc = "Aplica velocidade customizada no barco em tempo real",
+	Desc = "Áp dụng tốc độ tùy chỉnh cho thuyền theo thời gian thực",
 	Value = false,
 	Callback = function(v)
 		_G.SpeedBoat = v;
@@ -16338,7 +16338,7 @@ _G.GrindSea = _G.GrindSea or false;
 
 GrindSeaToggle = SeaEventTab:AddToggle({
 	Title = "Grind Sea",
-	Desc = "Goes to Tiki, buys boat, mounts it, sails to selected sea and farms sea NPCs.",
+	Desc = "Đến Tiki, mua thuyền, lên thuyền, đi đến vùng biển đã chọn và farm quái biển.",
 	Value = false,
 	Callback = function(state)
 		_G.GrindSea = state;
@@ -16456,7 +16456,7 @@ task.spawn(function()
 end);
 SeaEventTab:AddButton({
 	Title = "Bring Boat",
-	Desc = "Teleporta o barco selecionado ate a sua posicao atual.",
+	Desc = "Dịch chuyển thuyền đã chọn đến vị trí hiện tại của bạn.",
 	Callback = function()
 		pcall(function()
 			local selectedBoat = _G.Settings.SeaEvent["Selected Boat"] or "Guardian";
@@ -18557,7 +18557,7 @@ HoldAndSkillTab:AddParagraph({
 
 HoldAndSkillTab:AddToggle({
 	Title = "Z X C Melee",
-	Desc = "Usa apenas Z, X, C de Melee (Fighting Style)",
+	Desc = "Chỉ dùng Z, X, C của Melee (Fighting Style)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -18575,7 +18575,7 @@ HoldAndSkillTab:AddToggle({
 
 HoldAndSkillTab:AddToggle({
 	Title = "Z X C V F Fruit",
-	Desc = "Usa Z, X, C, V e F de Fruta (Devil Fruit)",
+	Desc = "Dùng Z, X, C, V và F của Trái Ác Quỷ",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -18593,7 +18593,7 @@ HoldAndSkillTab:AddToggle({
 
 HoldAndSkillTab:AddToggle({
 	Title = "Z X Sword",
-	Desc = "Usa apenas Z e X de Espada (Sword)",
+	Desc = "Chỉ dùng Z và X của Kiếm (Sword)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -18611,7 +18611,7 @@ HoldAndSkillTab:AddToggle({
 
 HoldAndSkillTab:AddToggle({
 	Title = "Z X Gun",
-	Desc = "Usa apenas Z e X de Arma de Fogo (Gun)",
+	Desc = "Chỉ dùng Z và X của Súng (Gun)",
 	Value = false,
 	Callback = function(state)
 		if state then
@@ -18630,40 +18630,40 @@ HoldAndSkillTab:AddToggle({
 HoldAndSkillTab:AddSection("Skills Individuais");
 
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill Z",
-	Desc = "Ativa o uso da tecla Z nos farms",
+	Title = "Use Skill Z",
+	Desc = "Bật sử dụng phím Z khi farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["Z"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill X",
-	Desc = "Ativa o uso da tecla X nos farms",
+	Title = "Use Skill X",
+	Desc = "Bật sử dụng phím X khi farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["X"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill C",
-	Desc = "Ativa o uso da tecla C nos farms",
+	Title = "Use Skill C",
+	Desc = "Bật sử dụng phím C khi farm",
 	Value = true,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["C"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill V",
-	Desc = "Ativa o uso da tecla V nos farms",
+	Title = "Use Skill V",
+	Desc = "Bật sử dụng phím V khi farm",
 	Value = false,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["V"] = state;
 	end
 });
 HoldAndSkillTab:AddToggle({
-	Title = "Usar Skill F",
-	Desc = "Ativa o uso da tecla F nos farms",
+	Title = "Use Skill F",
+	Desc = "Bật sử dụng phím F khi farm",
 	Value = false,
 	Callback = function(state)
 		getgenv().HoldSkillConfig["F"] = state;

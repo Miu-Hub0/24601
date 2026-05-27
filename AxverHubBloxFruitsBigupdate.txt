@@ -4075,7 +4075,7 @@ end);
 local _FHAutoUsoap = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Usoap Hat"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Usoap's Hat [Sea 1]",
-	Desc = "Auto kill players perto para Usoap Hat",
+	Desc = "Tự động kill người chơi gần để lấy Mũ Usoap",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Usoap Hat"] or false,
 	Callback = function(state)
 		_FHAutoUsoap = state;
@@ -4108,7 +4108,7 @@ end);
 local _FHobsFarm = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Observation"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Farm Observation [All Seas]",
-	Desc = "Auto farm Observation Haki (Ken) - Sea 1, 2 e 3",
+	Desc = "Tự động farm Haki Quan Sát (Ken) - Biển 1, 2 và 3",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Observation"] or false,
 	Callback = function(state)
 		_FHobsFarm = state;
@@ -4154,7 +4154,7 @@ end);
 local _FHBones = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bones"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Random Bone [All Seas]",
-	Desc = "Auto buy Bones aleatoriamente para invocar bosses",
+	Desc = "Tự động mua Xương ngẫu nhiên để triệu hồi boss",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bones"] or false,
 	Callback = function(state)
 		_FHBones = state;
@@ -4213,7 +4213,7 @@ FarmingHopTab:AddSection(" Sea 2 Farms");
 local _FHDarkbeard = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Darkbeard"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Darkbeard [Sea 2 + Hop]",
-	Desc = "Auto kill Darkbeard - hops server if not found",
+	Desc = "Tự động kill Darkbeard - nhảy server nếu không tìm thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Darkbeard"] or false,
 	Callback = function(state)
 		_FHDarkbeard = state;
@@ -4280,7 +4280,7 @@ FarmingHopTab:AddSection(" Sea 3 Farms");
 local _FHEliteQuest = false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Elite Quest [Sea 3]",
-	Desc = "Go to Diablo/Urban/Deandre, kill elite boss, hops if not found",
+	Desc = "Đến Diablo/Urban/Deandre, kill elite boss, nhảy server nếu không thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Elite Quest"] or false,
 	Callback = function(state)
 		_FHEliteQuest = state;
@@ -4335,7 +4335,7 @@ end);
 local _FHCitizenQuest = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Citizen Quest"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Citizen Quest / Ken V2 [Sea 3]",
-	Desc = "Auto Citizen Quest para desbloquear Ken V2",
+	Desc = "Tự động làm nhiệm vụ Công Dân để mở Ken V2",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Citizen Quest"] or false,
 	Callback = function(state)
 		_FHCitizenQuest = state;
@@ -4366,7 +4366,7 @@ end);
 local _FHRipIndra = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Rip Indra"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Rip Indra [Sea 3 + Hop]",
-	Desc = "Auto kill Rip Indra - hops server if not found",
+	Desc = "Tự động kill Rip Indra - nhảy server nếu không tìm thấy",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Rip Indra"] or false,
 	Callback = function(state)
 		_FHRipIndra = state;
@@ -4402,7 +4402,7 @@ end);
 local _FHMarineCoat = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Marine Coat"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Marine Coat [Sea 1 + Hop]",
-	Desc = "Auto farm Marine Coat - hops if Vice Admiral not found",
+	Desc = "Tự động farm Áo Marine - nhảy server nếu không thấy Đô Đốc Vice",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Marine Coat"] or false,
 	Callback = function(state)
 		_FHMarineCoat = state;
@@ -4439,7 +4439,7 @@ end);
 local _FHSwanCoat = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Swan Coat"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Swan Coat [Sea 2 + Hop]",
-	Desc = "Auto kill Don Swan para Swan Coat - Sea 2 Swan Room",
+	Desc = "Tự động kill Don Swan để lấy Áo Thiên Nga - Biển 2, Phòng Swan",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Swan Coat"] or false,
 	Callback = function(state)
 		_FHSwanCoat = state;
@@ -4475,7 +4475,7 @@ end);
 local _FHGodChalice = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto God Chalice"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto God Chalice [Sea 3 + Hop]",
-	Desc = "Auto farm God Chalice - hops when boss not found",
+	Desc = "Tự động farm Chén Thánh - nhảy server khi không thấy boss",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto God Chalice"] or false,
 	Callback = function(state)
 		_FHGodChalice = state;
@@ -4509,7 +4509,7 @@ local _FHSkullGuitarMat = false;
 FarmingHopTab:AddSection(" Material Farm");
 FarmingHopTab:AddToggle({
 	Title = "Auto Farm Material Skull Guitar",
-	Desc = "Detecta e farma: 250 Ectoplasma (Haunted Ship Sea 2), 500 Bones (Haunted Castle Sea 2), 1 Dark Fragment (Darkbeard Sea 2). Ordem: Darkbeard > Ectoplasma > Ossos.",
+	Desc = "Phát hiện và farm: 250 Ectoplasm (Tàu Ma Biển 2), 500 Xương (Lâu Đài Ma Biển 2), 1 Mảnh Bóng Tối (Darkbeard Biển 2). Thứ tự: Darkbeard → Ectoplasm → Xương.",
 	Value = false,
 	Callback = function(state)
 		_FHSkullGuitarMat = state;
@@ -9613,7 +9613,7 @@ local function _vStage5_Raid()
 	task.wait(1);
 
 	if _G.VolcanicCollectEgg and _G.FullyVolcanicActive then
-		Library:Notify({Title="Volcanic Kaitun", Content="Coletando Dragon Egg...", Icon="egg", Duration=4});
+		Library:Notify({Title="Volcanic Kaitun", Content="Đang thu thập Trứng Rồng...", Icon="egg", Duration=4});
 		local et=0; local eggDone=false;
 		while _G.FullyVolcanicActive and et<40 and not eggDone do
 			pcall(function()
@@ -9646,7 +9646,7 @@ local function _vStage5_Raid()
 	end;
 
 	if _G.VolcanicCollectBone and _G.FullyVolcanicActive then
-		Library:Notify({Title="Volcanic Kaitun", Content="Coletando Dino Bones...", Icon="box", Duration=4});
+		Library:Notify({Title="Volcanic Kaitun", Content="Đang thu thập Xương Khủng Long...", Icon="box", Duration=4});
 		local bt=0;
 		while _G.FullyVolcanicActive and bt<30 do
 			pcall(function()
@@ -9672,7 +9672,7 @@ _volcanicMainLoop = function()
 		if not hasMagnet then
 			_G._volcanicPhase = "scrap";
 			if _vGetMat("Scrap Metal") < 10 then
-				Library:Notify({Title="Volcanic Kaitun", Content="[1/9] Farmando Scrap Metal (".. _vGetMat("Scrap Metal") .."/10)...", Icon="pickaxe", Duration=4});
+				Library:Notify({Title="Volcanic Kaitun", Content="[1/9] Đang farm Kim Loại Phế Liệu (".. _vGetMat("Scrap Metal") .."/10)...", Icon="pickaxe", Duration=4});
 				local scrapTries = 0;
 				while _G.FullyVolcanicActive and _vGetMat("Scrap Metal") < 10 and scrapTries < 6 do
 					_vStage1_ScrapMetal(); scrapTries = scrapTries + 1; task.wait(0.5);
@@ -9682,7 +9682,7 @@ _volcanicMainLoop = function()
 
 			_G._volcanicPhase = "blaze";
 			if _vGetMat("Blaze Ember") < 15 then
-				Library:Notify({Title="Volcanic Kaitun", Content="[2/9] Farmando Blaze Ember (".. _vGetMat("Blaze Ember") .."/15)...", Icon="flame", Duration=4});
+				Library:Notify({Title="Volcanic Kaitun", Content="[2/9] Đang farm Blaze Ember (".. _vGetMat("Blaze Ember") .."/15)...", Icon="flame", Duration=4});
 				local blazeTries = 0;
 				_G.Settings.DragonDojo["Auto Farm Blaze Ember"] = true;
 				_G.OnBlzeQuest = false;
@@ -9700,17 +9700,17 @@ _volcanicMainLoop = function()
 			if not _G.FullyVolcanicActive then break; end;
 
 			_G._volcanicPhase = "craft";
-			Library:Notify({Title="Volcanic Kaitun", Content="[3/9] Craftando Volcanic Magnet...", Icon="hammer", Duration=4});
+			Library:Notify({Title="Volcanic Kaitun", Content="[3/9] Đang chế tạo Nam Châm Núi Lửa...", Icon="hammer", Duration=4});
 			_vStage3_CraftMagnet();
 			if not _G.FullyVolcanicActive then break; end;
 			hasMagnet = _vHasItem("Volcanic Magnet");
 			if not hasMagnet then task.wait(1); continue; end;
-			Library:Notify({Title="Volcanic Kaitun", Content="[3/9] Volcanic Magnet craftado!", Icon="check", Duration=3});
+			Library:Notify({Title="Volcanic Kaitun", Content="[3/9] Đã chế tạo Nam Châm Núi Lửa thành công!", Icon="check", Duration=3});
 		end;
 
 		if not workspace._WorldOrigin.Locations:FindFirstChild("Prehistoric Island") then
 			_G._volcanicPhase = "sailing";
-			Library:Notify({Title="Volcanic Kaitun", Content="[4/9] Indo ate Tiki Outpost e navegando para o Mar 6+...", Icon="anchor", Duration=5});
+			Library:Notify({Title="Volcanic Kaitun", Content="[4/9] Đang đến Tiền Đồn Tiki và đi thuyền ra Biển 6+...", Icon="anchor", Duration=5});
 			_vStopTween();
 			shouldTween = false; _G.StopTween = true;
 			local boatName = _G.VolcanicSelectedBoat or "Guardian";
@@ -9722,31 +9722,31 @@ _volcanicMainLoop = function()
 				game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyBoat", boatName);
 				task.wait(2);
 			end;
-			Library:Notify({Title="Volcanic Kaitun", Content="[5/9] Navegando... aguardando spawn da Prehistoric Island...", Icon="ship", Duration=6});
+			Library:Notify({Title="Volcanic Kaitun", Content="[5/9] Đang chèo thuyền... chờ Đảo Tiền Sử xuất hiện...", Icon="ship", Duration=6});
 			_vSailToIsland(700);
 		end;
 		if not _G.FullyVolcanicActive then break; end;
 
 		if workspace._WorldOrigin.Locations:FindFirstChild("Prehistoric Island") then
-			Library:Notify({Title="Volcanic Kaitun", Content="[6/9] Prehistoric Island detectada! Indo ate ela via Tween...", Icon="map-pin", Duration=4});
+			Library:Notify({Title="Volcanic Kaitun", Content="[6/9] Đã tìm thấy Đảo Tiền Sử! Đang di chuyển đến...", Icon="map-pin", Duration=4});
 			_G._volcanicPhase = "tweening";
 			_vStage4_GoToIsland();
-			Library:Notify({Title="Volcanic Kaitun", Content="[7/9] Na ilha! Ativando raid do vulcao...", Icon="zap", Duration=3});
+			Library:Notify({Title="Volcanic Kaitun", Content="[7/9] Đã đến đảo! Đang kích hoạt raid núi lửa...", Icon="zap", Duration=3});
 		end;
 		if not _G.FullyVolcanicActive then break; end;
 
 		_G._volcanicPhase = "solving";
-		Library:Notify({Title="Volcanic Kaitun", Content="[8/9] RAID ATIVA! Fechando buracos + Kill Golems...", Icon="shield", Duration=5});
+		Library:Notify({Title="Volcanic Kaitun", Content="[8/9] RAID ĐÃ KÍCH HOẠT! Đang bịt lỗ hổng + tiêu diệt Golem...", Icon="shield", Duration=5});
 		_vStage5_Raid();
 		if not _G.FullyVolcanicActive then break; end;
 
-		Library:Notify({Title="Volcanic Kaitun", Content="[9/9] FULLY VOLCANIC SOLADO! Aguardando reset...", Icon="trophy", Duration=8});
+		Library:Notify({Title="Volcanic Kaitun", Content="[9/9] ĐÃ HOÀN THÀNH VOLCANIC! Đang chờ reset...", Icon="trophy", Duration=8});
 		_G._volcanicPhase = "resetting";
 		if _G.VolcanicAutoReset then
 			local t = 0;
 			while t < 10 and _G.FullyVolcanicActive and _G.VolcanicAutoReset do task.wait(1); t = t + 1; end;
 			if _G.FullyVolcanicActive and _G.VolcanicAutoReset then
-				Library:Notify({Title="Volcanic Kaitun", Content="Resetando personagem para novo ciclo...", Icon="refresh-cw", Duration=3});
+				Library:Notify({Title="Volcanic Kaitun", Content="Đang reset nhân vật để bắt đầu chu kỳ mới...", Icon="refresh-cw", Duration=3});
 				pcall(function()
 					local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid");
 					if hum then hum.Health = 0; end;
@@ -9765,7 +9765,7 @@ _volcanicMainLoop = function()
 	if _vHB then pcall(function() _vHB:Disconnect(); end); _vHB=nil; end;
 	shouldTween=false; _G.StopTween=false;
 	_G._volcanicPhase = "idle";
-	Library:Notify({Title="Volcanic Kaitun", Content="Auto Fully Volcanic desativado.", Icon="x", Duration=4});
+	Library:Notify({Title="Volcanic Kaitun", Content="Auto Fully Volcanic đã tắt.", Icon="x", Duration=4});
 end;
 
 MultiFarmTab:AddSection("PRE HISTORIC KAITUN");
@@ -9886,7 +9886,7 @@ task.spawn(function()
 		if _G._volcanicPhase == "idle" then return; end;
 		task.wait(4);
 		if not _G.FullyVolcanicActive then return; end;
-		Library:Notify({Title="Volcanic Kaitun", Content="Personagem ressurgiu - retomando ciclo...", Icon="refresh-cw", Duration=4});
+		Library:Notify({Title="Volcanic Kaitun", Content="Nhân vật đã hồi sinh - tiếp tục chu kỳ...", Icon="refresh-cw", Duration=4});
 		task.spawn(_volcanicMainLoop);
 	end);
 end);
@@ -9961,7 +9961,7 @@ task.spawn(function()
 		if _AutoFullyDungeonToggle and _AutoFullyDungeonToggle.SetStage then
 			_AutoFullyDungeonToggle.SetStage(true);
 		end;
-		Library:Notify({Title = "Dungeon", Content = "Auto Fully Dungeon re-activated automatically!", Icon = "zap", Duration = 4});
+		Library:Notify({Title = "Dungeon", Content = "Auto Fully Dungeon đã được tự động kích hoạt lại!", Icon = "zap", Duration = 4});
 	end;
 end);
 
@@ -9971,7 +9971,7 @@ task.spawn(function()
 		task.wait(1);
 		if not _G.Settings.Main["Auto Fully Dungeon"] then continue; end;
 		if game.PlaceId ~= _DUNGEON_PID then
-			Library:Notify({Title = "Auto Fully Dungeon", Content = "Not in Dungeon World! Place ID: " .. _DUNGEON_PID, Icon = "alert-triangle", Duration = 5});
+			Library:Notify({Title = "Auto Fully Dungeon", Content = "Không ở trong Thế Giới Dungeon! ID Bản Đồ: " .. _DUNGEON_PID, Icon = "alert-triangle", Duration = 5});
 			task.wait(10);
 			continue;
 		end;
@@ -10132,7 +10132,7 @@ task.spawn(function()
 			if _isSpecialChestItem() then
 				_chestTweenActive = false;
 				_G.Settings.Farm["Auto Farm Chest Tween"] = false;
-				Library:Notify({Title = "Axver Hub", Content = "Special item found! Auto Chest stopped.", Icon = "bell", Duration = 6});
+				Library:Notify({Title = "Axver Hub", Content = "Đã tìm thấy vật phẩm đặc biệt! Tạm dừng Auto Chest.", Icon = "bell", Duration = 6});
 				return;
 			end;
 			local chests = {};
@@ -10174,7 +10174,7 @@ task.spawn(function()
 			end;
 			if _G.ChestHopActive and _G.ChestHopCount >= _G.ChestHopLimit then
 				_G.ChestHopCount = 0;
-				Library:Notify({Title = "Axver Hub", Content = "Chest Hop: limit reached, switching server...", Icon = "bell", Duration = 4});
+				Library:Notify({Title = "Axver Hub", Content = "Chest Hop: đã đạt giới hạn, đang chuyển server...", Icon = "bell", Duration = 4});
 				task.wait(2);
 				local module = (loadstring(game:HttpGet("https://raw.githubusercontent.com/raw-scriptpastebin/FE/main/Server_Hop_Settings")))();
 				module:Teleport(game.PlaceId);
@@ -10257,7 +10257,7 @@ task.spawn(function()
 		end;
 		if _G.ChestHopActive and _G.ChestHopCount >= _G.ChestHopLimit then
 			_G.ChestHopCount = 0;
-			Library:Notify({Title = "Axver Hub", Content = "Chest Hop: switching server...", Icon = "bell", Duration = 4});
+			Library:Notify({Title = "Axver Hub", Content = "Chest Hop: đang chuyển server...", Icon = "bell", Duration = 4});
 			task.wait(2);
 			local module = (loadstring(game:HttpGet("https://raw.githubusercontent.com/raw-scriptpastebin/FE/main/Server_Hop_Settings")))();
 			module:Teleport(game.PlaceId);
@@ -10746,7 +10746,7 @@ local function ShowResetConfirm()
 		msg.Size = UDim2.new(1,-20,0,40);
 		msg.Position = UDim2.new(0,10,0,42);
 		msg.BackgroundTransparency = 1;
-		msg.Text = "Tem certeza que quer resetar todas as configuracoes";
+		msg.Text = "Bạn có chắc chắn muốn reset tất cả cài đặt?";
 		msg.TextColor3 = Color3.fromRGB(200,200,200);
 		msg.Font = Enum.Font.Gotham;
 		msg.TextSize = 13;
@@ -10758,7 +10758,7 @@ local function ShowResetConfirm()
 		simBtn.Size = UDim2.new(0,130,0,38);
 		simBtn.Position = UDim2.new(0,15,1,-52);
 		simBtn.BackgroundColor3 = Color3.fromRGB(220,60,60);
-		simBtn.Text = " Sim, Resetar";
+		simBtn.Text = "Có,Reset";
 		simBtn.TextColor3 = Color3.fromRGB(255,255,255);
 		simBtn.Font = Enum.Font.GothamBold;
 		simBtn.TextSize = 13;
@@ -10771,7 +10771,7 @@ local function ShowResetConfirm()
 		naoBtn.Size = UDim2.new(0,130,0,38);
 		naoBtn.Position = UDim2.new(1,-145,1,-52);
 		naoBtn.BackgroundColor3 = Color3.fromRGB(40,40,60);
-		naoBtn.Text = " Nao";
+		naoBtn.Text = "Không";
 		naoBtn.TextColor3 = Color3.fromRGB(200,200,200);
 		naoBtn.Font = Enum.Font.GothamBold;
 		naoBtn.TextSize = 13;
@@ -14722,7 +14722,7 @@ ShopTab:AddDropdown({
 local function BuyFightStyleFull(styleName)
 	local data = FightStyleNPCs[styleName];
 	if not data then
-		Library:Notify({Title = "Axver Hub", Content = "Style not found: " .. tostring(styleName), Icon = "alert-triangle", Duration = 4});
+		Library:Notify({Title = "Axver Hub", Content = "Không tìm thấy phong cách: " .. tostring(styleName), Icon = "alert-triangle", Duration = 4});
 		return;
 	end;
 	local plr = game.Players.LocalPlayer;
@@ -14770,7 +14770,7 @@ local function BuyFightStyleFull(styleName)
 	pcall(function()
 		(game:GetService("ReplicatedStorage")).Remotes.CommF_:InvokeServer(data.buy, true);
 	end);
-	Library:Notify({Title = "Axver Yub", Content = "Purchase sent: " .. styleName, Icon = "check", Duration = 4});
+	Library:Notify({Title = "Axver Hub", Content = "Đã gửi yêu cầu mua: " .. styleName, Icon = "check", Duration = 4});
 end;
 
 ShopTab:AddButton({
@@ -17298,7 +17298,7 @@ task.spawn(function()
 						hrp.CFrame = v.CFrame;
 						task.wait(0.2);
 						pcall(function()
-							Library:Notify({Title = "Axver Hub", Content = "Quest complete!", Icon = "bell", Duration = 6});
+							Library:Notify({Title = "Axver Hub", Content = "Đã hoàn thành nhiệm vụ!", Icon = "bell", Duration = 6});
 						end);
 						_G.AutoBlueGear = false;
 						if _G.Settings and _G.Settings.SeaStack then _G.Settings.SeaStack["Auto Blue Gear"] = false; (getgenv()).SaveSetting(); end;
@@ -17310,7 +17310,7 @@ task.spawn(function()
 						hrp.CFrame = v.CFrame;
 						task.wait(0.2);
 						pcall(function()
-							Library:Notify({Title = "Axver Hub", Content = "Quest complete!", Icon = "bell", Duration = 6});
+							Library:Notify({Title = "Axver Hub", Content = "Đã hoàn thành nhiệm vụ!", Icon = "bell", Duration = 6});
 						end);
 						_G.AutoBlueGear = false;
 						if _G.Settings and _G.Settings.SeaStack then _G.Settings.SeaStack["Auto Blue Gear"] = false; (getgenv()).SaveSetting(); end;

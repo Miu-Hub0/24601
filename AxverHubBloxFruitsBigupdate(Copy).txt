@@ -12553,7 +12553,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Yama CDK",
-	Desc = "Auto completa todas as etapas da quest Yama para CDK. Sea 3.",
+	Desc = "Tự động hoàn thành tất cả các giai đoạn của nhiệm vụ Yama cho CDK. Sea 3.",
 	Value = false,
 	Callback = function(state)
 		_G._CDK_YM_Active = state;
@@ -12732,7 +12732,7 @@ local _ripIndraTombCF = CFrame.new(-26965, 22.8, 495);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Pad Haki [Sea 3]",
-	Desc = "Equipa Hakis lendarios (Rosa/Branco/Vermelho) e ativa os Pads no castelo. Troca a cada 7s.",
+	Desc = "Trang bị Haki Huyền Thoại (Hồng/Trắng/Đỏ) và kích hoạt các ô trong lâu đài. Thay đổi sau mỗi 7 giây.",
 	Value = _G.Settings.Items["Auto Pad Haki"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Pad Haki"] = state;
@@ -12799,8 +12799,8 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Spawn Rip Indra [Sea 3]",
-	Desc = "Leva automaticamente o God Chalice ate a lapide para spawnar Rip Indra.",
-	Value = _G.Settings.Items["Spawn Rip Indra"],
+	Desc = "Tự động nâng Chén Thánh lên bia mộ để triệu hồi Rip Indra.",
+Giá trị = _G.Settings.Items["Triệu hồi Rip Indra"]"],
 	Callback = function(state)
 		_G.Settings.Items["Spawn Rip Indra"] = state;
 		_G._spawnRipIndraActive = state;
@@ -12855,7 +12855,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Kill Rip Indra [Sea 3]",
-	Desc = "Mata automaticamente Rip Indra quando spawnar no Sea 3.",
+	Desc = " tự động giết Rip Indra [sea 3]",
 	Value = _G.Settings.Items["Auto Kill Rip Indra"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Kill Rip Indra"] = state;
@@ -13340,7 +13340,7 @@ ChooseChipRaidDropdown = RaidTab:AddDropdown({
 
 AutoRaidToggle = RaidTab:AddToggle({
 	Title = " Auto Raid (Start + Complete)",
-	Desc = "Starts the raid when the chip is in the bag and kills all enemies on the islands. Nao compra chip.",
+	Desc = "Bắt đầu cuộc đột kích khi con chip nằm trong túi và tiêu diệt tất cả kẻ thù trên các hòn đảo.",
 	Value = _G.Settings.Raid["Auto Raid"],
 	Callback = function(state)
 		_G.Settings.Raid["Auto Raid"] = state;
@@ -13459,7 +13459,7 @@ end);
 
 AutoAwakeningToggle = RaidTab:AddToggle({
 	Title = "Auto Awaken",
-	Desc = "Desperta a fruta automaticamente durante o raid",
+	Desc = "Tự động kích hoạt trái cây trong suốt cuộc đột kích.",
 	Value = _G.Settings.Raid["Auto Awaken"],
 	Callback = function(state)
 		_G.Settings.Raid["Auto Awaken"] = state;
@@ -13512,7 +13512,7 @@ end);
 
 TeleportToLabButton = RaidTab:AddButton({
 	Title = "Teleport To Lab",
-	Desc = "Vai para o summon da Raid",
+	Desc = "Vào phần triệu hồi Raid",
 	Callback = function()
 		if World2 then TweenPlayer(CFrame.new(-6438.73535,250.645355,-4501.50684));
 		elseif World3 then TweenPlayer(CFrame.new(-5033.50879,315.014252,-2947.77539));
@@ -13950,7 +13950,7 @@ else
 	DungeonTab:AddSection("Rings");
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Fuse Rings [BETA]",
-		Desc = "Vai até o NPC de anéis no lobby e funde os anéis automaticamente.",
+		Desc = "Đến NPC bán nhẫn ở sảnh chờ và tự động nung chảy nhẫn.",
 		Value = getgenv().DungeonConfig.AutoFuse,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoFuse = state;
@@ -13985,7 +13985,7 @@ else
 
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Spin Rings [BETA]",
-		Desc = "Gira anéis automaticamente no NPC do lobby.",
+		Desc = "Tự động xoay nhẫn tại NPC ở sảnh chờ.",
 		Value = getgenv().DungeonConfig.AutoSpin,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoSpin = state;
@@ -14024,7 +14024,7 @@ else
 	DungeonTab:AddSection("Dungeon");
 	DungeonTab:AddToggle({
 		Title = "Auto Enter Dungeon",
-		Desc = "Teleporta para o chao amarelo na entrada da Dungeon e fica tentando iniciar a partida.",
+		Desc = "Dịch chuyển đến sàn vàng ở lối vào Dungeon và cố gắng bắt đầu trận đấu",
 		Value = getgenv().DungeonConfig.AutoEnter,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoEnter = state;
@@ -14083,7 +14083,7 @@ else
 
 	DungeonTab:AddToggle({
 		Title = "Auto Complete Dungeon",
-		Desc = "Ataca todos os NPCs proximos de cada Floor, destroi Shrines do Kitsune (Floor 10), destroi vazamentos de gas (Floor 15) e avanca automaticamente.",
+		Desc = "Tấn công tất cả NPC gần mỗi tầng, phá Đền Kitsune (Tầng 10), phá rò rỉ khí gas (Tầng 15) và tự động tiến lên",
 		Value = getgenv().DungeonConfig.AutoComplete,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoComplete = state;
@@ -14179,7 +14179,7 @@ else
 	DungeonTab:AddSection("Buffs");
 	DungeonTab:AddToggle({
 		Title = "Dungeon Select Buffs [BETA]",
-		Desc = "Ativa a seleção automática de buffs quando aparecer a tela de cartas na dungeon.",
+		Desc = "Bật tính năng tự động chọn buff khi màn hình chọn bài xuất hiện trong dungeon",
 		Value = getgenv().DungeonConfig.SelectBuffs,
 		Callback = function(state)
 			getgenv().DungeonConfig.SelectBuffs = state;
@@ -14187,7 +14187,7 @@ else
 	});
 	DungeonTab:AddDropdown({
 		Title = "Dungeon Buffs to Select [BETA]",
-		Desc = "Escolha quais buffs devem ser selecionados automaticamente (multi-seleção)",
+		Desc = "Chọn những buff sẽ được tự động chọn (chọn nhiều)",
 		Values = _KNOWN_BUFFS,
 		Value = getgenv().DungeonConfig.SelectedBuffs[1] or _KNOWN_BUFFS[1],
 		Callback = function(option)
@@ -14224,7 +14224,7 @@ else
 	DungeonTab:AddSection("Post-Dungeon");
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Skip Hub [BETA]",
-		Desc = "Quando a dungeon terminar, aperta automaticamente para voltar ao lobby.",
+		Desc = "Khi dungeon kết thúc, tự động nhấn để quay lại sảnh chờ",
 		Value = getgenv().DungeonConfig.AutoSkipHub,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoSkipHub = state;
@@ -14258,7 +14258,7 @@ RefreshPvPTargets();
 
 local PvPPlayerDropdown = CombatTab:AddDropdown({
 	Title = "Select Player",
-	Desc = "Seleciona o jogador alvo para PvP",
+	Desc = "Chọn người chơi mục tiêu cho chế độ PvP.",
 	Values = PvPTargetList,
 	Value = PvPTargetList[1] or "No Players",
 	Callback = function(v)
@@ -14285,7 +14285,7 @@ CombatTab:AddButton({
 
 CombatTab:AddButton({
 	Title = " TP to Selected Player",
-	Desc = "Teleporta para a posicao do jogador selecionado",
+	Desc = "Dịch chuyển tức thời đến vị trí của người chơi đã chọn.",
 	Callback = function()
 		pcall(function()
 			if SelectedPvPTarget then
@@ -14301,7 +14301,7 @@ CombatTab:AddButton({
 local _PvPAutoTP = false;
 CombatTab:AddToggle({
 	Title = "Auto Follow / TP to Player",
-	Desc = "Segue e fica em cima do jogador selecionado constantemente",
+	Desc = "Theo dõi và đứng trên người chơi đã chọn liên tục",
 	Value = false,
 	Callback = function(v)
 		_PvPAutoTP = v;
@@ -14322,7 +14322,7 @@ end);
 
 CombatTab:AddToggle({
 	Title = "Auto Activate PvP",
-	Desc = "Mantem PvP ativado automaticamente",
+	Desc = "Tự động bật chế độ PvP",
 	Value = false,
 	Callback = function(v)
 		if v then
@@ -14367,7 +14367,7 @@ end);
 local _PvPSpamSkills = false;
 CombatTab:AddToggle({
 	Title = " Auto Spam Skills (All)",
-	Desc = "Spama todas as skills de todas as categorias automaticamente em PvP",
+	Desc = "Tự động spam tất cả kỹ năng của mọi loại trong PvP",
 	Value = false,
 	Callback = function(v)
 		_PvPSpamSkills = v;
@@ -14469,7 +14469,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "AimLock Player",
-	Desc = "Trava camera no player selecionado automaticamente",
+	Desc = "Tự động khóa camera vào người chơi đã chọn.",
 	Value = false,
 	Callback = function(v)
 		_G.AimLockPlayer = v;
@@ -14519,7 +14519,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "Silent Aim Player",
-	Desc = "Redireciona hits para o player selecionado sem olhar para ele",
+	Desc = "Chuyển hướng đòn đánh vào người chơi đã chọn mà không cần nhìn",
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimPlayer = v;
@@ -14842,7 +14842,7 @@ end;
 
 ShopTab:AddButton({
 	Title = " Go Buy Selected Fight Style",
-	Desc = "Tween ate o NPC, faz dialogo e compra o estilo selecionado",
+	Desc = "Tween đã ăn thịt NPC, tham gia đối thoại và mua kiểu trang phục đã chọn.",
 	Callback = function()
 		task.spawn(function() pcall(BuyFightStyleFull, SelectedFightStyle); end);
 	end
@@ -14851,7 +14851,7 @@ ShopTab:AddButton({
 local _autoBuyAllActive = false;
 ShopTab:AddToggle({
 	Title = "Auto Buy All Fight Styles",
-	Desc = "Vai em cada NPC em ordem e compra todos os estilos",
+	Desc = "Hãy đến gặp từng NPC theo thứ tự và mua tất cả các kiểu trang phục.",
 	Value = false,
 	Callback = function(state)
 		_autoBuyAllActive = state;
@@ -15091,7 +15091,7 @@ local PortalIslands = {
 };
 SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 	Title = "Choose Island",
-	Desc = "Lista dinamica do Eclipse - le o mapa real",
+	Desc = "Danh sách động Eclipse - đọc bản đồ thực",
 	Values = EclipseIslandList,
 	Value = EclipseIslandList[1] or "",
 	Callback = function(option)
@@ -15101,7 +15101,7 @@ SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 
 AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada e para ao chegar. Player pode se mover normalmente.",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn và dừng lại khi đến nơi. Người chơi có thể di chuyển bình thường..",
 	Value = false,
 	Callback = function(state)
 		_G.TweenToIslandActive = state;
@@ -15145,7 +15145,7 @@ AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 _G.BypassTeleportActive = false;
 TeleportTab:AddToggle({
 	Title = "Bypass Teleport to Island",
-	Desc = "Teleporta via bypass (com reset) para a ilha selecionada. Repete ate chegar. Player pode pular/mover.",
+	Desc = "Dịch chuyển tức thời qua đường vòng (với thiết lập lại) đến hòn đảo đã chọn. Lặp lại cho đến khi đến nơi. Người chơi có thể nhảy/di chuyển.",
 	Value = false,
 	Callback = function(state)
 		_G.BypassTeleportActive = state;
@@ -15185,7 +15185,7 @@ TeleportTab:AddToggle({
 _G.TweenIsland = false;
 AutoTweenToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenIsland = state;
@@ -15243,7 +15243,7 @@ end);
 local SelectedNpcName = EclipseNPCList[1] or "";
 SelectedNpcTeleport = TeleportTab:AddDropdown({
 	Title = "Choose Npc",
-	Desc = "Lista dinamica do Eclipse - NPCs reais do servidor",
+	Desc = "Danh sách động Eclipse - NPC thực từ máy chủ",
 	Values = EclipseNPCList,
 	Value = EclipseNPCList[1] or "",
 	Callback = function(option)
@@ -15254,7 +15254,7 @@ SelectedNpcTeleport = TeleportTab:AddDropdown({
 
 TeleportToNpcToggle = TeleportTab:AddToggle({
 	Title = "Teleport To Npc",
-	Desc = "Teleporte instantaneo direto para o NPC",
+	Desc = "Dịch chuyển tức thì trực tiếp đến NPC.",
 	Value = false,
 	Callback = function(state)
 		_G.TeleportNPC = state;
@@ -15286,7 +15286,7 @@ TeleportToNpcToggle = TeleportTab:AddToggle({
 _G.TweenNPC = false;
 TweenToNpcToggle = TeleportTab:AddToggle({
 	Title = "Tween To Npc",
-	Desc = "Move suavemente ate o NPC selecionado",
+	Desc = "Di chuyển mượt mà đến NPC đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenNPC = state;
@@ -16592,7 +16592,7 @@ PrehistoricStatusSeaStackParagraph = SeaStackTab:AddParagraph({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Prehistoric Island",
-	Desc = "Navega automaticamente ate o Mar 6+ para encontrar a ilha",
+	Desc = "Nó tự động điều hướng đến Sea 6+ để tìm hòn đảo.",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Find = state;
@@ -16660,7 +16660,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Prehistoric Event (M3Ow)",
-	Desc = "Remove lava + Mata Golens + Fecha Buracos ate o evento acabar",
+	Desc = "Loại bỏ dung nham + Tiêu diệt Golem + Bịt kín các lỗ hổng cho đến khi sự kiện kết thúc",
 	Value = false,
 	Callback = function(state)
 		_G.PrehistoricEvent = state;
@@ -16869,7 +16869,7 @@ BribeLeviathanButton = SeaStackTab:AddButton({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Active Leviathan",
-	Desc = "Quando encontrar a ilha do Leviathan, vai ate o NPC e ativa ele automaticamente.",
+	Desc = "Khi tìm thấy Đảo Leviathan, hãy đến gặp NPC và kích hoạt nó tự động.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoActivateLeviathan = state;
@@ -16907,7 +16907,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Kill Leviathan",
-	Desc = "Detecta as caudas do Leviathan vivas e vai ate elas spammando todas as skills (Z X C V F).",
+	Desc = "Phát hiện những chiếc đuôi sống của Leviathan và lao đến tấn công chúng bằng cách sử dụng liên tục tất cả các kỹ năng (Z X C V F)..",
 	Value = false,
 	Callback = function(state)
 		_G.AutoKillLeviathan = state;
@@ -16970,7 +16970,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Get Heart Leviathan",
-	Desc = "Quando Leviathan morrer, pega barco Beast Hunter, centraliza no local e atira no coracao.",
+	Desc = "Khi Leviathan chết, hãy lấy thuyền Thợ săn quái vật, hướng nó về vị trí đó và bắn vào tim nó.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoGetHeartLeviathan = state;
@@ -17068,7 +17068,7 @@ end);
 
 SeaStackTab:AddDropdown({
 	Title = "Auto Drive Boat - Ilha Destino",
-	Desc = "Selecione a ilha de destino para o Auto Drive Boat",
+	Desc = "Chọn hòn đảo đích đến cho thuyền tự lái.",
 	Values = _leviathanIslandList,
 	Value = "Tiki Outpost",
 	Callback = function(opt)
@@ -17077,7 +17077,7 @@ SeaStackTab:AddDropdown({
 });
 SeaStackTab:AddToggle({
 	Title = "Auto Drive Boat",
-	Desc = "Monta no barco Beast Hunter mais proximo e vai via Tween para a ilha selecionada.",
+	Desc = "Lên chiếc thuyền săn quái thú gần nhất và di chuyển bằng Tween đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoDriveBoat = state;
@@ -17279,7 +17279,7 @@ SeaStackTab:AddSection("MIRAGE ISLAND");
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Mirage Island",
-	Desc = "Compra barco na Tiki, vai ao mar Lv 4, patrulha ate Mirage spawnar. Se barco quebrar, reseta e recomeca.",
+	Desc = "Mua một chiếc thuyền từ Tiki, ra khơi ở cấp độ 4, tuần tra cho đến khi Mirage xuất hiện. Nếu thuyền bị hỏng, hãy thiết lập lại và bắt đầu lại.",
 	Value = _G.Settings.SeaStack["Auto Find Mirage"] or false,
 	Callback = function(state)
 		_G.FindMirage = state;
@@ -17334,7 +17334,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Blue Gear",
-	Desc = "Vai ao ponto mais alto da Mirage, olha fixamente para a lua. Quando a lua brilhar a noite, teleporta para a engrenagem.",
+	Desc = "Hãy đến điểm cao nhất của Mirage, nhìn chăm chú vào mặt trăng. Khi mặt trăng tỏa sáng vào ban đêm, hãy dịch chuyển đến chỗ bánh răng.",
 	Value = _G.Settings.SeaStack["Auto Blue Gear"] or false,
 	Callback = function(state)
 		_G.AutoBlueGear = state;
@@ -17955,7 +17955,7 @@ function CheckFruits()
 end;
 AutoStoreFruitToggle = FruitTab:AddToggle({
 	Title = "Auto Store Fruit",
-	Desc = "Verifica inventario e armazena frutas elegiveis de forma rapida.",
+	Desc = "Nó nhanh chóng kiểm tra hàng tồn kho và lưu trữ các loại trái cây đủ điều kiện.",
 	Value = _G.Settings.Fruit["Auto Store Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Auto Store Fruit"] = state;
@@ -18046,7 +18046,7 @@ _G.FruitInterrupt = false;
 
 TeleportToFruitToggle = FruitTab:AddToggle({
 	Title = "Teleport To Fruit",
-	Desc = " RISCO DE BAN - Teleporta instantaneo para a fruta. Use com cautela.",
+	Desc = "NGUY CƠ BỊ CẤM - Dịch chuyển tức thì đến quả. Sử dụng cẩn thận.",
 	Value = _G.Settings.Fruit["Teleport To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Teleport To Fruit"] = state;
@@ -18076,7 +18076,7 @@ end);
 
 TweenToFruitToggle = FruitTab:AddToggle({
 	Title = "Tween To Fruit",
-	Desc = "Move suavemente ate a fruta e para o farm quando ela aparecer.",
+	Desc = "Di chuyển nhẹ nhàng về phía trái cây và dừng lại ở trang trại khi nó xuất hiện.",
 	Value = _G.Settings.Fruit["Tween To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Tween To Fruit"] = state;
@@ -18407,11 +18407,11 @@ task.spawn(function()
 	end;
 end);
 eaStatusParagraph = ServerTab:AddParagraph({
-	Title = "SEA ATUAL",
-	Desc = "Detectando..."
+	Title = "DÒNG BIỂN",
+	Desc = "Đang phát hiện..."
 });
 rverTimeParagraph = ServerTab:AddParagraph({
-	Title = "TEMPO DE SERVIDOR",
+	Title = "THỜI GIAN PHỤC VỤ",
 	Desc = "N/A"
 });
 dStatusParagraph = ServerTab:AddParagraph({
@@ -18436,7 +18436,7 @@ actoryStatusParagraph = ServerTab:AddParagraph({
 });
 jobIdParagraph = ServerTab:AddParagraph({
 	Title = "JOB ID",
-	Desc = "Em breve"
+	Desc = ""
 });
 erverStartTime = os.time();
 task.spawn(function()
@@ -18517,9 +18517,9 @@ task.spawn(function()
 		pcall(function()
 			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Pirate Raid") or workspace:FindFirstChild("PiratesRaid");
 			if pirateRaid then
-				_pirateRaidStatusParagraph:SetDesc("ATIVO no servidor!");
+				_pirateRaidStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_pirateRaidStatusParagraph:SetDesc("Inativo");
+				_pirateRaidStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -18530,9 +18530,9 @@ task.spawn(function()
 		pcall(function()
 			local factory = workspace:FindFirstChild("Factory") or workspace:FindFirstChild("FactoryFortress");
 			if factory then
-				_factoryStatusParagraph:SetDesc("ATIVO no servidor!");
+				_factoryStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_factoryStatusParagraph:SetDesc("Inativo");
+				_factoryStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -18548,11 +18548,11 @@ getgenv().HoldSkillConfig = {
 	["Gun"] = false,
 }
 
-HoldAndSkillTab:AddSection("Skills Config - Selecione as skills para usar nos farms");
+HoldAndSkillTab:AddSection("Skills Config - Hãy chọn những kỹ năng bạn muốn sử dụng trong trang trại.");
 
 HoldAndSkillTab:AddParagraph({
-	Title = "Como funciona",
-	Desc = "Selecione abaixo quais teclas/skills serao usadas em TODOS os farms e funcoes do hub que precisam de skills. As combinacoes Z X C Melee, Z X C V F Fruit, Z X Sword e Z X Gun definem grupos rapidos."
+	Title = "Cách thức hoạt động",
+	Desc = "Hãy chọn bên dưới những phím/kỹ năng nào sẽ được sử dụng trong TẤT CẢ các trang trại và chức năng trung tâm yêu cầu kỹ năng. Các tổ hợp Z X C Cận chiến, Z X C V F Trái cây, Z X Kiếm và Z X Súng xác định các nhóm tấn công nhanh."
 });
 
 HoldAndSkillTab:AddToggle({

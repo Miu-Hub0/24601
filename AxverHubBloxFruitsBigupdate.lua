@@ -1,7 +1,17 @@
 getgenv = getfenv
 getexecutorname = function() return "Delta" end
-
 identifyexecutor = function() return "Delta" end
+
+if getgenv().EclipseHub then 
+    if game.CoreGui:FindFirstChild("GUI") then
+        for i, v in ipairs(game.CoreGui:GetChildren()) do
+            if string.find(v.Name, "Axver Hub") then
+                v:Destroy()
+            end
+        end
+    end
+end
+getgenv().EclipseHub = true
 
 if getgenv().EclipseHub then 
 	if game.CoreGui:FindFirstChild("GUI") then

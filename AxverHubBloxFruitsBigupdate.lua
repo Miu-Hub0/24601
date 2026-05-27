@@ -3645,52 +3645,144 @@ pcall(function()
 end)
 
 
--- ============================================
--- SUPER FAST ATTACK NÂNG CẤP (0.01s)
+- ============================================
+-- FAST ATTACK MODULE (TỪ FILE ĐẦU)
 -- ============================================
 
--- BẢNG TỐC ĐỘ (CHO UI THAM CHIẾU)
+_G.FastAttackActive = true
+_G.Fast_Delay = 0.01
+
+-- Bảng tốc độ Fast Attack
 local FastAttackSpeeds = {
     ["Normal Attack"] = 0.25,
     ["Fast Attack"] = 0.15,
     ["Super Fast Attack"] = 0.05,
-    ["Dí siêu nhanh Attack"] = 0.1,
-    ["Extreme Fast Attack"] = 0.01
+    ["siêu nhanh Attack"] = 0.01
 }
 
--- MẶC ĐỊNH NHANH NHẤT
-_G.Fast_Delay = 0.01
-_G.Seriality = true
-_G.FastAttackActive = true
-
-if _G.Settings and _G.Settings.Setting then
-    _G.Settings.Setting["Fast Attack New"] = true
-    _G.Settings.Setting["Fast Attack Delay"] = 0.01
-end
-
-local vim = game:GetService("VirtualInputManager")
-local vu = game:GetService("VirtualUser")
-local replicated = game:GetService("ReplicatedStorage")
-local net = replicated.Modules and replicated.Modules.Net
-local registerAttack = net and net["RE/RegisterAttack"]
-local registerHit = net and net["RE/RegisterHit"]
-
--- HÀM CHỌN CHẾ ĐỘ (CHO UI GỌI)
-function SetFastAttackMode(mode)
-    if FastAttackSpeeds[mode] then
-        _G.Fast_Delay = FastAttackSpeeds[mode]
-        _G.FastAttackMode = mode
-        _G.Seriality = true
-        if _G.Settings and _G.Settings.Setting then
-            _G.Settings.Setting["Fast Attack Delay"] = _G.Fast_Delay
+-- Hàm UsesKills - gửi phím kỹ năng
+function UsesKills(weaponType, skillKey)
+    if weaponType == "Melee" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Melee" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
         end
-        print("✅ Fast Attack: " .. mode .. " (" .. _G.Fast_Delay .. "s)")
-        return true
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        elseif skillKey == "C" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
+        end
+    elseif weaponType == "Sword" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Sword" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        end
+    elseif weaponType == "Blox Fruit" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Blox Fruit" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        elseif skillKey == "C" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
+        elseif skillKey == "V" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "V", false, game)
+        end
+    elseif weaponType == "Gun" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Gun" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        end
     end
-    return false
 end
 
--- ATTACK LOOP
+-- Method Kill chính
+G = G or {}
+G.Kill = function(enemy, isActive)
+    if not enemy or not isActive then return end
+    local hrp = enemy:FindFirstChild("HumanoidRootPart")
+    local hum = enemy:FindFirstChild("Humanoid")
+    if not hrp or not hum or hum.Health <= 0 then return end
+    
+    PosMon = hrp.Position
+    BringEnemy()
+    
+    local weapon = _G.Settings.Main["Selected Weapon"] or _G.SelectWeapon or "Melee"
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v.ToolTip == weapon or v.Name == weapon then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+            break
+        end
+    end
+    
+    local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+    if tool then
+        if tool.ToolTip == "Blox Fruit" then
+            TweenPlayer(hrp.CFrame * CFrame.new(0, 10, 0))
+        else
+            TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 0))
+        end
+    end
+    
+    if RandomCFrame then
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 25))
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(25, 30, 0))
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(-25, 30, 0))
+    end
+    
+    local head = enemy:FindFirstChild("Head") or hrp
+    AttackModule:AttackEnemy(head, {})
+end
+
+-- Attack Loop chạy liên tục theo Fast_Delay
 task.spawn(function()
     repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character
     while task.wait(_G.Fast_Delay or 0.01) do
@@ -3705,58 +3797,42 @@ task.spawn(function()
                 or _G.Settings.Main["Auto Farm Gun Mastery"]
                 or _G.Settings.Farm["Auto Farm Bone"]
                 or _G.EclipseStartFarm
-                or _G.EclipseAutoTyrant
             
-            if not farmActive or not _G.Seriality then return end
+            if not farmActive then return end
             
             local char = game.Players.LocalPlayer.Character
             local root = char and char:FindFirstChild("HumanoidRootPart")
             if not char or not root then return end
             
-            if registerAttack then
-                registerAttack:FireServer()
-                registerAttack:FireServer(0)
-                registerAttack:FireServer(1)
-                registerAttack:FireServer(2)
-                registerAttack:FireServer(3)
-            end
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if not hum or hum.Health <= 0 then return end
+            
+            -- Tìm quái gần nhất
+            local closest = nil
+            local closestDist = 60
             
             for _, v in pairs(workspace.Enemies:GetChildren()) do
                 local hrp = v:FindFirstChild("HumanoidRootPart")
                 local vhum = v:FindFirstChild("Humanoid")
-                if hrp and vhum and vhum.Health > 0 then
+                if v ~= char and hrp and vhum and vhum.Health > 0 then
                     local dist = (hrp.Position - root.Position).Magnitude
-                    if dist <= 80 then
-                        local head = v:FindFirstChild("Head") or hrp
-                        if registerHit then
-                            registerHit:FireServer(head, {})
-                        end
+                    if dist < closestDist then
+                        closestDist = dist
+                        closest = v
                     end
                 end
             end
             
-            pcall(function()
-                vu:CaptureController()
-                vu:Button1Down(Vector2.new(0, 0))
-                task.wait(0)
-                vu:Button1Up(Vector2.new(0, 0))
-            end)
-            
-            pcall(function()
-                local wp = _G.Settings.Main["Selected Weapon"] or "Melee"
-                for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if v.ToolTip == wp then
-                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                        break
-                    end
+            if closest then
+                local head = closest:FindFirstChild("Head") or closest:FindFirstChild("HumanoidRootPart")
+                if head then
+                    AttackModule:AttackEnemy(head, {})
                 end
-                vim:SendKeyEvent(true, "Z", false, game)
-                task.wait(0)
-                vim:SendKeyEvent(false, "Z", false, game)
-            end)
+            end
         end)
     end
 end)
+
 
 
 pcall(function()
@@ -6212,55 +6288,131 @@ local function _ensureTPHB()
 	end);
 end;
 
-function TweenPlayer(pos)
-	local plr = game.Players.LocalPlayer;
-	local e   = plr.Character;
-	if not e or not e:FindFirstChild("HumanoidRootPart") then return; end;
-	local HRP  = e.HumanoidRootPart;
-	local hum  = e:FindFirstChildOfClass("Humanoid");
-	local dist = (pos.Position - HRP.Position).Magnitude;
-	if dist < 5 then return; end;
-	if _currentTweenTarget and _currentTween
-		and _currentTween.PlaybackState == Enum.PlaybackState.Playing then
-		local retDist = (pos.Position - _currentTweenTarget.Position).Magnitude;
-		if retDist < 10 then return; end;
-		_currentTween:Cancel();
-	end;
-	_ensureTPHB();
-	shouldTween          = true;
-	_G.StopTween         = false;
-	HRP.Anchored         = false;
-	_currentTweenTarget  = pos;
-	local tweenSpeed = getgenv().TweenSpeedFar or 350;
-	local info = TweenInfo.new(math.max(0.05, dist / tweenSpeed), Enum.EasingStyle.Linear, Enum.EasingDirection.Out);
-	C.CFrame = HRP.CFrame;
-	local tween = TweenService:Create(C, info, {CFrame = pos});
-	_currentTween = tween;
-	if e.Humanoid and e.Humanoid.Sit then
-		C.CFrame = CFrame.new(C.Position.X, pos.Y, C.Position.Z);
-	end;
-	tween:Play();
-	task.spawn(function()
-		while tween.PlaybackState == Enum.PlaybackState.Playing do
-			if _G.StopTween then
-				tween:Cancel();
-				break;
-			end;
-			task.wait(0.05);
-		end;
-		_currentTween       = nil;
-		_currentTweenTarget = nil;
-		pcall(function()
-			if e and e.Parent and HRP then
-				HRP.Anchored = false;
-				if hum then
-					if hum.WalkSpeed <= 0 then hum.WalkSpeed = 16; end;
-					if hum.JumpPower  <= 0 then hum.JumpPower  = 50; end;
-				end;
-			end;
-		end);
-	end);
-end;
+-- Biến toàn cục để quản lý Tween liên tục
+getgenv().ContinuousTweenTarget = nil
+getgenv().ContinuousTweenActive = false
+getgenv().ContinuousTweenConnection = nil
+
+-- Hàm TweenPlayer mới, hỗ trợ bám theo mục tiêu liên tục
+function TweenPlayer(pos, isContinuous, targetPart)
+    local plr = game.Players.LocalPlayer
+    local e = plr.Character
+    if not e or not e:FindFirstChild("HumanoidRootPart") then return end
+    local HRP = e.HumanoidRootPart
+    local hum = e:FindFirstChildOfClass("Humanoid")
+    local dist = (pos.Position - HRP.Position).Magnitude
+    
+    if dist < 5 then return end
+    
+    if _currentTween and _currentTween.PlaybackState == Enum.PlaybackState.Playing then
+        _currentTween:Cancel()
+    end
+    
+    _ensureTPHB()
+    shouldTween = true
+    _G.StopTween = false
+    HRP.Anchored = false
+    
+    if isContinuous then
+        getgenv().ContinuousTweenTarget = pos
+        getgenv().ContinuousTweenActive = true
+        if targetPart and targetPart.Parent then
+            getgenv().ContinuousTargetPart = targetPart
+        else
+            getgenv().ContinuousTargetPart = nil
+        end
+        
+        if getgenv().ContinuousTweenConnection then
+            getgenv().ContinuousTweenConnection:Disconnect()
+        end
+        
+        getgenv().ContinuousTweenConnection = game:GetService("RunService").RenderStepped:Connect(function()
+            if not getgenv().ContinuousTweenActive then
+                if getgenv().ContinuousTweenConnection then
+                    getgenv().ContinuousTweenConnection:Disconnect()
+                    getgenv().ContinuousTweenConnection = nil
+                end
+                return
+            end
+            
+            if getgenv().ContinuousTargetPart and getgenv().ContinuousTargetPart.Parent then
+                local newPos = getgenv().ContinuousTargetPart.CFrame
+                if newPos and (newPos.Position - getgenv().ContinuousTweenTarget.Position).Magnitude > 10 then
+                    getgenv().ContinuousTweenTarget = newPos
+                    local newDist = (newPos.Position - HRP.Position).Magnitude
+                    if newDist > 5 then
+                        local speed = getgenv().TweenSpeedFar or 350
+                        local info = TweenInfo.new(math.max(0.05, newDist / speed), Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+                        C.CFrame = HRP.CFrame
+                        if _currentTween then pcall(function() _currentTween:Cancel() end) end
+                        _currentTween = TweenService:Create(C, info, {CFrame = newPos})
+                        _currentTween:Play()
+                    end
+                end
+            end
+        end)
+    else
+        getgenv().ContinuousTweenActive = false
+        if getgenv().ContinuousTweenConnection then
+            getgenv().ContinuousTweenConnection:Disconnect()
+            getgenv().ContinuousTweenConnection = nil
+        end
+    end
+    
+    _currentTweenTarget = pos
+    local tweenSpeed = getgenv().TweenSpeedFar or 350
+    local info = TweenInfo.new(math.max(0.05, dist / tweenSpeed), Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+    C.CFrame = HRP.CFrame
+    local tween = TweenService:Create(C, info, {CFrame = pos})
+    _currentTween = tween
+    
+    if e.Humanoid and e.Humanoid.Sit then
+        C.CFrame = CFrame.new(C.Position.X, pos.Y, C.Position.Z)
+    end
+    
+    tween:Play()
+    
+    task.spawn(function()
+        while tween and tween.PlaybackState == Enum.PlaybackState.Playing do
+            if _G.StopTween or not getgenv().ContinuousTweenActive then
+                tween:Cancel()
+                break
+            end
+            task.wait(0.05)
+        end
+        if not getgenv().ContinuousTweenActive then
+            _currentTween = nil
+            _currentTweenTarget = nil
+            pcall(function()
+                if e and e.Parent and HRP then
+                    HRP.Anchored = false
+                    if hum then
+                        if hum.WalkSpeed <= 0 then hum.WalkSpeed = 16 end
+                        if hum.JumpPower <= 0 then hum.JumpPower = 50 end
+                    end
+                end
+            end)
+        end
+    end)
+end
+
+-- Hàm dừng Tween liên tục
+function StopContinuousTween()
+    getgenv().ContinuousTweenActive = false
+    getgenv().ContinuousTargetPart = nil
+    getgenv().ContinuousTweenTarget = nil
+    if getgenv().ContinuousTweenConnection then
+        getgenv().ContinuousTweenConnection:Disconnect()
+        getgenv().ContinuousTweenConnection = nil
+    end
+    if _currentTween and _currentTween.PlaybackState == Enum.PlaybackState.Playing then
+        _currentTween:Cancel()
+    end
+    _currentTween = nil
+    _currentTweenTarget = nil
+    shouldTween = false
+    _G.StopTween = false
+end
 
 task.spawn(function()
 	while true do
@@ -8341,31 +8493,66 @@ AutoMonFarmToggle = MainTab:AddToggle({
 	end
 });
 task.spawn(function()
-	while task.wait(0.2) do
-		if _G.Settings.Main["Auto Farm Mon"] then
-			pcall(function()
-				if (game:GetService("Workspace")).Enemies:FindFirstChild(_G.Settings.Main["Selected Mon"]) then
-					for i, v in pairs((game:GetService("Workspace")).Enemies:GetChildren()) do
-						if v.Name == _G.Settings.Main["Selected Mon"] then
-							if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-								repeat
-									task.wait(0.15);
-									AutoHaki();
-									EquipWeapon(_G.Settings.Main["Selected Weapon"]);
-									v.Humanoid.WalkSpeed = 0;
-									PosMon = v.HumanoidRootPart.CFrame;
-									MonFarm = v.Name;
-									v.HumanoidRootPart.Size = Vector3.new(1, 1, 1);
-									TweenPlayer(v.HumanoidRootPart.CFrame * Pos);
-									Attack();
-								until not _G.Settings.Main["Auto Farm Mon"] or (not v.Parent) or v.Humanoid.Health <= 0;
-							end;
-						end;
-					end;
-				end;
-			end);
-		end;
-	end;
+    while task.wait(0.15) do
+        if _G.Settings.Main["Auto Farm Mon"] then
+            pcall(function()
+                local plr = game.Players.LocalPlayer
+                local char = plr.Character
+                if not char then return end
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
+                
+                local targetMob = nil
+                local targetDist = math.huge
+                
+                for _, v in pairs(workspace.Enemies:GetChildren()) do
+                    if v.Name == _G.Settings.Main["Selected Mon"] 
+                        and v:FindFirstChild("Humanoid") 
+                        and v.Humanoid.Health > 0 
+                        and v:FindFirstChild("HumanoidRootPart") then
+                        
+                        local dist = (v.HumanoidRootPart.Position - hrp.Position).Magnitude
+                        if dist < targetDist then
+                            targetDist = dist
+                            targetMob = v
+                        end
+                    end
+                end
+                
+                if targetMob then
+                    local mob = targetMob
+                    
+                    -- ===== LIÊN TỤC TWEEN THEO QUÁI =====
+                    while _G.Settings.Main["Auto Farm Mon"] and mob.Parent and mob.Humanoid.Health > 0 do
+                        if not mob.HumanoidRootPart then break end
+                        
+                        local currentDist = (mob.HumanoidRootPart.Position - hrp.Position).Magnitude
+                        
+                        if currentDist > 12 then
+                            TweenPlayer(mob.HumanoidRootPart.CFrame * Pos)
+                        end
+                        
+                        if currentDist < 5 then
+                            TweenPlayer(mob.HumanoidRootPart.CFrame * CFrame.new(0, 5, 6))
+                        end
+                        
+                        AutoHaki()
+                        EquipWeapon(_G.Settings.Main["Selected Weapon"])
+                        pcall(function()
+                            mob.Humanoid.WalkSpeed = 0
+                            mob.HumanoidRootPart.CanCollide = false
+                            mob.HumanoidRootPart.Size = Vector3.new(1,1,1)
+                        end)
+                        Attack()
+                        task.wait(0.1)
+                    end
+                    -- ===== KẾT THÚC =====
+                else
+                    TweenPlayer(CFrameMon)
+                end
+            end)
+        end
+    end
 end);
 BossSection = FarmingHopTab:AddSection(" Boss Farm");
 BossStatusParagraph = FarmingHopTab:AddParagraph({
@@ -10214,7 +10401,7 @@ end);
 local _chestBypassActive = false;
 AutoFarmChestInstantToggle = OthersTab:AddToggle({
 	Title = "Auto Farm Chest Bypass",
-	Desc = "Teleporte instantaneo e preciso em cada bau. Aguarda confirmacao de coleta antes do proximo.",
+	Desc = "Dịch chuyển tức thời và chính xác đến từng rương kho báu. Chờ xác nhận thu thập trước khi dịch chuyển tiếp theo..",
 	Value = _G.Settings.Farm["Auto Farm Chest Instant"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Farm Chest Instant"] = state;
@@ -13263,7 +13450,7 @@ end;
 
 local RaidStatusParagraph = RaidTab:AddParagraph({
 	Title = "Raid Status",
-	Desc = "Desligado"
+	Desc = "Tắt"
 });
 
 task.spawn(function()
@@ -13272,24 +13459,24 @@ task.spawn(function()
 			local raidActive = game.Players.LocalPlayer.PlayerGui.Main.TopHUDList.RaidTimer.Visible;
 			if _G.Settings.Raid["Auto Raid"] then
 				if raidActive then
-					RaidStatusParagraph:SetDesc(" Raid em progresso! Matando inimigos...");
+					RaidStatusParagraph:SetDesc("Cuộc đột kích đang diễn ra! Tiêu diệt kẻ thù...");
 				else
 					if RaidGetBP("Special Microchip") then
-						RaidStatusParagraph:SetDesc(" Microchip pronto. Iniciando raid...");
+						RaidStatusParagraph:SetDesc("Microchip đã sẵn sàng. Bắt đầu RAID...");
 					else
-						RaidStatusParagraph:SetDesc(" Comprando Microchip...");
+						RaidStatusParagraph:SetDesc("Mua một microchip...");
 					end;
 				end;
 			else
-				RaidStatusParagraph:SetDesc(" Desligado");
+				RaidStatusParagraph:SetDesc("Tắt");
 			end;
 		end);
 	end;
 end);
 
 ChooseChipRaidDropdown = RaidTab:AddDropdown({
-	Title = "Choose Chip (Fruta para Microchip)",
-	Desc = "Seleciona qual fruta trocar pelo Microchip",
+	Title = "Chọn Chip (Trái cây cho Microchip",
+	Desc = "Hãy chọn loại trái cây bạn muốn đổi lấy Microchip.",
 	Values = {"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha","Sand","Bird: Phoenix","Dough"},
 	Value = _G.Settings.Raid["Selected Chip"] or "Flame",
 	Callback = function(option)
@@ -13388,7 +13575,7 @@ end);
 _G.AutoBuyChip = false;
 AutoBuyChipToggle = RaidTab:AddToggle({
 	Title = " Auto Buy Chip",
-	Desc = "Swaps a fruit already in the bag for the Microchip. Does not unstore fruits fo estoque. Compra apenas 1 chip por vez.",
+	Desc = "Đổi một quả trái cây đã có sẵn trong túi lấy Microchip. Không lấy trái cây ra khỏi kho để bổ sung vào hàng tồn. Chỉ mua 1 chip mỗi lần.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoBuyChip = state;
@@ -13420,7 +13607,7 @@ end);
 
 AutoAwakeningToggle = RaidTab:AddToggle({
 	Title = "Auto Awaken",
-	Desc = "Desperta a fruta automaticamente durante o raid",
+	Desc = "Tự động kích hoạt trái cây trong suốt cuộc đột kích.",
 	Value = _G.Settings.Raid["Auto Awaken"],
 	Callback = function(state)
 		_G.Settings.Raid["Auto Awaken"] = state;
@@ -13447,7 +13634,7 @@ PriceDevilFruitToUnstoreSlider = RaidTab:AddSlider({
 });
 AutoUnstoreDevilFruitToggle = RaidTab:AddToggle({
 	Title = "Auto Unstore Fruit (< 1M)",
-	Desc = "Tira do estoque frutas abaixo do preco definido (padrao: menos de 1.000.000). Use junto com Auto Buy Chip.",
+	Desc = "Loại bỏ trái cây khỏi kho dưới mức giá đã đặt (mặc định: dưới 1.000.000). Sử dụng kết hợp với Chip Mua Tự Động.",
 	Value = _G.Settings.Raid["Unstore Devil Fruit"],
 	Callback = function(state)
 		_G.Settings.Raid["Unstore Devil Fruit"] = state;
@@ -13473,7 +13660,7 @@ end);
 
 TeleportToLabButton = RaidTab:AddButton({
 	Title = "Teleport To Lab",
-	Desc = "Vai para o summon da Raid",
+	Desc = "Vào phần triệu hồi Raid",
 	Callback = function()
 		if World2 then TweenPlayer(CFrame.new(-6438.73535,250.645355,-4501.50684));
 		elseif World3 then TweenPlayer(CFrame.new(-5033.50879,315.014252,-2947.77539));
@@ -13911,7 +14098,7 @@ else
 	DungeonTab:AddSection("Rings");
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Fuse Rings [BETA]",
-		Desc = "Vai até o NPC de anéis no lobby e funde os anéis automaticamente.",
+		Desc = "Hãy đến gặp NPC chuyên về nhẫn ở sảnh và hệ thống sẽ tự động hợp nhất các chiếc nhẫn.",
 		Value = getgenv().DungeonConfig.AutoFuse,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoFuse = state;
@@ -13946,7 +14133,7 @@ else
 
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Spin Rings [BETA]",
-		Desc = "Gira anéis automaticamente no NPC do lobby.",
+		Desc = "NPC trong sảnh tự động xoay vòng.",
 		Value = getgenv().DungeonConfig.AutoSpin,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoSpin = state;
@@ -13985,7 +14172,7 @@ else
 	DungeonTab:AddSection("Dungeon");
 	DungeonTab:AddToggle({
 		Title = "Auto Enter Dungeon",
-		Desc = "Teleporta para o chao amarelo na entrada da Dungeon e fica tentando iniciar a partida.",
+		Desc = "Dịch chuyển tức thời đến sàn màu vàng ở lối vào Hầm ngục và tiếp tục thử khởi động trò chơi.",
 		Value = getgenv().DungeonConfig.AutoEnter,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoEnter = state;
@@ -14044,7 +14231,7 @@ else
 
 	DungeonTab:AddToggle({
 		Title = "Auto Complete Dungeon",
-		Desc = "Ataca todos os NPCs proximos de cada Floor, destroi Shrines do Kitsune (Floor 10), destroi vazamentos de gas (Floor 15) e avanca automaticamente.",
+		Desc = "Tấn công tất cả NPC gần đó trên mỗi tầng, phá hủy đền thờ Kitsune (tầng 10), phá hủy các điểm rò rỉ khí gas (tầng 15) và tự động tiến lên.",
 		Value = getgenv().DungeonConfig.AutoComplete,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoComplete = state;
@@ -14148,7 +14335,7 @@ else
 	});
 	DungeonTab:AddDropdown({
 		Title = "Dungeon Buffs to Select [BETA]",
-		Desc = "Escolha quais buffs devem ser selecionados automaticamente (multi-seleção)",
+		Desc = "Chọn những hiệu ứng nào sẽ được tự động chọn (chọn nhiều hiệu ứng).",
 		Values = _KNOWN_BUFFS,
 		Value = getgenv().DungeonConfig.SelectedBuffs[1] or _KNOWN_BUFFS[1],
 		Callback = function(option)
@@ -14185,7 +14372,7 @@ else
 	DungeonTab:AddSection("Post-Dungeon");
 	DungeonTab:AddToggle({
 		Title = "Dungeon Auto Skip Hub [BETA]",
-		Desc = "Quando a dungeon terminar, aperta automaticamente para voltar ao lobby.",
+		Desc = "Khi hoàn thành hầm ngục, hãy nhấn nút để tự động quay lại sảnh chờ..",
 		Value = getgenv().DungeonConfig.AutoSkipHub,
 		Callback = function(state)
 			getgenv().DungeonConfig.AutoSkipHub = state;
@@ -14262,7 +14449,7 @@ CombatTab:AddButton({
 local _PvPAutoTP = false;
 CombatTab:AddToggle({
 	Title = "Auto Follow / TP to Player",
-	Desc = "Segue e fica em cima do jogador selecionado constantemente",
+	Desc = "Theo dõi và nắm bắt sát sao cầu thủ đã chọn một cách thường xuyên.",
 	Value = false,
 	Callback = function(v)
 		_PvPAutoTP = v;
@@ -14283,7 +14470,7 @@ end);
 
 CombatTab:AddToggle({
 	Title = "Auto Activate PvP",
-	Desc = "Mantem PvP ativado automaticamente",
+	Desc = "Tự động bật chế độ PvP.",
 	Value = false,
 	Callback = function(v)
 		if v then
@@ -14302,7 +14489,7 @@ CombatTab:AddToggle({
 local _PvPAutoKill = false;
 CombatTab:AddToggle({
 	Title = "Auto Kill Selected Player",
-	Desc = "Mata automaticamente o jogador selecionado",
+	Desc = "Tự động tiêu diệt người chơi được chọn.",
 	Value = false,
 	Callback = function(v)
 		_PvPAutoKill = v;
@@ -14328,7 +14515,7 @@ end);
 local _PvPSpamSkills = false;
 CombatTab:AddToggle({
 	Title = " Auto Spam Skills (All)",
-	Desc = "Spama todas as skills de todas as categorias automaticamente em PvP",
+	Desc = "Tự động sử dụng tất cả kỹ năng từ mọi loại trong chế độ PvP.",
 	Value = false,
 	Callback = function(v)
 		_PvPSpamSkills = v;
@@ -14430,7 +14617,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "AimLock Player",
-	Desc = "Trava camera no player selecionado automaticamente",
+	Desc = "Tự động khóa camera vào người chơi đã chọn.",
 	Value = false,
 	Callback = function(v)
 		_G.AimLockPlayer = v;
@@ -14462,7 +14649,7 @@ end);
 
 CombatTab:AddToggle({
 	Title = "Silent Aim Skill",
-	Desc = "Redireciona os projecteis/hits da skill para o alvo sem precisar olhar pra ele",
+	Desc = "Điều hướng các đòn tấn công/đạn của kỹ năng về phía mục tiêu mà không cần nhìn vào mục tiêu đó.,
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimSkill = v;
@@ -14471,7 +14658,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "Silent Aim NPC",
-	Desc = "Redireciona hits para o NPC mais proximo sem olhar para ele",
+	Desc = "Chuyển hướng các đòn tấn công đến NPC gần nhất mà không cần nhìn vào chúng.",
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimNPC = v;
@@ -14480,7 +14667,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "Silent Aim Player",
-	Desc = "Redireciona hits para o player selecionado sem olhar para ele",
+	Desc = "Chuyển hướng các lượt tấn công đến người chơi đã chọn mà không cần nhìn vào người chơi đó.",
 	Value = false,
 	Callback = function(v)
 		_G.SilentAimPlayer = v;
@@ -14812,7 +14999,7 @@ ShopTab:AddButton({
 local _autoBuyAllActive = false;
 ShopTab:AddToggle({
 	Title = "Auto Buy All Fight Styles",
-	Desc = "Vai em cada NPC em ordem e compra todos os estilos",
+	Desc = "Hãy đến gặp từng NPC theo thứ tự và mua tất cả các kiểu trang phục.",
 	Value = false,
 	Callback = function(state)
 		_autoBuyAllActive = state;
@@ -15052,7 +15239,7 @@ local PortalIslands = {
 };
 SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 	Title = "Choose Island",
-	Desc = "Lista dinamica do Eclipse - le o mapa real",
+	Desc = "Danh sách động Axver - đọc bản đồ thực",
 	Values = EclipseIslandList,
 	Value = EclipseIslandList[1] or "",
 	Callback = function(option)
@@ -15062,7 +15249,7 @@ SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 
 AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada e para ao chegar. Player pode se mover normalmente.",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn và dừng lại khi đến nơi. Người chơi có thể di chuyển bình thường.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenToIslandActive = state;
@@ -15106,7 +15293,7 @@ AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 _G.BypassTeleportActive = false;
 TeleportTab:AddToggle({
 	Title = "Bypass Teleport to Island",
-	Desc = "Teleporta via bypass (com reset) para a ilha selecionada. Repete ate chegar. Player pode pular/mover.",
+	Desc = "Dịch chuyển tức thời qua đường vòng (với thiết lập lại) đến hòn đảo đã chọn. Lặp lại cho đến khi đến nơi. Người chơi có thể nhảy/di chuyển.",
 	Value = false,
 	Callback = function(state)
 		_G.BypassTeleportActive = state;
@@ -15146,7 +15333,7 @@ TeleportTab:AddToggle({
 _G.TweenIsland = false;
 AutoTweenToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenIsland = state;
@@ -15215,7 +15402,7 @@ SelectedNpcTeleport = TeleportTab:AddDropdown({
 
 TeleportToNpcToggle = TeleportTab:AddToggle({
 	Title = "Teleport To Npc",
-	Desc = "Teleporte instantaneo direto para o NPC",
+	Desc = "Dịch chuyển tức thì trực tiếp đến NPC.",
 	Value = false,
 	Callback = function(state)
 		_G.TeleportNPC = state;
@@ -15247,7 +15434,7 @@ TeleportToNpcToggle = TeleportTab:AddToggle({
 _G.TweenNPC = false;
 TweenToNpcToggle = TeleportTab:AddToggle({
 	Title = "Tween To Npc",
-	Desc = "Move suavemente ate o NPC selecionado",
+	Desc = "Di chuyển mượt mà đến NPC đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenNPC = state;
@@ -15421,7 +15608,7 @@ end;
 
 DragonDojoTab:AddToggle({
 	Title = "Auto Dojo Trainer",
-	Desc = "Pega e completa quests de faixa: White, Yellow, Green, Purple, Red, Black",
+	Desc = "Nhận và hoàn thành các nhiệm vụ tương ứng với các cấp đai sau: Trắng, Vàng, Xanh lá cây, Tím, Đỏ, Đen.",
 	Value = false,
 	Callback = function(I)
 		_G_Dojoo = I;
@@ -16015,7 +16202,7 @@ PrehistoricFarm:AddToggle({
 
 PrehistoricFarm:AddToggle({
 	Title = "Auto Find Prehistoric Island",
-	Desc = "Sails to Prehistoric Island automatically",
+	Desc = "Tự động đi thuyền đến hòn đảo thời tiền sử",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Find = state
@@ -16227,7 +16414,7 @@ ChooseBoatDropdown = SeaEventTab:AddDropdown({
 
 ChooseZoneDropdown = SeaEventTab:AddDropdown({
 	Title = "Choose Zone (Sea 3)",
-	Desc = "Nivel de perigo para navegar (Sea 3 apenas)",
+	Desc = "Mức độ nguy hiểm đối với hoạt động hàng hải (chỉ áp dụng cho Biển 3)",
 	Values = {"Lv 1","Lv 2","Lv 3","Lv 4","Lv 5","Lv 6","Lv Infinite"},
 	Value = "Lv 1",
 	Callback = function(option)
@@ -16237,7 +16424,7 @@ ChooseZoneDropdown = SeaEventTab:AddDropdown({
 
 local BoatSpeedSlider = SeaEventTab:AddSlider({
 	Title = "Boat Speed",
-	Desc = "Velocidade do barco (padrao: 300)",
+	Desc = "Tốc độ thuyền (mặc định: 300)",
 	Min = 10,
 	Max = 350,
 	Default = 300,
@@ -16249,7 +16436,7 @@ local BoatSpeedSlider = SeaEventTab:AddSlider({
 
 SeaEventTab:AddToggle({
 	Title = "Activate Boat Speed",
-	Desc = "Aplica velocidade customizada no barco em tempo real",
+	Desc = "Áp dụng tốc độ tùy chỉnh cho thuyền trong thời gian thực",
 	Value = false,
 	Callback = function(v)
 		_G.SpeedBoat = v;
@@ -16299,7 +16486,7 @@ _G.GrindSea = _G.GrindSea or false;
 
 GrindSeaToggle = SeaEventTab:AddToggle({
 	Title = "Grind Sea",
-	Desc = "Goes to Tiki, buys boat, mounts it, sails to selected sea and farms sea NPCs.",
+	Desc = "Đến chỗ Tiki, mua thuyền, lên thuyền, dong buồm đến vùng biển đã chọn và thu thập tài nguyên từ các NPC trên biển..",
 	Value = false,
 	Callback = function(state)
 		_G.GrindSea = state;
@@ -16553,7 +16740,7 @@ PrehistoricStatusSeaStackParagraph = SeaStackTab:AddParagraph({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Prehistoric Island",
-	Desc = "Navega automaticamente ate o Mar 6+ para encontrar a ilha",
+	Desc = "Nó tự động điều hướng đến Sea 6+ để tìm hòn đảo.",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Find = state;
@@ -16621,7 +16808,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Prehistoric Event (M3Ow)",
-	Desc = "Remove lava + Mata Golens + Fecha Buracos ate o evento acabar",
+	Desc = "Loại bỏ dung nham + Tiêu diệt Golem + Bịt kín các lỗ hổng cho đến khi sự kiện kết thúc",
 	Value = false,
 	Callback = function(state)
 		_G.PrehistoricEvent = state;
@@ -16830,7 +17017,7 @@ BribeLeviathanButton = SeaStackTab:AddButton({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Active Leviathan",
-	Desc = "Quando encontrar a ilha do Leviathan, vai ate o NPC e ativa ele automaticamente.",
+	Desc = "Khi tìm thấy Đảo Leviathan, hãy đến gặp NPC và kích hoạt nó tự động..",
 	Value = false,
 	Callback = function(state)
 		_G.AutoActivateLeviathan = state;
@@ -16868,7 +17055,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Kill Leviathan",
-	Desc = "Detecta as caudas do Leviathan vivas e vai ate elas spammando todas as skills (Z X C V F).",
+	Desc = "Phát hiện những chiếc đuôi sống của Leviathan và lao đến tấn công chúng bằng cách sử dụng liên tục tất cả các kỹ năng (Z X C V F).",
 	Value = false,
 	Callback = function(state)
 		_G.AutoKillLeviathan = state;
@@ -16931,7 +17118,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Get Heart Leviathan",
-	Desc = "Quando Leviathan morrer, pega barco Beast Hunter, centraliza no local e atira no coracao.",
+	Desc = "Khi Leviathan chết, hãy lấy thuyền Thợ săn quái vật, hướng nó về vị trí đó và bắn vào tim nó.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoGetHeartLeviathan = state;
@@ -17038,7 +17225,7 @@ SeaStackTab:AddDropdown({
 });
 SeaStackTab:AddToggle({
 	Title = "Auto Drive Boat",
-	Desc = "Monta no barco Beast Hunter mais proximo e vai via Tween para a ilha selecionada.",
+	Desc = "Lên chiếc thuyền săn quái thú gần nhất và di chuyển bằng Tween đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoDriveBoat = state;
@@ -17240,7 +17427,7 @@ SeaStackTab:AddSection("MIRAGE ISLAND");
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Mirage Island",
-	Desc = "Compra barco na Tiki, vai ao mar Lv 4, patrulha ate Mirage spawnar. Se barco quebrar, reseta e recomeca.",
+	Desc = "Mua một chiếc thuyền từ Tiki, ra khơi ở cấp độ 4, tuần tra cho đến khi Mirage xuất hiện. Nếu thuyền bị hỏng, hãy thiết lập lại và bắt đầu lại.",
 	Value = _G.Settings.SeaStack["Auto Find Mirage"] or false,
 	Callback = function(state)
 		_G.FindMirage = state;
@@ -17295,7 +17482,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Blue Gear",
-	Desc = "Vai ao ponto mais alto da Mirage, olha fixamente para a lua. Quando a lua brilhar a noite, teleporta para a engrenagem.",
+	Desc = "Hãy đến điểm cao nhất của Mirage, nhìn chăm chú vào mặt trăng. Khi mặt trăng tỏa sáng vào ban đêm, hãy dịch chuyển đến chỗ bánh răng..",
 	Value = _G.Settings.SeaStack["Auto Blue Gear"] or false,
 	Callback = function(state)
 		_G.AutoBlueGear = state;
@@ -17916,7 +18103,7 @@ function CheckFruits()
 end;
 AutoStoreFruitToggle = FruitTab:AddToggle({
 	Title = "Auto Store Fruit",
-	Desc = "Verifica inventario e armazena frutas elegiveis de forma rapida.",
+	Desc = "Nó nhanh chóng kiểm tra hàng tồn kho và lưu trữ các loại trái cây đủ điều kiện.",
 	Value = _G.Settings.Fruit["Auto Store Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Auto Store Fruit"] = state;
@@ -18007,7 +18194,7 @@ _G.FruitInterrupt = false;
 
 TeleportToFruitToggle = FruitTab:AddToggle({
 	Title = "Teleport To Fruit",
-	Desc = " RISCO DE BAN - Teleporta instantaneo para a fruta. Use com cautela.",
+	Desc = " NGUY CƠ BỊ CẤM - Dịch chuyển tức thì đến trái cây. Sử dụng thận trọng..",
 	Value = _G.Settings.Fruit["Teleport To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Teleport To Fruit"] = state;
@@ -18037,7 +18224,7 @@ end);
 
 TweenToFruitToggle = FruitTab:AddToggle({
 	Title = "Tween To Fruit",
-	Desc = "Move suavemente ate a fruta e para o farm quando ela aparecer.",
+	Desc = "Di chuyển nhẹ nhàng về phía trái cây và dừng lại ở trang trại khi nó xuất hiện.",
 	Value = _G.Settings.Fruit["Tween To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Tween To Fruit"] = state;
@@ -18397,7 +18584,7 @@ actoryStatusParagraph = ServerTab:AddParagraph({
 });
 jobIdParagraph = ServerTab:AddParagraph({
 	Title = "JOB ID",
-	Desc = "Em breve"
+	Desc = "ghi id cần vào"
 });
 erverStartTime = os.time();
 task.spawn(function()
@@ -18468,7 +18655,7 @@ task.spawn(function()
 					break;
 				end;
 			end;
-			if not found then _raidBossStatusParagraph:SetDesc("Nenhum Raid Boss ativo"); end;
+			if not found then _raidBossStatusParagraph:SetDesc("Hiện không có trùm raid nào đang hoạt động."); end;
 		end);
 	end;
 end);
@@ -18478,9 +18665,9 @@ task.spawn(function()
 		pcall(function()
 			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Pirate Raid") or workspace:FindFirstChild("PiratesRaid");
 			if pirateRaid then
-				_pirateRaidStatusParagraph:SetDesc("ATIVO no servidor!");
+				_pirateRaidStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_pirateRaidStatusParagraph:SetDesc("Inativo");
+				_pirateRaidStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -18491,9 +18678,9 @@ task.spawn(function()
 		pcall(function()
 			local factory = workspace:FindFirstChild("Factory") or workspace:FindFirstChild("FactoryFortress");
 			if factory then
-				_factoryStatusParagraph:SetDesc("ATIVO no servidor!");
+				_factoryStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_factoryStatusParagraph:SetDesc("Inativo");
+				_factoryStatusParagraph:SetDesc("không hoạt động");
 			end;
 		end);
 	end;

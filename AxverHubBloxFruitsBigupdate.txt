@@ -3649,15 +3649,15 @@ end)
 -- FAST ATTACK MODULE (TỪ FILE ĐẦU)
 -- ============================================
 
-_G.FastAttackActive = false
-_G.Fast_Delay = 0.15
+_G.FastAttackActive = true
+_G.Fast_Delay = 0.01
 
 -- Bảng tốc độ Fast Attack
 local FastAttackSpeeds = {
     ["Normal Attack"] = 0.25,
     ["Fast Attack"] = 0.15,
     ["Super Fast Attack"] = 0.05,
-    ["Dí siêu nhanh Attack"] = 0.1
+    ["siêu nhanh Attack"] = 0.01
 }
 
 -- Hàm UsesKills - gửi phím kỹ năng
@@ -3785,7 +3785,7 @@ end
 -- Attack Loop chạy liên tục theo Fast_Delay
 task.spawn(function()
     repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character
-    while task.wait(_G.Fast_Delay or 0.15) do
+    while task.wait(_G.Fast_Delay or 0.01) do
         pcall(function()
             local farmActive = _G.Settings.Main["Auto Farm"] 
                 or _G.Settings.Main["Auto Farm Mon"] 

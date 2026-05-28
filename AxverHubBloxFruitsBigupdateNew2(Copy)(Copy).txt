@@ -3883,7 +3883,7 @@ local Window = Library:CreateWindow({
     Image = "rbxassetid://116766438673467"
 })
 
-local InfoTab = Window:AddTab("Tab | Tiktok")
+local InfoTab = Window:AddTab("Tab | Info")
 local ServerTab = Window:AddTab("Tab | Status and Server")
 local SettingsTab = Window:AddTab("Tab | Settings")
 local HoldAndSkillTab = Window:AddTab("Tab | Hold And Skill")
@@ -3934,8 +3934,6 @@ InfoTab:AddButton({
 		})
 	end
 })
-
-InfoTab:AddSection("Credits")
 
 InfoTab:AddParagraph({
 	Title = "Quyền Sở Hữu",

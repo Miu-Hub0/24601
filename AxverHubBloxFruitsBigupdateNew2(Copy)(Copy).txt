@@ -3938,39 +3938,39 @@ InfoTab:AddButton({
 InfoTab:AddSection("Credits")
 
 InfoTab:AddParagraph({
-	Title = "Owner",
+	Title = "Quyền Sở Hữu",
 	Desc = "KhanggVTX"
 })
 InfoTab:AddParagraph({
-	Title = "Devs",
+	Title = "Những người làm script này",
 	Desc = "Fias Hub,Axver Hub"
 })
 InfoTab:AddParagraph({
-	Title = "Helpers",
-	Desc = "Team"
+	Title = "những người chung tay",
+	Desc = "Teams"
 })
 InfoTab:AddParagraph({
-	Title = "Functions Script",
+	Title = "Functions",
 	Desc = "KhanggVTX,Axver Hub"
 })
 InfoTab:AddParagraph({
-	Title = "Cảm ơn tất cả!",
+	Title = "Cảm ơn vì tât cả!",
 	Desc = ""
 })
 
-InfoTab:AddSection("Axver Hub Version Stable: 🟢")
+InfoTab:AddSection("Axver Hub Version: 1.2")
 
 InfoTab:AddParagraph({
-	Title = "Gen 4.442 Updates:",
-	Desc = "Fix: Tween Teleport\nNew: Fast Attack (High, Super Fast Attack, Axver Attack)\nNew: Volcano Event Tab (And More)\nFixed: Random, Store, Teleport To Fruit (Tween Teleport)\nNew: Fishing Functions\nDisabled: Fully Volcanic\nFixed: Tab One Click (Functions Soon)\nNew: Auto True Triple Katana\nFix: Auto Cdk\nFix: Auto Skull Guitar\nFix: Lag\nNew: Teleport (Tab)\nFix: Shop (Tab)\nFix: Factory And Pirate Raid (Tab Farming)\nFix: Farm (Level Bone, Cake Prince, Tirant, More...)\nFix: Raids (Bug)\nFix: Sea Events (Bugs)\nFix: Elite Boss\nFix: Fast Attack (Not Working On Pc)\nNew: Farm Boss And Mastery\nNew: Auto Kick if Admin Joined And Anti Ban\nNew: PvP Functions"
+	Title = "Những lỗi fix và chức mới trong bản này:",
+	Desc = "Fix: Auto farm levels\nFix: Tween và TP\nFix: Không raid được\nFix: ,...\nNew: Fast Attack\n"
 })
 InfoTab:AddParagraph({
-	Title = "Curiosity",
-	Desc = "Axver hub!"
+	Title = "Fix/Bug",
+	Desc = "Có lỗi gì nhớ liên hệ mình nhé <3"
 })
 InfoTab:AddParagraph({
-	Title = "Community",
-	Desc = "Join my account tiktok to know more, Love You All :3 !!!"
+	Title = "Follow My Account TikTok!",
+	Desc = "Follow Account TikTok Của Mình Để Biết Thêm Nhiều Script Nhé!! <3"
 })
 
 
@@ -12855,7 +12855,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Kill Rip Indra [Sea 3]",
-	Desc = "Mata tự động Rip Indra quando spawnar no Sea 3.",
+	Desc = "Tự động kill Rip Indra [Sea 3]",
 	Value = _G.Settings.Items["Auto Kill Rip Indra"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Kill Rip Indra"] = state;

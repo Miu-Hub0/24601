@@ -3883,7 +3883,7 @@ local Window = Library:CreateWindow({
     Image = "rbxassetid://116766438673467"
 })
 
-local InfoTab = Window:AddTab("Tab | Info")
+local InfoTab = Window:AddTab("Tab | Tiktok")
 local ServerTab = Window:AddTab("Tab | Status and Server")
 local SettingsTab = Window:AddTab("Tab | Settings")
 local HoldAndSkillTab = Window:AddTab("Tab | Hold And Skill")
@@ -3924,12 +3924,12 @@ end);
 InfoTab:AddSection("Tiktok")
 
 InfoTab:AddButton({
-	Title = "Follow My account tiktok",
+	Title = "Tham gia nhóm của mình nhé",
 	Callback = function()
-		setclipboard("https://tiktok/axver.hub")
+		setclipboard("https://tiktok.me/group/ZSxqo1T4a/")
 		Library:Notify({
-			Title = "Axver Hub",
-			Content = "The TikTok link has been copied",
+			Title = "Group TikTok",
+			Content = "Link group TikTok has been copied",
 			Duration = 4
 		})
 	end

@@ -16907,7 +16907,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Kill Leviathan",
-	Desc = "Phát hiện những chiếc đuôi sống của Leviathan và lao đến tấn công chúng bằng cách sử dụng liên tục tất cả các kỹ năng (Z X C V F)..",
+	Desc = "Detecta as caudas do Leviathan vivas e vai ate elas spammando todas as skills (Z X C V F).",
 	Value = false,
 	Callback = function(state)
 		_G.AutoKillLeviathan = state;
@@ -16970,7 +16970,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Get Heart Leviathan",
-	Desc = "Khi Leviathan chết, hãy lấy thuyền Thợ săn quái vật, hướng nó về vị trí đó và bắn vào tim nó.",
+	Desc = "Quando Leviathan morrer, pega barco Beast Hunter, centraliza no local e atira no coracao.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoGetHeartLeviathan = state;
@@ -17068,7 +17068,7 @@ end);
 
 SeaStackTab:AddDropdown({
 	Title = "Auto Drive Boat - Ilha Destino",
-	Desc = "Chọn hòn đảo đích đến cho thuyền tự lái.",
+	Desc = "Selecione a ilha de destino para o Auto Drive Boat",
 	Values = _leviathanIslandList,
 	Value = "Tiki Outpost",
 	Callback = function(opt)
@@ -17077,7 +17077,7 @@ SeaStackTab:AddDropdown({
 });
 SeaStackTab:AddToggle({
 	Title = "Auto Drive Boat",
-	Desc = "Lên chiếc thuyền săn quái thú gần nhất và di chuyển bằng Tween đến hòn đảo đã chọn.",
+	Desc = "Monta no barco Beast Hunter mais proximo e vai via Tween para a ilha selecionada.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoDriveBoat = state;
@@ -17279,7 +17279,7 @@ SeaStackTab:AddSection("MIRAGE ISLAND");
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Mirage Island",
-	Desc = "Mua một chiếc thuyền từ Tiki, ra khơi ở cấp độ 4, tuần tra cho đến khi Mirage xuất hiện. Nếu thuyền bị hỏng, hãy thiết lập lại và bắt đầu lại.",
+	Desc = "Compra barco na Tiki, vai ao mar Lv 4, patrulha ate Mirage spawnar. Se barco quebrar, reseta e recomeca.",
 	Value = _G.Settings.SeaStack["Auto Find Mirage"] or false,
 	Callback = function(state)
 		_G.FindMirage = state;
@@ -17334,7 +17334,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Blue Gear",
-	Desc = "Hãy đến điểm cao nhất của Mirage, nhìn chăm chú vào mặt trăng. Khi mặt trăng tỏa sáng vào ban đêm, hãy dịch chuyển đến chỗ bánh răng.",
+	Desc = "Vai ao ponto mais alto da Mirage, olha fixamente para a lua. Quando a lua brilhar a noite, teleporta para a engrenagem.",
 	Value = _G.Settings.SeaStack["Auto Blue Gear"] or false,
 	Callback = function(state)
 		_G.AutoBlueGear = state;
@@ -17955,7 +17955,7 @@ function CheckFruits()
 end;
 AutoStoreFruitToggle = FruitTab:AddToggle({
 	Title = "Auto Store Fruit",
-	Desc = "Nó nhanh chóng kiểm tra hàng tồn kho và lưu trữ các loại trái cây đủ điều kiện.",
+	Desc = "Verifica inventario e armazena frutas elegiveis de forma rapida.",
 	Value = _G.Settings.Fruit["Auto Store Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Auto Store Fruit"] = state;
@@ -18046,7 +18046,7 @@ _G.FruitInterrupt = false;
 
 TeleportToFruitToggle = FruitTab:AddToggle({
 	Title = "Teleport To Fruit",
-	Desc = "NGUY CƠ BỊ CẤM - Dịch chuyển tức thì đến quả. Sử dụng cẩn thận.",
+	Desc = " RISCO DE BAN - Teleporta instantaneo para a fruta. Use com cautela.",
 	Value = _G.Settings.Fruit["Teleport To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Teleport To Fruit"] = state;
@@ -18076,7 +18076,7 @@ end);
 
 TweenToFruitToggle = FruitTab:AddToggle({
 	Title = "Tween To Fruit",
-	Desc = "Di chuyển nhẹ nhàng về phía trái cây và dừng lại ở trang trại khi nó xuất hiện.",
+	Desc = "Move suavemente ate a fruta e para o farm quando ela aparecer.",
 	Value = _G.Settings.Fruit["Tween To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Tween To Fruit"] = state;
@@ -18407,11 +18407,11 @@ task.spawn(function()
 	end;
 end);
 eaStatusParagraph = ServerTab:AddParagraph({
-	Title = "DÒNG BIỂN",
-	Desc = "Đang phát hiện..."
+	Title = "SEA ATUAL",
+	Desc = "Detectando..."
 });
 rverTimeParagraph = ServerTab:AddParagraph({
-	Title = "THỜI GIAN PHỤC VỤ",
+	Title = "TEMPO DE SERVIDOR",
 	Desc = "N/A"
 });
 dStatusParagraph = ServerTab:AddParagraph({
@@ -18436,7 +18436,7 @@ actoryStatusParagraph = ServerTab:AddParagraph({
 });
 jobIdParagraph = ServerTab:AddParagraph({
 	Title = "JOB ID",
-	Desc = ""
+	Desc = "Em breve"
 });
 erverStartTime = os.time();
 task.spawn(function()
@@ -18517,9 +18517,9 @@ task.spawn(function()
 		pcall(function()
 			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Pirate Raid") or workspace:FindFirstChild("PiratesRaid");
 			if pirateRaid then
-				_pirateRaidStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
+				_pirateRaidStatusParagraph:SetDesc("ATIVO no servidor!");
 			else
-				_pirateRaidStatusParagraph:SetDesc("Không hoạt động");
+				_pirateRaidStatusParagraph:SetDesc("Inativo");
 			end;
 		end);
 	end;
@@ -18530,9 +18530,9 @@ task.spawn(function()
 		pcall(function()
 			local factory = workspace:FindFirstChild("Factory") or workspace:FindFirstChild("FactoryFortress");
 			if factory then
-				_factoryStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
+				_factoryStatusParagraph:SetDesc("ATIVO no servidor!");
 			else
-				_factoryStatusParagraph:SetDesc("Không hoạt động");
+				_factoryStatusParagraph:SetDesc("Inativo");
 			end;
 		end);
 	end;
@@ -18548,11 +18548,11 @@ getgenv().HoldSkillConfig = {
 	["Gun"] = false,
 }
 
-HoldAndSkillTab:AddSection("Skills Config - Hãy chọn những kỹ năng bạn muốn sử dụng trong trang trại.");
+HoldAndSkillTab:AddSection("Skills Config - Selecione as skills para usar nos farms");
 
 HoldAndSkillTab:AddParagraph({
-	Title = "Cách thức hoạt động",
-	Desc = "Hãy chọn bên dưới những phím/kỹ năng nào sẽ được sử dụng trong TẤT CẢ các trang trại và chức năng trung tâm yêu cầu kỹ năng. Các tổ hợp Z X C Cận chiến, Z X C V F Trái cây, Z X Kiếm và Z X Súng xác định các nhóm tấn công nhanh."
+	Title = "Como funciona",
+	Desc = "Selecione abaixo quais teclas/skills serao usadas em TODOS os farms e funcoes do hub que precisam de skills. As combinacoes Z X C Melee, Z X C V F Fruit, Z X Sword e Z X Gun definem grupos rapidos."
 });
 
 HoldAndSkillTab:AddToggle({

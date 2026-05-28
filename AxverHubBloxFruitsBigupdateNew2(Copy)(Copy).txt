@@ -4010,7 +4010,7 @@ FarmingHopTab:AddSection(" Sea 1 Farms");
 local _FHAutoSaw = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saw Sword"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Saw Sword [Sea 1]",
-	Desc = "Auto kill The Saw boss para Saw Sword",
+	Desc = "Tự động tiêu diệt trùm Saw Sword",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saw Sword"] or false,
 	Callback = function(state)
 		_FHAutoSaw = state;
@@ -4041,7 +4041,7 @@ end);
 local _FHAutoSaber = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saber Sword"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Saber Sword [Sea 1]",
-	Desc = "Auto complete Saber Expert quest chain - Sea 1",
+	Desc = "Tự động hoàn thành chuỗi nhiệm vụ Chuyên gia Kiếm - Biển 1",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Saber Sword"] or false,
 	Callback = function(state)
 		_FHAutoSaber = state;
@@ -4176,7 +4176,7 @@ end);
 local _FHBisento = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bisento"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Bisento V2 [Sea 1]",
-	Desc = "Auto kill Greybeard para Bisento - Sea 1",
+	Desc = "Tự động tiêu diệt Greybeard cho Bisento - Biển 1",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Bisento"] or false,
 	Callback = function(state)
 		_FHBisento = state;
@@ -4247,7 +4247,7 @@ end);
 local _FHWarden = (_G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Warden"]) or false;
 FarmingHopTab:AddToggle({
 	Title = "Auto Warden Sword [Sea 2]",
-	Desc = "Auto kill Chief Warden para Warden Sword",
+	Desc = "Tự động tiêu diệt Trưởng cai ngục để lấy Warden Sword",
 	Value = _G.Settings and _G.Settings.FarmHop and _G.Settings.FarmHop["Auto Warden"] or false,
 	Callback = function(state)
 		_FHWarden = state;
@@ -8371,7 +8371,7 @@ ChooseMonDropdown = MainTab:AddDropdown({
 });
 AutoMonFarmToggle = MainTab:AddToggle({
 	Title = "Auto Farm Mob",
-	Desc = "Auto Kill Mob When Spawn",
+	Desc = "Tự động tiêu diệt quái vật khi chúng xuất hiện",
 	Value = _G.Settings.Main["Auto Farm Mon"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Mon"] = state;
@@ -8476,7 +8476,7 @@ ChooseBossDropdown = FarmingHopTab:AddDropdown({
 });
 AutoFarmBossToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Farm Boss",
-	Desc = "Auto Kill Boss When Spawn",
+	Desc = "Tự động tiêu diệt trùm khi xuất hiện",
 	Value = _G.Settings.Main["Auto Farm Boss"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Farm Boss"] = state;
@@ -8616,7 +8616,7 @@ end);
 PirateRaidSection = OthersTab:AddSection("Pirate Raid");
 AutoPirateRaidToggle = OthersTab:AddToggle({
 	Title = "Auto Pirate Raid",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Farm["Auto Pirate Raid"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Pirate Raid"] = state;
@@ -9839,7 +9839,7 @@ MultiFarmTab:AddSection("PRE HISTORIC KAITUN");
 
 MultiFarmTab:AddDropdown({
 	Title   = "Boat Selection",
-	Desc    = "Thuyền để di chuyển đến Đảo Tiền Sử",
+	Desc    = "Chọn thuyền để di chuyển đến Đảo Tiền Sử",
 	Options = {"Guardian","Patrol Boat","Speedboat","Upgraded Boat","Cannon Raft"},
 	CurrentOption = {_G.VolcanicSelectedBoat or "Guardian"},
 	Callback = function(sel)
@@ -10000,7 +10000,7 @@ MultiFarmTab:AddParagraph({
 
 local _AutoFullyDungeonToggle = MultiFarmTab:AddToggle({
 	Title = "Auto Fully Dungeon",
-	Desc = "Enables/disables the full auto Dungeon cycle.",
+	Desc = "Cho phép/vô hiệu hóa chu trình hầm ngục tự động hoàn toàn.",
 	Value = _G.Settings.Main["Auto Fully Dungeon"],
 	Callback = function(state)
 		_G.Settings.Main["Auto Fully Dungeon"] = state;
@@ -10253,7 +10253,7 @@ end);
 local _chestBypassActive = false;
 AutoFarmChestInstantToggle = OthersTab:AddToggle({
 	Title = "Auto Farm Chest Bypass",
-	Desc = "Teleport tức thời và chính xác đến từng rương. Chờ xác nhận đã nhặt trước khi chuyển.",
+	Desc = "Teleport và chính xác đến từng rương. Chờ xác nhận đã nhặt trước khi chuyển.",
 	Value = _G.Settings.Farm["Auto Farm Chest Instant"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Farm Chest Instant"] = state;
@@ -10357,7 +10357,7 @@ OthersTab:AddParagraph({
 task.spawn(function()
 	local para = nil;
 	for _, v in pairs(Tabs.OthersTab._elements or {}) do
-		if type(v) == "table" and v.Title == "Baus Coletados" then para = v; break; end;
+		if type(v) == "table" and v.Title == "Rương đã thu thập" then para = v; break; end;
 	end;
 	while true do
 		task.wait(1);
@@ -10454,7 +10454,7 @@ task.spawn(function()
 end);
 AutoKatakuriToggle = OthersTab:AddToggle({
 	Title = "Auto Katakuri",
-	Desc = "Auto Farm + Kill Cake Prince [ Sea 3 Only ]",
+	Desc = "Tự động farm + Tiêu diệt Cake Prince [Chỉ dành cho Sea 3] ]",
 	Value = _G.Settings.Farm["Auto Farm Katakuri"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Farm Katakuri"] = state;
@@ -10464,7 +10464,7 @@ AutoKatakuriToggle = OthersTab:AddToggle({
 });
 AutoSpawnCakePrinceToggle = OthersTab:AddToggle({
 	Title = "Auto Spawn Cake Prince",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Farm["Auto Spawn Cake Prince"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Spawn Cake Prince"] = state;
@@ -10533,7 +10533,7 @@ task.spawn(function()
 end);
 AutoKillCakePrinceToggle = OthersTab:AddToggle({
 	Title = "Auto Kill Cake Prince",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Farm["Auto Kill Cake Prince"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Kill Cake Prince"] = state;
@@ -10543,7 +10543,7 @@ AutoKillCakePrinceToggle = OthersTab:AddToggle({
 });
 AutoKillDoughKingToggle = OthersTab:AddToggle({
 	Title = "Auto Kill Dough King",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Farm["Auto Kill Dough King"],
 	Callback = function(state)
 		_G.Settings.Farm["Auto Kill Dough King"] = state;
@@ -10924,7 +10924,7 @@ SettingsTab:AddSection("Weapon");
 local WeaponList = {"Melee","Sword","Fruit","Gun"};
 ChooseWeaponDropdown = SettingsTab:AddDropdown({
 	Title = "Choose Weapon",
-	Desc = "Weapon type to equip during farm (Melee, Sword, Fruit or Gun)",
+	Desc = "Loại vũ khí nên trang bị khi cày cuốc (Vũ khí cận chiến, Kiếm, Trái cây hoặc Súng)",
 	Values = WeaponList,
 	Value = _G.Settings.Main["Select Weapon"] or "Melee",
 	Callback = function(option)
@@ -10935,7 +10935,7 @@ ChooseWeaponDropdown = SettingsTab:AddDropdown({
 });
 SettingsTab:AddSlider({
 	Title = "Nearest Farm Distance",
-	Desc = "Distancia maxima (em studs) para atacar NPCs proximos. Padrao da ilha = 150",
+	Desc = "Khoảng cách tối đa (tính bằng stud) để tấn công các NPC gần đó. Mặc định trên đảo = 150",
 	Min = 20,
 	Max = 600,
 	Default = _G.NearestFarmRadius or 150,
@@ -10945,7 +10945,7 @@ SettingsTab:AddSlider({
 });
 ResetSettingsButton = SettingsTab:AddButton({
 	Title = " Reset Settings",
-	Desc = "Apaga todas as configuracoes salvas (pede confirmacao)",
+	Desc = "Xóa tất cả cài đặt đã lưu (yêu cầu xác nhận)",
 	Callback = function()
 		ShowResetConfirm();
 	end
@@ -11042,7 +11042,7 @@ local Pirates = function()
 end;
 SpinPositionToggle = SettingsTab:AddToggle({
 	Title = "Spin Position",
-	Desc = "Spin Position When Farm",
+	Desc = "Xoay vị trí (Farm,...)",
 	Value = _G.Settings.Setting["Spin Position"],
 	Callback = function(state)
 		_G.Settings.Setting["Spin Position"] = state;
@@ -11076,7 +11076,7 @@ PlayerTweenSpeedSlider = SettingsTab:AddSlider({
 SettingsTab:AddSection("Bring Mob");
 BringMobToggle = SettingsTab:AddToggle({
 	Title = "Bring Mob",
-	Desc = "Pulls mobs to your position with BodyPosition. Active only while farming.",
+	Desc = "Sử dụng BodyPosition để kéo quái vật về vị trí của bạn. Chỉ kích hoạt khi đang farm.",
 	Value = _G.Settings.Setting["Bring Mob"] or false,
 	Callback = function(state)
 		_G.Settings.Setting["Bring Mob"] = state;
@@ -11111,7 +11111,7 @@ SettingsTab:AddSlider({
 SettingsTab:AddSection("Fast Attack");
 SettingsTab:AddToggle({
 	Title = "Fast Attack",
-	Desc = "Enables fast attack. Auto-activates with mob farms. Uses the new RegisterHit method.",
+	Desc = "Cho phép tấn công nhanh. Tự động kích hoạt khi có trang trại quái vật. Sử dụng phương thức RegisterHit mới.",
 	Value = _G.Settings.Setting["Fast Attack New"] or false,
 	Callback = function(state)
 		_G.Settings.Setting["Fast Attack New"] = state;
@@ -11120,7 +11120,7 @@ SettingsTab:AddToggle({
 });
 AttackAuraToggle = SettingsTab:AddToggle({
 	Title = "Atatck Aura",
-	Desc = "Attack Nearest Enemies",
+	Desc = "Tấn công kẻ thù gần nhất",
 	Value = _G.Settings.Items["Attack Aura"],
 	Callback = function(state)
 		_G.Settings.Items["Attack Aura"] = state;
@@ -11478,7 +11478,7 @@ GunSwordSection = FarmingHopTab:AddSection(" Sea 1 Items");
 GunSwordSection = FarmingHopTab:AddSection("World");
 AutoSecondSeaToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Second Sea",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ ở Sea 1",
 	Value = _G.Settings.Items["Auto Second Sea"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Second Sea"] = state;
@@ -11488,7 +11488,7 @@ AutoSecondSeaToggle = FarmingHopTab:AddToggle({
 });
 AutoThirdSeaToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Third Sea",
-	Desc = "Function Sea 2 Only",
+	Desc = "Chức năng chỉ ở Sea 2",
 	Value = _G.Settings.Items["Auto Third Sea"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Third Sea"] = state;
@@ -11951,7 +11951,7 @@ end);
 GunSwordSection = FarmingHopTab:AddSection("Gun & Sword");
 AutoGetSaberToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Get Saber",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ ở Sea 1",
 	Value = _G.Settings.Items["Auto Saber"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Saber"] = state;
@@ -12058,7 +12058,7 @@ task.spawn(function()
 end);
 AutoBuddySwordToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Buddy Sword",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Items["Auto Buddy Sword"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Buddy Sword"] = state;
@@ -12431,7 +12431,7 @@ function AutoSoulGuitar()
 end;
 AutoSoulGuitarToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Soul Guitar",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Items["Auto Soul Guitar"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Soul Guitar"] = state;
@@ -12450,7 +12450,7 @@ task.spawn(function()
 end);
 AutoRengokuToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Rengoku",
-	Desc = "Function Sea 2 Only",
+	Desc = "Chức năng chỉ ở Sea 2",
 	Value = _G.Settings.Items["Auto Rengoku"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Rengoku"] = state;
@@ -12489,7 +12489,7 @@ task.spawn(function()
 end);
 AutoHallowScytheToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Hallow Scythe",
-	Desc = "Function Sea 3 Only",
+	Desc = "Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Items["Auto Hallow Scythe"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Hallow Scythe"] = state;
@@ -12499,7 +12499,7 @@ AutoHallowScytheToggle = FarmingHopTab:AddToggle({
 });
 AutoWardenSwordToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Warden Sword",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ Sea 1",
 	Value = _G.Settings.Items["Auto Warden Sword"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Warden Sword"] = state;
@@ -12514,7 +12514,7 @@ _G._CDK_YM_Active = false;
 
 FarmingHopTab:AddToggle({
 	Title = "Auto CDK [Last Quest - Boss]",
-	Desc = "Auto CDK: progride a quest e derrota o Cursed Skeleton Boss. Sea 3.",
+	Desc = "Auto CDK: tiếp tục nhiệm vụ và đánh bại Trùm Bộ xương bị nguyền rủa. Biển 3.",
 	Value = false,
 	Callback = function(state)
 		_G._CDK_Active = state;
@@ -12553,7 +12553,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Yama CDK",
-	Desc = "Auto completa todas as etapas da quest Yama para CDK. Sea 3.",
+	Desc = "Tự động hoàn thành tất cả các giai đoạn của nhiệm vụ Yama cho CDK. Sea 3.",
 	Value = false,
 	Callback = function(state)
 		_G._CDK_YM_Active = state;
@@ -12620,7 +12620,7 @@ end);
 
 AutoGetYamaToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Get Yama",
-	Desc = "Need 30 Elite Hunter, Function Sea 3 Only",
+	Desc = "Cần 30 Elite Hunter, Chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Items["Auto Yama"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Yama"] = state;
@@ -12630,7 +12630,7 @@ AutoGetYamaToggle = FarmingHopTab:AddToggle({
 });
 AutoGetYamaHopToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Get Yama Hop",
-	Desc = "Hop If Elite Hunter Not Spawn",
+	Desc = "Nếu Elite Hunter không xuất hiện thì nhảy vào đây.",
 	Value = _G.Settings.Items["Auto Yama Hop"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Yama Hop"] = state;
@@ -12649,7 +12649,7 @@ AutoGetTushitaToggle = FarmingHopTab:AddToggle({
 });
 AutoDragonTridentToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Dragon Trident",
-	Desc = "Function Sea 2 Only",
+	Desc = "Chức năng chỉ ở Sea 2",
 	Value = _G.Settings.Items["Auto Dragon Trident"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Dragon Trident"] = state;
@@ -12659,7 +12659,7 @@ AutoDragonTridentToggle = FarmingHopTab:AddToggle({
 });
 AutoDragonTridentToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Greybeard",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ ở Sea 1",
 	Value = _G.Settings.Items["Auto Greybeard"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Greybeard"] = state;
@@ -12669,7 +12669,7 @@ AutoDragonTridentToggle = FarmingHopTab:AddToggle({
 });
 AutoSharkSawToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Shark Saw",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ ở Sea 1",
 	Value = _G.Settings.Items["Auto Shark Saw"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Shark Saw"] = state;
@@ -12679,7 +12679,7 @@ AutoSharkSawToggle = FarmingHopTab:AddToggle({
 });
 AutoPoleToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Pole",
-	Desc = "Function Sea 1 Only",
+	Desc = "Chức năng chỉ ở Sea 1",
 	Value = _G.Settings.Items["Auto Pole"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Pole"] = state;
@@ -12689,7 +12689,7 @@ AutoPoleToggle = FarmingHopTab:AddToggle({
 });
 AutoDarkDaggerToggle = FarmingHopTab:AddToggle({
 	Title = "Auto Dark Dagger",
-	Desc = "Need Spawn Rip Indra, Function Sea 3 Only",
+	Desc = "Cần Spawn Rip Indra, chức năng chỉ ở Sea 3",
 	Value = _G.Settings.Items["Auto Dark Dagger"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Dark Dagger"] = state;
@@ -12732,7 +12732,7 @@ local _ripIndraTombCF = CFrame.new(-26965, 22.8, 495);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Pad Haki [Sea 3]",
-	Desc = "Equipa Hakis lendarios (Rosa/Branco/Vermelho) e ativa os Pads no castelo. Troca a cada 7s.",
+	Desc = "Trang bị Haki Huyền Thoại (Hồng/Trắng/Đỏ) và kích hoạt các ô trong lâu đài. Thay đổi sau mỗi 7 giây.",
 	Value = _G.Settings.Items["Auto Pad Haki"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Pad Haki"] = state;
@@ -12799,7 +12799,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Spawn Rip Indra [Sea 3]",
-	Desc = "Leva automaticamente o God Chalice ate a lapide para spawnar Rip Indra.",
+	Desc = "Nó tự động đưa Chén Thánh đến bia mộ để triệu hồi Rip Indra.",
 	Value = _G.Settings.Items["Spawn Rip Indra"],
 	Callback = function(state)
 		_G.Settings.Items["Spawn Rip Indra"] = state;
@@ -12855,7 +12855,7 @@ end);
 
 FarmingHopTab:AddToggle({
 	Title = "Auto Kill Rip Indra [Sea 3]",
-	Desc = "Mata automaticamente Rip Indra quando spawnar no Sea 3.",
+	Desc = "Mata tự động Rip Indra quando spawnar no Sea 3.",
 	Value = _G.Settings.Items["Auto Kill Rip Indra"],
 	Callback = function(state)
 		_G.Settings.Items["Auto Kill Rip Indra"] = state;
@@ -13328,7 +13328,7 @@ end);
 
 ChooseChipRaidDropdown = RaidTab:AddDropdown({
 	Title = "Choose Chip (Fruta para Microchip)",
-	Desc = "Seleciona qual fruta trocar pelo Microchip",
+	Desc = "Hãy chọn loại trái cây bạn muốn đổi lấy Microchip.",
 	Values = {"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha","Sand","Bird: Phoenix","Dough"},
 	Value = _G.Settings.Raid["Selected Chip"] or "Flame",
 	Callback = function(option)
@@ -13340,7 +13340,7 @@ ChooseChipRaidDropdown = RaidTab:AddDropdown({
 
 AutoRaidToggle = RaidTab:AddToggle({
 	Title = " Auto Raid (Start + Complete)",
-	Desc = "Starts the raid when the chip is in the bag and kills all enemies on the islands. Nao compra chip.",
+	Desc = "Bắt đầu cuộc đột kích khi con chip nằm trong túi và tiêu diệt tất cả kẻ thù trên các hòn đảo.",
 	Value = _G.Settings.Raid["Auto Raid"],
 	Callback = function(state)
 		_G.Settings.Raid["Auto Raid"] = state;
@@ -13459,7 +13459,7 @@ end);
 
 AutoAwakeningToggle = RaidTab:AddToggle({
 	Title = "Auto Awaken",
-	Desc = "Desperta a fruta automaticamente durante o raid",
+	Desc = "Tự động kích hoạt trái cây trong suốt cuộc đột kích.",
 	Value = _G.Settings.Raid["Auto Awaken"],
 	Callback = function(state)
 		_G.Settings.Raid["Auto Awaken"] = state;
@@ -13512,7 +13512,7 @@ end);
 
 TeleportToLabButton = RaidTab:AddButton({
 	Title = "Teleport To Lab",
-	Desc = "Vai para o summon da Raid",
+	Desc = "Vào phần triệu hồi Raid",
 	Callback = function()
 		if World2 then TweenPlayer(CFrame.new(-6438.73535,250.645355,-4501.50684));
 		elseif World3 then TweenPlayer(CFrame.new(-5033.50879,315.014252,-2947.77539));
@@ -13647,7 +13647,7 @@ task.spawn(function()
 end);
 TweenToMirageIslandToggle = RaceTab:AddToggle({
 	Title = "Tween To Mirage Island",
-	Desc = "Tween to highest point",
+	Desc = "Tween đến điểm cao nhất",
 	Value = _G.Settings.Race["Tween To Highest Mirage"],
 	Callback = function(state)
 		_G.Settings.Race["Tween To Highest Mirage"] = state;
@@ -13800,8 +13800,8 @@ getgenv().DungeonConfig = getgenv().DungeonConfig or {
 if not _IS_DUNGEON then
 	DungeonTab:AddSection("Dungeon World");
 	DungeonTab:AddParagraph({
-		Title = "⚠ You are not in Dungeon World",
-		Desc = "Please go to Dungeon World to use these features.\nDungeon Place ID: " .. tostring(_DUNGEON_PLACE_ID)
+		Title = "⚠ Bạn không đang ở trong Dungeon World",
+		Desc = "Vui lòng truy cập Dungeon World để sử dụng các tính năng này.\nDungeon Place ID: " .. tostring(_DUNGEON_PLACE_ID)
 	});
 else
 
@@ -14285,7 +14285,7 @@ CombatTab:AddButton({
 
 CombatTab:AddButton({
 	Title = " TP to Selected Player",
-	Desc = "Teleporta para a posicao do jogador selecionado",
+	Desc = "Dịch chuyển tức thời đến vị trí của người chơi đã chọn.",
 	Callback = function()
 		pcall(function()
 			if SelectedPvPTarget then
@@ -14469,7 +14469,7 @@ CombatTab:AddToggle({
 
 CombatTab:AddToggle({
 	Title = "AimLock Player",
-	Desc = "Trava camera no player selecionado automaticamente",
+	Desc = "Tự động khóa camera vào người chơi đã chọn.",
 	Value = false,
 	Callback = function(v)
 		_G.AimLockPlayer = v;
@@ -14842,7 +14842,7 @@ end;
 
 ShopTab:AddButton({
 	Title = " Go Buy Selected Fight Style",
-	Desc = "Tween ate o NPC, faz dialogo e compra o estilo selecionado",
+	Desc = "Tween đã ăn thịt NPC, tham gia đối thoại và mua kiểu trang phục đã chọn.",
 	Callback = function()
 		task.spawn(function() pcall(BuyFightStyleFull, SelectedFightStyle); end);
 	end
@@ -14851,7 +14851,7 @@ ShopTab:AddButton({
 local _autoBuyAllActive = false;
 ShopTab:AddToggle({
 	Title = "Auto Buy All Fight Styles",
-	Desc = "Vai em cada NPC em ordem e compra todos os estilos",
+	Desc = "Hãy đến gặp từng NPC theo thứ tự và mua tất cả các kiểu trang phục.",
 	Value = false,
 	Callback = function(state)
 		_autoBuyAllActive = state;
@@ -15091,7 +15091,7 @@ local PortalIslands = {
 };
 SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 	Title = "Choose Island",
-	Desc = "Lista dinamica do Eclipse - le o mapa real",
+	Desc = "Chọn Đảo để Tween",
 	Values = EclipseIslandList,
 	Value = EclipseIslandList[1] or "",
 	Callback = function(option)
@@ -15101,7 +15101,7 @@ SelectedTeleportIslandDropdown = TeleportTab:AddDropdown({
 
 AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada e para ao chegar. Player pode se mover normalmente.",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn và dừng lại khi đến nơi. Người chơi có thể di chuyển bình thường.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenToIslandActive = state;
@@ -15145,7 +15145,7 @@ AutoTeleportToIslandToggle = TeleportTab:AddToggle({
 _G.BypassTeleportActive = false;
 TeleportTab:AddToggle({
 	Title = "Bypass Teleport to Island",
-	Desc = "Teleporta via bypass (com reset) para a ilha selecionada. Repete ate chegar. Player pode pular/mover.",
+	Desc = "Dịch chuyển tức thời qua đường vòng (với thiết lập lại) đến hòn đảo đã chọn. Lặp lại cho đến khi đến nơi. Người chơi có thể nhảy/di chuyển.",
 	Value = false,
 	Callback = function(state)
 		_G.BypassTeleportActive = state;
@@ -15185,7 +15185,7 @@ TeleportTab:AddToggle({
 _G.TweenIsland = false;
 AutoTweenToIslandToggle = TeleportTab:AddToggle({
 	Title = "Tween To Island",
-	Desc = "Move suavemente ate a ilha selecionada",
+	Desc = "Di chuyển nhẹ nhàng đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.TweenIsland = state;
@@ -15243,7 +15243,7 @@ end);
 local SelectedNpcName = EclipseNPCList[1] or "";
 SelectedNpcTeleport = TeleportTab:AddDropdown({
 	Title = "Choose Npc",
-	Desc = "Lista dinamica do Eclipse - NPCs reais do servidor",
+	Desc = "Chọn NPC để TP",
 	Values = EclipseNPCList,
 	Value = EclipseNPCList[1] or "",
 	Callback = function(option)
@@ -15254,7 +15254,7 @@ SelectedNpcTeleport = TeleportTab:AddDropdown({
 
 TeleportToNpcToggle = TeleportTab:AddToggle({
 	Title = "Teleport To Npc",
-	Desc = "Teleporte instantaneo direto para o NPC",
+	Desc = "TP đến NPC.",
 	Value = false,
 	Callback = function(state)
 		_G.TeleportNPC = state;
@@ -15286,7 +15286,7 @@ TeleportToNpcToggle = TeleportTab:AddToggle({
 _G.TweenNPC = false;
 TweenToNpcToggle = TeleportTab:AddToggle({
 	Title = "Tween To Npc",
-	Desc = "Move suavemente ate o NPC selecionado",
+	Desc = "Tween đến NPC",
 	Value = false,
 	Callback = function(state)
 		_G.TweenNPC = state;
@@ -15520,7 +15520,7 @@ end);
 DragonDojoSection = DragonDojoTab:AddSection("Dragon Dojo");
 AutoFarmBlazeEmberToggle = DragonDojoTab:AddToggle({
 	Title = "Auto Farm Blaze Ember",
-	Desc = "Auto Compleate Quest + Collect Blaze Ember [ Sea 3 Only ]",
+	Desc = "Hoàn thành nhiệm vụ tự động + Thu thập Blaze Ember [Chỉ dành cho Sea 3]",
 	Value = _G.Settings.DragonDojo["Auto Farm Blaze Ember"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Farm Blaze Ember"] = state;
@@ -15809,7 +15809,7 @@ GetQuestDracoLevel = function()
 end;
 UpgradeDracoTrialToggle = DragonDojoTab:AddToggle({
 	Title = "Auto Upgrade Draco Trial",
-	Desc = "Auto tween to Dragon Wizard and upgrade",
+	Desc = "Chuyển đổi tự động sang Dragon Wizard và nâng cấp",
 	Value = _G.Settings.DragonDojo["Auto Upgrade Draco Trial"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Upgrade Draco Trial"] = state;
@@ -15834,7 +15834,7 @@ task.spawn(function()
 end);
 DracoV1Toggle = DragonDojoTab:AddToggle({
 	Title = "Auto Draco V1",
-	Desc = "Auto Quest 1 + Prehistoric Event + Collect Dragon Eggs",
+	Desc = "Tự động làm nhiệm vụ thứ nhất + Sự kiện thời tiền sử + Thu thập trứng rồng",
 	Value = _G.Settings.DragonDojo["Auto Draco V1"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Draco V1"] = state;
@@ -15863,7 +15863,7 @@ task.spawn(function()
 end);
 DracoV2Toggle = DragonDojoTab:AddToggle({
 	Title = "Auto Draco V2",
-	Desc = "Auto Kill Forest Pirate + Collect Fire Flower",
+	Desc = "Tự động tiêu diệt hải tặc rừng + Thu thập hoa lửa",
 	Value = _G.Settings.DragonDojo["Auto Draco V2"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Draco V2"] = state;
@@ -15905,7 +15905,7 @@ task.spawn(function()
 end);
 DracoV3Toggle = DragonDojoTab:AddToggle({
 	Title = "Auto Draco V3",
-	Desc = "Auto Sea Event Kill Terror Shark",
+	Desc = "Sự kiện biển tự động Giết Terror Shark",
 	Value = _G.Settings.DragonDojo["Auto Draco V3"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Draco V3"] = state;
@@ -15932,7 +15932,7 @@ task.spawn(function()
 end);
 RelicDracoTrialToggle = DragonDojoTab:AddToggle({
 	Title = "Auto Relic Draco Trial [Beta]",
-	Desc = "Auto Trial V4 - Collect the Relic yourself first",
+	Desc = "Chế độ chơi tự động V4 - Hãy tự mình thu thập di vật trước",
 	Value = _G.Settings.DragonDojo["Auto Relic Draco Trial"],
 	Callback = function(state)
 		_G.Settings.DragonDojo["Auto Relic Draco Trial"] = state;
@@ -16037,7 +16037,7 @@ local PrehistoricFarm = PrehistoricTab
 
 PrehistoricFarm:AddToggle({
 	Title = "Auto Crafting Volcanic Magnet",
-	Desc = "Auto craft Volcanic Magnet",
+	Desc = "Tự động chế tạo Volcanic Magnet",
 	Value = false,
 	Callback = function(state)
 		_G.CraftVolcanicMagnet = state
@@ -16054,7 +16054,7 @@ PrehistoricFarm:AddToggle({
 
 PrehistoricFarm:AddToggle({
 	Title = "Auto Find Prehistoric Island",
-	Desc = "Sails to Prehistoric Island automatically",
+	Desc = "Tự động đi thuyền đến hòn đảo thời tiền sử",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Find = state
@@ -16108,7 +16108,7 @@ PrehistoricFarm:AddToggle({
 
 PrehistoricFarm:AddToggle({
 	Title = "Auto Event Prehistoric Island",
-	Desc = "Auto complete Prehistoric Island event",
+	Desc = "Tự động hoàn thành sự kiện Đảo Thời Tiền sử",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Skills = state
@@ -16173,7 +16173,7 @@ PrehistoricFarm:AddToggle({
 
 PrehistoricFarm:AddToggle({
 	Title = "Auto Collect Bone",
-	Desc = "Auto collect Dino Bones",
+	Desc = "Tự động thu thập xương khủng long",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_DB = state
@@ -16254,7 +16254,7 @@ SeaEventTab:AddSection(" Sea Event - Setting Sail");
 
 ChooseBoatDropdown = SeaEventTab:AddDropdown({
 	Title = "Choose Boat",
-	Desc = "Boat type to buy and use",
+	Desc = "Chọn thuyền nên mua và sử dụng",
 	Values = {"Guardian","PirateGrandBrigade","MarineGrandBrigade","PirateBrigade","MarineBrigade","PirateSloop","MarineSloop","Beast Hunter"},
 	Value = _G.Settings.SeaEvent["Selected Boat"] or "Guardian",
 	Callback = function(option)
@@ -16592,7 +16592,7 @@ PrehistoricStatusSeaStackParagraph = SeaStackTab:AddParagraph({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Prehistoric Island",
-	Desc = "Navega automaticamente ate o Mar 6+ para encontrar a ilha",
+	Desc = "Nó tự động điều hướng đến Sea 6+ để tìm hòn đảo.",
 	Value = false,
 	Callback = function(state)
 		_G.Prehis_Find = state;
@@ -16660,7 +16660,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Prehistoric Event (M3Ow)",
-	Desc = "Remove lava + Mata Golens + Fecha Buracos ate o evento acabar",
+	Desc = "Loại bỏ dung nham + Tiêu diệt Golem + Bịt kín các lỗ hổng cho đến khi sự kiện kết thúc",
 	Value = false,
 	Callback = function(state)
 		_G.PrehistoricEvent = state;
@@ -16869,7 +16869,7 @@ BribeLeviathanButton = SeaStackTab:AddButton({
 
 SeaStackTab:AddToggle({
 	Title = "Auto Active Leviathan",
-	Desc = "Quando encontrar a ilha do Leviathan, vai ate o NPC e ativa ele automaticamente.",
+	Desc = "Khi tìm thấy Đảo Leviathan, hãy đến gặp NPC và kích hoạt nó tự động.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoActivateLeviathan = state;
@@ -16907,7 +16907,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Kill Leviathan",
-	Desc = "Detecta as caudas do Leviathan vivas e vai ate elas spammando todas as skills (Z X C V F).",
+	Desc = "Phát hiện những chiếc đuôi sống của Leviathan và lao đến tấn công chúng bằng cách sử dụng liên tục tất cả các kỹ năng (Z X C V F).",
 	Value = false,
 	Callback = function(state)
 		_G.AutoKillLeviathan = state;
@@ -16970,7 +16970,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Get Heart Leviathan",
-	Desc = "Quando Leviathan morrer, pega barco Beast Hunter, centraliza no local e atira no coracao.",
+	Desc = "Khi Leviathan chết, hãy lấy thuyền Thợ săn quái vật, hướng nó về vị trí đó và bắn vào tim nó.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoGetHeartLeviathan = state;
@@ -17067,8 +17067,8 @@ end);
 
 
 SeaStackTab:AddDropdown({
-	Title = "Auto Drive Boat - Ilha Destino",
-	Desc = "Selecione a ilha de destino para o Auto Drive Boat",
+	Title = "Auto Drive Boat",
+	Desc = "Chọn hòn đảo muốn đến -thuyền tự lái.",
 	Values = _leviathanIslandList,
 	Value = "Tiki Outpost",
 	Callback = function(opt)
@@ -17076,8 +17076,8 @@ SeaStackTab:AddDropdown({
 	end
 });
 SeaStackTab:AddToggle({
-	Title = "Auto Drive Boat",
-	Desc = "Monta no barco Beast Hunter mais proximo e vai via Tween para a ilha selecionada.",
+	Title = "Auto Drive Boat - Tween",
+	Desc = "Lên chiếc thuyền săn quái thú gần nhất và di chuyển bằng Tween đến hòn đảo đã chọn.",
 	Value = false,
 	Callback = function(state)
 		_G.AutoDriveBoat = state;
@@ -17279,7 +17279,7 @@ SeaStackTab:AddSection("MIRAGE ISLAND");
 
 SeaStackTab:AddToggle({
 	Title = "Auto Find Mirage Island",
-	Desc = "Compra barco na Tiki, vai ao mar Lv 4, patrulha ate Mirage spawnar. Se barco quebrar, reseta e recomeca.",
+	Desc = "Mua một chiếc thuyền từ Tiki, ra khơi ở cấp độ 4, tuần tra cho đến khi Mirage xuất hiện. Nếu thuyền bị hỏng, hãy thiết lập lại và bắt đầu lại.",
 	Value = _G.Settings.SeaStack["Auto Find Mirage"] or false,
 	Callback = function(state)
 		_G.FindMirage = state;
@@ -17334,7 +17334,7 @@ end);
 
 SeaStackTab:AddToggle({
 	Title = "Auto Blue Gear",
-	Desc = "Vai ao ponto mais alto da Mirage, olha fixamente para a lua. Quando a lua brilhar a noite, teleporta para a engrenagem.",
+	Desc = "Hãy đến điểm cao nhất của Mirage, nhìn chăm chú vào mặt trăng. Khi mặt trăng tỏa sáng vào ban đêm, hãy dịch chuyển đến chỗ bánh răng.",
 	Value = _G.Settings.SeaStack["Auto Blue Gear"] or false,
 	Callback = function(state)
 		_G.AutoBlueGear = state;
@@ -17955,7 +17955,7 @@ function CheckFruits()
 end;
 AutoStoreFruitToggle = FruitTab:AddToggle({
 	Title = "Auto Store Fruit",
-	Desc = "Verifica inventario e armazena frutas elegiveis de forma rapida.",
+	Desc = "Nó nhanh chóng kiểm tra hàng tồn kho và lưu trữ các loại trái cây đủ điều kiện.",
 	Value = _G.Settings.Fruit["Auto Store Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Auto Store Fruit"] = state;
@@ -18046,7 +18046,7 @@ _G.FruitInterrupt = false;
 
 TeleportToFruitToggle = FruitTab:AddToggle({
 	Title = "Teleport To Fruit",
-	Desc = " RISCO DE BAN - Teleporta instantaneo para a fruta. Use com cautela.",
+	Desc = "NGUY CƠ BỊ BAN - Dịch chuyển tức thì đến quả. Sử dụng cẩn thận.",
 	Value = _G.Settings.Fruit["Teleport To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Teleport To Fruit"] = state;
@@ -18076,7 +18076,7 @@ end);
 
 TweenToFruitToggle = FruitTab:AddToggle({
 	Title = "Tween To Fruit",
-	Desc = "Move suavemente ate a fruta e para o farm quando ela aparecer.",
+	Desc = "Di chuyển nhẹ nhàng về phía trái cây và dừng lại ở trang trại khi nó xuất hiện.",
 	Value = _G.Settings.Fruit["Tween To Fruit"],
 	Callback = function(state)
 		_G.Settings.Fruit["Tween To Fruit"] = state;
@@ -18407,11 +18407,11 @@ task.spawn(function()
 	end;
 end);
 eaStatusParagraph = ServerTab:AddParagraph({
-	Title = "SEA ATUAL",
-	Desc = "Detectando..."
+	Title = "SÓNG BIỂN",
+	Desc = "Đang phát hiện..."
 });
 rverTimeParagraph = ServerTab:AddParagraph({
-	Title = "TEMPO DE SERVIDOR",
+	Title = "SERVICE TIME",
 	Desc = "N/A"
 });
 dStatusParagraph = ServerTab:AddParagraph({
@@ -18436,7 +18436,7 @@ actoryStatusParagraph = ServerTab:AddParagraph({
 });
 jobIdParagraph = ServerTab:AddParagraph({
 	Title = "JOB ID",
-	Desc = "Em breve"
+	Desc = "Shortly"
 });
 erverStartTime = os.time();
 task.spawn(function()
@@ -18461,7 +18461,7 @@ task.spawn(function()
 			elseif World3 then
 				_seaStatusParagraph:SetDesc("SEA 3 (Third Sea)");
 			else
-				_seaStatusParagraph:SetDesc("Sea desconhecido");
+				_seaStatusParagraph:SetDesc("Biển...");
 			end;
 		end);
 	end;
@@ -18507,7 +18507,7 @@ task.spawn(function()
 					break;
 				end;
 			end;
-			if not found then _raidBossStatusParagraph:SetDesc("Nenhum Raid Boss ativo"); end;
+			if not found then _raidBossStatusParagraph:SetDesc("Hiện không có trùm raid nào đang hoạt động."); end;
 		end);
 	end;
 end);
@@ -18517,9 +18517,9 @@ task.spawn(function()
 		pcall(function()
 			local pirateRaid = workspace:FindFirstChild("PirateRaid") or workspace:FindFirstChild("Pirate Raid") or workspace:FindFirstChild("PiratesRaid");
 			if pirateRaid then
-				_pirateRaidStatusParagraph:SetDesc("ATIVO no servidor!");
+				_pirateRaidStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_pirateRaidStatusParagraph:SetDesc("Inativo");
+				_pirateRaidStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -18530,9 +18530,9 @@ task.spawn(function()
 		pcall(function()
 			local factory = workspace:FindFirstChild("Factory") or workspace:FindFirstChild("FactoryFortress");
 			if factory then
-				_factoryStatusParagraph:SetDesc("ATIVO no servidor!");
+				_factoryStatusParagraph:SetDesc("Đang hoạt động trên máy chủ!");
 			else
-				_factoryStatusParagraph:SetDesc("Inativo");
+				_factoryStatusParagraph:SetDesc("Không hoạt động");
 			end;
 		end);
 	end;
@@ -18548,11 +18548,11 @@ getgenv().HoldSkillConfig = {
 	["Gun"] = false,
 }
 
-HoldAndSkillTab:AddSection("Skills Config - Selecione as skills para usar nos farms");
+HoldAndSkillTab:AddSection("Skills Config");
 
 HoldAndSkillTab:AddParagraph({
-	Title = "Como funciona",
-	Desc = "Selecione abaixo quais teclas/skills serao usadas em TODOS os farms e funcoes do hub que precisam de skills. As combinacoes Z X C Melee, Z X C V F Fruit, Z X Sword e Z X Gun definem grupos rapidos."
+	Title = "Cách thức hoạt động",
+	Desc = "Hãy chọn bên dưới những phím/kỹ năng nào sẽ được sử dụng trong TẤT CẢ các trang trại và chức năng trung tâm yêu cầu kỹ năng. Các tổ hợp Z X C Cận chiến, Z X C V F Trái cây, Z X Kiếm và Z X Súng xác định các nhóm nhanh."
 });
 
 HoldAndSkillTab:AddToggle({

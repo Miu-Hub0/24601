@@ -255,6 +255,7 @@ task["spawn"](function()
 end)
 L_1_[43] = game:GetService("CoreGui")
 L_1_[6] = game:GetService("TweenService")
+-- ========== TẠO GUI CHÍNH ==========
 if L_1_[43]:FindFirstChild("Status_UI") then
 	L_1_[43]["Status_UI"]:Destroy()
 end
@@ -262,6 +263,7 @@ L_1_[11] = Instance["new"]("ScreenGui")
 L_1_[11]["Name"] = "Status_UI"
 L_1_[11]["ResetOnSpawn"] = false
 L_1_[11]["Parent"] = L_1_[43]
+
 L_1_[42] = Instance["new"]("Frame")
 L_1_[42]["Size"] = UDim2["new"](0, 420, 0, 70)
 L_1_[42]["Position"] = UDim2["new"](.5, 0, .07, 0)
@@ -271,14 +273,17 @@ L_1_[42][L_1_[3]({"BackgroundTransparen"; "cy"})] = .25
 L_1_[42]["BorderSizePixel"] = 3
 L_1_[42]["BorderColor3"] = Color3["fromRGB"](0, 150, 255)
 L_1_[42]["Parent"] = L_1_[11]
+
 L_1_[41] = Instance["new"]("UICorner")
 L_1_[41]["CornerRadius"] = UDim["new"](0, 6)
 L_1_[41]["Parent"] = L_1_[42]
+
 L_1_[12] = Instance["new"]("UIStroke")
 L_1_[12]["Thickness"] = 2
 L_1_[12]["Color"] = Color3["fromRGB"](0, 180, 255)
 L_1_[12]["ApplyStrokeMode"] = Enum["ApplyStrokeMode"]["Border"]
 L_1_[12]["Parent"] = L_1_[42]
+
 L_1_[15] = Instance["new"]("TextLabel")
 L_1_[15]["Size"] = UDim2["new"](1, -10, .5, 0)
 L_1_[15]["Position"] = UDim2["new"](.5, 0, 0, 5)
@@ -291,6 +296,7 @@ L_1_[15]["Font"] = Enum["Font"]["GothamBold"]
 L_1_[15]["TextXAlignment"] = Enum["TextXAlignment"]["Center"]
 L_1_[15]["TextYAlignment"] = Enum["TextYAlignment"]["Center"]
 L_1_[15]["Parent"] = L_1_[42]
+
 L_1_[26] = Instance["new"]("TextLabel")
 L_1_[26]["Size"] = UDim2["new"](1, -10, .5, 0)
 L_1_[26]["Position"] = UDim2["new"](.5, 0, .5, 0)
@@ -304,19 +310,24 @@ L_1_[26]["TextXAlignment"] = Enum["TextXAlignment"]["Center"]
 L_1_[26]["TextYAlignment"] = Enum["TextYAlignment"]["Center"]
 L_1_[26]["Parent"] = L_1_[42]
 
--- ===== ICON TOGGLE BẬT/TẮT GUI (CÓ KÉO THẢ) =====
+-- ========== TẠO ICON TOGGLE (ScreenGui RIÊNG) ==========
+local ToggleGui = Instance.new("ScreenGui")
+ToggleGui.Name = "ToggleIconGui"
+ToggleGui.ResetOnSpawn = false
+ToggleGui.Parent = L_1_[43]
+
 local ToggleIcon = Instance.new("ImageButton")
 ToggleIcon.Name = "ToggleIcon"
-ToggleIcon.Size = UDim2.new(0, 44, 0, 44)
-ToggleIcon.Position = UDim2.new(0, 8, 0, 8)
-ToggleIcon.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
-ToggleIcon.BackgroundTransparency = 0.1
+ToggleIcon.Size = UDim2.new(0, 48, 0, 48)
+ToggleIcon.Position = UDim2.new(0, 10, 0, 100)
+ToggleIcon.BackgroundColor3 = Color3.fromRGB(25, 25, 40)
+ToggleIcon.BackgroundTransparency = 0.15
 ToggleIcon.BorderSizePixel = 2
 ToggleIcon.BorderColor3 = Color3.fromRGB(0, 200, 255)
 ToggleIcon.Image = "rbxassetid://116766438673467"
 ToggleIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
 ToggleIcon.ScaleType = Enum.ScaleType.Fit
-ToggleIcon.Parent = L_1_[42]
+ToggleIcon.Parent = ToggleGui
 
 local ToggleCorner = Instance.new("UICorner")
 ToggleCorner.CornerRadius = UDim.new(1, 0)
@@ -327,13 +338,14 @@ ToggleStroke.Thickness = 2
 ToggleStroke.Color = Color3.fromRGB(0, 255, 100)
 ToggleStroke.Parent = ToggleIcon
 
--- Biến trạng thái UI (chỉ ẩn/hiện frame chứ không xóa)
+-- Biến trạng thái
 local isUIVisible = true
 
--- Chức năng toggle
+-- Toggle UI (chỉ ẩn/hiện frame chính, icon vẫn nguyên)
 ToggleIcon.MouseButton1Click:Connect(function()
 	isUIVisible = not isUIVisible
 	L_1_[11].Enabled = isUIVisible
+	
 	if isUIVisible then
 		ToggleStroke.Color = Color3.fromRGB(0, 255, 100)
 		ToggleIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -345,7 +357,7 @@ ToggleIcon.MouseButton1Click:Connect(function()
 	end
 end)
 
--- KÉO THẢ ICON
+-- ========== KÉO THẢ ICON ==========
 local dragging = false
 local dragStart, startPos
 
@@ -354,11 +366,12 @@ ToggleIcon.InputBegan:Connect(function(input)
 		dragging = true
 		dragStart = input.Position
 		startPos = ToggleIcon.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
+	end
+end)
+
+ToggleIcon.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
 	end
 end)
 
@@ -373,7 +386,7 @@ ToggleIcon.InputChanged:Connect(function(input)
 		)
 	end
 end)
--- ==============================================
+
 task["spawn"](function()
 	while task["wait"]() do
 		local L_27_ = {}

@@ -304,13 +304,13 @@ L_1_[26]["TextXAlignment"] = Enum["TextXAlignment"]["Center"]
 L_1_[26]["TextYAlignment"] = Enum["TextYAlignment"]["Center"]
 L_1_[26]["Parent"] = L_1_[42]
 
--- ===== ICON TOGGLE BẬT/TẮT GUI =====
+-- ===== ICON TOGGLE BẬT/TẮT GUI (CÓ KÉO THẢ) =====
 local ToggleIcon = Instance.new("ImageButton")
 ToggleIcon.Name = "ToggleIcon"
-ToggleIcon.Size = UDim2.new(0, 36, 0, 36)
+ToggleIcon.Size = UDim2.new(0, 44, 0, 44)
 ToggleIcon.Position = UDim2.new(0, 8, 0, 8)
-ToggleIcon.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
-ToggleIcon.BackgroundTransparency = 0.15
+ToggleIcon.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+ToggleIcon.BackgroundTransparency = 0.1
 ToggleIcon.BorderSizePixel = 2
 ToggleIcon.BorderColor3 = Color3.fromRGB(0, 200, 255)
 ToggleIcon.Image = "rbxassetid://116766438673467"
@@ -323,11 +323,14 @@ ToggleCorner.CornerRadius = UDim.new(1, 0)
 ToggleCorner.Parent = ToggleIcon
 
 local ToggleStroke = Instance.new("UIStroke")
-ToggleStroke.Thickness = 1.5
+ToggleStroke.Thickness = 2
 ToggleStroke.Color = Color3.fromRGB(0, 255, 100)
 ToggleStroke.Parent = ToggleIcon
 
+-- Biến trạng thái UI (chỉ ẩn/hiện frame chứ không xóa)
 local isUIVisible = true
+
+-- Chức năng toggle
 ToggleIcon.MouseButton1Click:Connect(function()
 	isUIVisible = not isUIVisible
 	L_1_[11].Enabled = isUIVisible
@@ -341,7 +344,36 @@ ToggleIcon.MouseButton1Click:Connect(function()
 		ToggleIcon.BorderColor3 = Color3.fromRGB(150, 50, 50)
 	end
 end)
--- =================================
+
+-- KÉO THẢ ICON
+local dragging = false
+local dragStart, startPos
+
+ToggleIcon.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = ToggleIcon.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+ToggleIcon.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - dragStart
+		ToggleIcon.Position = UDim2.new(
+			startPos.X.Scale,
+			startPos.X.Offset + delta.X,
+			startPos.Y.Scale,
+			startPos.Y.Offset + delta.Y
+		)
+	end
+end)
+-- ==============================================
 task["spawn"](function()
 	while task["wait"]() do
 		local L_27_ = {}

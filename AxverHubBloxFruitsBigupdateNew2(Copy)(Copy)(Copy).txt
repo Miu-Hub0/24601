@@ -3649,13 +3649,13 @@ end)
 -- FAST ATTACK SIÊU CỰC NHANH
 -- ============================================
 
-_G.Fast_Delay = 0.001
+_G.Fast_Delay = 0.00001
 
 local FastAttackSpeeds = {
     ["Normal Attack"] = 0.25,
     ["Fast Attack"] = 0.15,
     ["Super Fast Attack"] = 0.05,
-    ["siêu nhanh Attack"] = 0.001
+    ["siêu nhanh Attack"] = 0.00001
 }
 
 function UsesKills(weaponType, skillKey)

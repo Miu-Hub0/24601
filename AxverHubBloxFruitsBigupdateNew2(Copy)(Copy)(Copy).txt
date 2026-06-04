@@ -3646,52 +3646,96 @@ end)
 
 
 -- ============================================
--- SUPER FAST M1 + BYPASS
+-- FAST ATTACK SIÊU CỰC NHANH
 -- ============================================
 
-_G.SuperFastAttack = true
-_G.SuperFastDelay = 0.0001
-_G.AutoTeleportToEnemy = true
-_G.BypassAntiCheat = true
+_G.Fast_Delay = 0.001
 
-local vim = game:GetService("VirtualInputManager")
-local vu = game:GetService("VirtualUser")
-local rs = game:GetService("RunService")
-local plr = game.Players.LocalPlayer
+local FastAttackSpeeds = {
+    ["Normal Attack"] = 0.25,
+    ["Fast Attack"] = 0.15,
+    ["Super Fast Attack"] = 0.05,
+    ["siêu nhanh Attack"] = 0.001
+}
 
-pcall(function()
-    sethiddenproperty(plr, "SimulationRadius", math.huge)
-    setsimulationradius(plr, math.huge)
-end)
-
-rs.RenderStepped:Connect(function()
-    if not _G.BypassAntiCheat then return end
-    pcall(function()
-        sethiddenproperty(plr, "SimulationRadius", math.huge)
-        if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-            plr.Character.HumanoidRootPart.Velocity = Vector3.zero
-            plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+function UsesKills(weaponType, skillKey)
+    if weaponType == "Melee" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Melee" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
         end
-    end)
-end)
-
-pcall(function()
-    local ts = game:GetService("TeleportService")
-    local old = ts.teleport
-    ts.teleport = function(self, placeId, ...)
-        if placeId == game.PlaceId then return end
-        return old(self, placeId, ...)
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        elseif skillKey == "C" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
+        end
+    elseif weaponType == "Sword" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Sword" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        end
+    elseif weaponType == "Blox Fruit" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Blox Fruit" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        elseif skillKey == "C" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "C", false, game)
+        elseif skillKey == "V" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "V", false, game)
+        end
+    elseif weaponType == "Gun" then
+        for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Gun" then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                break
+            end
+        end
+        if skillKey == "Z" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Z", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Z", false, game)
+        elseif skillKey == "X" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "X", false, game)
+            task.wait(0.05)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "X", false, game)
+        end
     end
-end)
-
-local function SuperSpamM1()
-    pcall(function()
-        vu:CaptureController()
-        for i = 1, 15 do
-            vu:ClickButton1(Vector2.new(851, 158))
-            task.wait(0.0001)
-        end
-    end)
 end
 
 G = G or {}
@@ -3712,27 +3756,31 @@ G.Kill = function(enemy, isActive)
         end
     end
     
-    local char = game.Players.LocalPlayer.Character
-    if char and char:FindFirstChild("HumanoidRootPart") then
-        char.HumanoidRootPart.CFrame = hrp.CFrame * CFrame.new(0, 3, 2)
+    local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+    if tool then
+        if tool.ToolTip == "Blox Fruit" then
+            TweenPlayer(hrp.CFrame * CFrame.new(0, 10, 0))
+        else
+            TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 0))
+        end
     end
     
-    pcall(function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-    end)
+    if RandomCFrame then
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(0, 30, 25))
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(25, 30, 0))
+        task.wait(0.5)
+        TweenPlayer(hrp.CFrame * CFrame.new(-25, 30, 0))
+    end
     
     local head = enemy:FindFirstChild("Head") or hrp
-    for i = 1, 8 do
-        SuperSpamM1()
-        AttackModule:AttackEnemy(head, {})
-        task.wait(_G.SuperFastDelay)
-    end
+    AttackModule:AttackEnemy(head, {})
 end
 
 task.spawn(function()
     repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character
-    
-    while _G.SuperFastAttack do
+    while task.wait(_G.Fast_Delay or 0.001) do
         pcall(function()
             local farmActive = _G.Settings.Main["Auto Farm"] 
                 or _G.Settings.Main["Auto Farm Mon"] 
@@ -3745,32 +3793,23 @@ task.spawn(function()
                 or _G.Settings.Farm["Auto Farm Bone"]
                 or _G.EclipseStartFarm
             
-            if not farmActive then 
-                task.wait(0.5)
-                return 
-            end
+            if not farmActive then return end
             
             local char = game.Players.LocalPlayer.Character
-            local hrp = char and char:FindFirstChild("HumanoidRootPart")
-            if not char or not hrp then return end
+            local root = char and char:FindFirstChild("HumanoidRootPart")
+            if not char or not root then return end
             
             local hum = char:FindFirstChildOfClass("Humanoid")
             if not hum or hum.Health <= 0 then return end
             
-            pcall(function()
-                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                hrp.Velocity = Vector3.zero
-                hrp.AssemblyLinearVelocity = Vector3.zero
-            end)
-            
             local closest = nil
-            local closestDist = 500
+            local closestDist = 60
             
             for _, v in pairs(workspace.Enemies:GetChildren()) do
-                local ehrp = v:FindFirstChild("HumanoidRootPart")
-                local ehum = v:FindFirstChild("Humanoid")
-                if v ~= char and ehrp and ehum and ehum.Health > 0 then
-                    local dist = (ehrp.Position - hrp.Position).Magnitude
+                local hrp = v:FindFirstChild("HumanoidRootPart")
+                local vhum = v:FindFirstChild("Humanoid")
+                if v ~= char and hrp and vhum and vhum.Health > 0 then
+                    local dist = (hrp.Position - root.Position).Magnitude
                     if dist < closestDist then
                         closestDist = dist
                         closest = v
@@ -3779,50 +3818,12 @@ task.spawn(function()
             end
             
             if closest then
-                local targetHrp = closest:FindFirstChild("HumanoidRootPart")
-                if targetHrp then
-                    if _G.AutoTeleportToEnemy and closestDist > 8 then
-                        hrp.CFrame = targetHrp.CFrame * CFrame.new(0, 3, 2)
-                    end
-                    
-                    local head = closest:FindFirstChild("Head") or targetHrp
-                    
-                    for i = 1, 10 do
-                        SuperSpamM1()
-                        AttackModule:AttackEnemy(head, {})
-                        task.wait(_G.SuperFastDelay)
-                    end
+                local head = closest:FindFirstChild("Head") or closest:FindFirstChild("HumanoidRootPart")
+                if head then
+                    AttackModule:AttackEnemy(head, {})
                 end
             end
         end)
-        task.wait(_G.SuperFastDelay)
-    end
-end)
-
-task.spawn(function()
-    while _G.SuperFastAttack do
-        pcall(function()
-            local char = game.Players.LocalPlayer.Character
-            if char then
-                for _, part in pairs(char:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
-                end
-            end
-        end)
-        task.wait(0.5)
-    end
-end)
-
-task.spawn(function()
-    while _G.SuperFastAttack do
-        pcall(function()
-            if game.Players.LocalPlayer.Character and not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-            end
-        end)
-        task.wait(1)
     end
 end)
 

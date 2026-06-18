@@ -1,0 +1,330 @@
+-- MobileFly - Cleaned and deobfuscated
+-- Removed anti-tamper, junk loops, and obfuscation
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+
+local settings = {
+    hoverHeight = 0.8,
+    hoverSpeed = 2.9,
+    baseSpeed = 50,
+    boostSpeed = 100,
+    selectedIdle = "DefaultIdle",
+    controlsLocked = false,
+    buttonTheme = "modern",
+    guiTheme = "default",
+    showArms = true,
+    mobileUIPosition = UDim2.new(0.5, -100, 0.5, -40),
+    toggleButtonPosition = UDim2.new(1, -70, 0, 20)
+}
+
+local isFlying = false
+local isHovering = false
+local boostLevel = 0
+local currentSpeed = settings.baseSpeed
+local hoverSine = 0
+local hoverConnection = nil
+local currentAnim = nil
+local animTrack = nil
+
+local animations = {
+    DefaultIdle = { AnimationId = "rbxassetid://11394033602", Start = 1, End = 1.22, Reverse = true, PlaybackSpeed = 0.2, AdjustableSpeed = true },
+    ChillLevitate = { AnimationId = "rbxassetid://125815409725539", Start = 1, End = 2.6, Reverse = true, PlaybackSpeed = 0.5, AdjustableSpeed = true },
+    FlashyFly = { AnimationId = "rbxassetid://83375399295408", Start = 0.9, End = 1.8, Reverse = true, PlaybackSpeed = 0.6, AdjustableSpeed = true },
+    MetroMan = { AnimationId = "rbxassetid://74645777874912", Start = 0.1, End = 1.8, Reverse = true, PlaybackSpeed = 0.7, AdjustableSpeed = true },
+    MustacheMark = { AnimationId = "rbxassetid://77807262438365", Start = 0.1, End = 3, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    ZombieMark = { AnimationId = "rbxassetid://75532269733454", Start = 0.1, End = 3, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    Thragg = { AnimationId = "rbxassetid://101740020467030", Start = 0, End = 2, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    RelaxedFly = { AnimationId = "rbxassetid://132783162476851", Start = 0.1, End = 5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    TrackSuitMark = { AnimationId = "rbxassetid://125313210961391", Start = 0.1, End = 4, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    LongHairMark = { AnimationId = "rbxassetid://101003076314239", Start = 0.1, End = 4, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    FlaxanMark = { AnimationId = "rbxassetid://108933593456838", Start = 0.1, End = 4, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    MasklessMark = { AnimationId = "rbxassetid://72952994235315", Start = 0.1, End = 4, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    ViltrimiteMark = { AnimationId = "rbxassetid://124574039035034", Start = 0.1, End = 5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    PrisonerMark = { AnimationId = "rbxassetid://98385196315632", Start = 1, End = 4, Reverse = true, PlaybackSpeed = 0.6, AdjustableSpeed = true },
+    TargetMark = { AnimationId = "rbxassetid://122741335712327", Start = 1, End = 5.5, Reverse = true, PlaybackSpeed = 0.6, AdjustableSpeed = true },
+    NoGoggles = { AnimationId = "rbxassetid://77715558557237", Start = 1, End = 5, Reverse = true, PlaybackSpeed = 0.7, AdjustableSpeed = true },
+    SheistyMark = { AnimationId = "rbxassetid://121605966423204", Start = 1, End = 3.9, Reverse = true, PlaybackSpeed = 0.6, AdjustableSpeed = true },
+    AnnoyedIdle = { AnimationId = "rbxassetid://93326430026112", Start = 0.2, End = 3, Reverse = true, PlaybackSpeed = 1.2, AdjustableSpeed = true },
+    UpsideDown = { AnimationId = "rbxassetid://100566641677826", Start = 0.1, End = 3, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    Conquest = { AnimationId = "rbxassetid://91850736796162", Start = 0.5, End = 2.5, Reverse = true, PlaybackSpeed = 0.7, AdjustableSpeed = true },
+    MohawkMark = { AnimationId = "rbxassetid://116733977004098", Start = 0.5, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    BulletProofMark = { AnimationId = "rbxassetid://95218435498795", Start = 0.5, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    Sinisterv3 = { AnimationId = "rbxassetid://110525048751383", Start = 0.5, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    BaldMark = { AnimationId = "rbxassetid://76797102013719", Start = 0.5, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    ViltrimiteIdle = { AnimationId = "rbxassetid://92901321263182", Start = 0.1, End = 4, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    StillIdle = { AnimationId = "rbxassetid://99828067051785", Start = 0.1, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true },
+    StandardIdle = { AnimationId = "rbxassetid://99828067051785", Start = 0.1, End = 3.5, Reverse = true, PlaybackSpeed = 1, AdjustableSpeed = true }
+}
+
+local function UpdateSpeed()
+    if boostLevel == 0 then
+        currentSpeed = settings.baseSpeed
+    elseif boostLevel == 1 then
+        currentSpeed = settings.boostSpeed
+    elseif boostLevel == 2 then
+        currentSpeed = settings.boostSpeed * 2.5
+    elseif boostLevel == 3 then
+        currentSpeed = settings.boostSpeed * 4
+    end
+end
+
+local function PlayAnimation(character, animType)
+    if animTrack then
+        animTrack:Stop()
+        animTrack:Destroy()
+        animTrack = nil
+    end
+    
+    local humanoid = character and character:FindFirstChild("Humanoid")
+    if not humanoid then return end
+    
+    local animData = animType == "Idle" and animations[settings.selectedIdle] or
+                     animType == "Move" and animations.DefaultIdle or
+                     animType == "Boost" and animations.DefaultIdle or
+                     animations.DefaultIdle
+    
+    if not animData then return end
+    
+    local anim = Instance.new("Animation")
+    anim.AnimationId = animData.AnimationId
+    
+    local track = humanoid:LoadAnimation(anim)
+    if track then
+        track.Looped = false
+        track:Play()
+        track.TimePosition = animData.Start or 0
+        track:AdjustSpeed(animData.PlaybackSpeed or 1)
+        animTrack = track
+    end
+end
+
+local function StartHover(character)
+    if hoverConnection then
+        hoverConnection:Disconnect()
+        hoverConnection = nil
+    end
+    
+    local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return end
+    
+    local startY = rootPart.Position.Y
+    hoverSine = 0
+    
+    hoverConnection = RunService.Heartbeat:Connect(function(delta)
+        if not isHovering or not rootPart or not rootPart.Parent then
+            return
+        end
+        
+        hoverSine = hoverSine + delta * settings.hoverSpeed
+        local pos = rootPart.Position
+        rootPart.CFrame = CFrame.new(pos.X, startY + math.sin(hoverSine) * settings.hoverHeight, pos.Z) * rootPart.CFrame.Rotation
+    end)
+end
+
+local function StopHover()
+    if hoverConnection then
+        hoverConnection:Disconnect()
+        hoverConnection = nil
+    end
+end
+
+local function StartFly(character)
+    if isFlying then return end
+    
+    local humanoid = character and character:FindFirstChild("Humanoid")
+    local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+    if not humanoid or not rootPart then return end
+    
+    isFlying = true
+    isHovering = true
+    boostLevel = 0
+    UpdateSpeed()
+    
+    humanoid.AutoRotate = true
+    humanoid.PlatformStand = false
+    
+    -- Flight physics via BodyVelocity and BodyGyro
+    local velocity = Instance.new("BodyVelocity")
+    velocity.Name = "FlightVelocity"
+    velocity.MaxForce = Vector3.new(4000, 4000, 4000)
+    velocity.P = 4000
+    velocity.Velocity = Vector3.new(0, 0, 0)
+    velocity.Parent = rootPart
+    
+    local gyro = Instance.new("BodyGyro")
+    gyro.Name = "FlightGyro"
+    gyro.MaxTorque = Vector3.new(4000, 4000, 4000)
+    gyro.P = 4000
+    gyro.CFrame = rootPart.CFrame
+    gyro.Parent = rootPart
+    
+    StartHover(character)
+    PlayAnimation(character, "Idle")
+    
+    UpdateUI()
+end
+
+local function StopFly()
+    if not isFlying then return end
+    
+    local character = LocalPlayer.Character
+    local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+    
+    if rootPart then
+        local vel = rootPart:FindFirstChild("FlightVelocity")
+        if vel then vel:Destroy() end
+        local gyro = rootPart:FindFirstChild("FlightGyro")
+        if gyro then gyro:Destroy() end
+    end
+    
+    if character and character:FindFirstChild("Humanoid") then
+        character.Humanoid.AutoRotate = true
+        character.Humanoid.PlatformStand = false
+    end
+    
+    if currentAnim then
+        currentAnim:Stop()
+        currentAnim:Destroy()
+        currentAnim = nil
+    end
+    
+    StopHover()
+    isFlying = false
+    isHovering = false
+    boostLevel = 0
+    UpdateSpeed()
+    UpdateUI()
+end
+
+local function ToggleFly()
+    local character = LocalPlayer.Character
+    if not character then return end
+    
+    if isFlying then
+        StopFly()
+    else
+        StartFly(character)
+    end
+end
+
+local function CycleBoost()
+    if not isFlying then return end
+    
+    boostLevel = (boostLevel + 1) % 4
+    UpdateSpeed()
+    UpdateUI()
+end
+
+local function UpdateUI()
+    -- Update mobile buttons if they exist
+    if flyButton and boostButton then
+        if isFlying then
+            flyButton.Text = "UNFLY"
+            flyButton.BackgroundColor3 = Color3.fromRGB(120, 40, 60)
+            
+            if boostLevel == 0 then
+                boostButton.Text = "BOOST"
+                boostButton.BackgroundColor3 = Color3.fromRGB(50, 40, 60)
+            elseif boostLevel == 1 then
+                boostButton.Text = "BOOST 1"
+                boostButton.BackgroundColor3 = Color3.fromRGB(80, 60, 120)
+            elseif boostLevel == 2 then
+                boostButton.Text = "BOOST 2"
+                boostButton.BackgroundColor3 = Color3.fromRGB(100, 80, 150)
+            elseif boostLevel == 3 then
+                boostButton.Text = "ULTRA"
+                boostButton.BackgroundColor3 = Color3.fromRGB(150, 60, 180)
+            end
+        else
+            flyButton.Text = "FLY"
+            flyButton.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+            boostButton.Text = "BOOST"
+            boostButton.BackgroundColor3 = Color3.fromRGB(50, 40, 60)
+        end
+    end
+end
+
+-- Create mobile controls
+local function CreateMobileControls()
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "MobileFlyControls"
+    gui.ResetOnSpawn = false
+    gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    
+    local frame = Instance.new("Frame")
+    frame.Name = "MobileControls"
+    frame.Size = UDim2.new(0, 200, 0, 80)
+    frame.Position = settings.mobileUIPosition
+    frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+    frame.BackgroundTransparency = 0.2
+    frame.BorderSizePixel = 0
+    frame.ClipsDescendants = true
+    frame.Parent = gui
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = frame
+    
+    local container = Instance.new("Frame")
+    container.Name = "ButtonContainer"
+    container.Size = UDim2.new(1, -20, 1, -20)
+    container.Position = UDim2.new(0, 10, 0, 10)
+    container.BackgroundTransparency = 1
+    container.Parent = frame
+    
+    flyButton = Instance.new("TextButton")
+    flyButton.Name = "FlyButton"
+    flyButton.Size = UDim2.new(0.4, 0, 0.7, 0)
+    flyButton.Position = UDim2.new(0.05, 0, 0.15, 0)
+    flyButton.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+    flyButton.BackgroundTransparency = 0.1
+    flyButton.Text = "FLY"
+    flyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    flyButton.TextSize = 14
+    flyButton.Font = Enum.Font.GothamBold
+    flyButton.TextScaled = true
+    flyButton.Parent = container
+    
+    local flyCorner = Instance.new("UICorner")
+    flyCorner.CornerRadius = UDim.new(0, 8)
+    flyCorner.Parent = flyButton
+    
+    boostButton = Instance.new("TextButton")
+    boostButton.Name = "BoostButton"
+    boostButton.Size = UDim2.new(0.4, 0, 0.7, 0)
+    boostButton.Position = UDim2.new(0.55, 0, 0.15, 0)
+    boostButton.BackgroundColor3 = Color3.fromRGB(50, 40, 60)
+    boostButton.BackgroundTransparency = 0.1
+    boostButton.Text = "BOOST"
+    boostButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+    boostButton.TextSize = 12
+    boostButton.Font = Enum.Font.GothamBold
+    boostButton.TextScaled = true
+    boostButton.Parent = container
+    
+    local boostCorner = Instance.new("UICorner")
+    boostCorner.CornerRadius = UDim.new(0, 8)
+    boostCorner.Parent = boostButton
+    
+    flyButton.MouseButton1Click:Connect(ToggleFly)
+    boostButton.MouseButton1Click:Connect(CycleBoost)
+    
+    UpdateUI()
+    return gui
+end
+
+-- Character added handler
+LocalPlayer.CharacterAdded:Connect(function(character)
+    task.wait(0.5)
+    if isFlying then
+        StartFly(character)
+    end
+end)
+
+-- Start
+CreateMobileControls()
